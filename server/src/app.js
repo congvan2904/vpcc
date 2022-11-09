@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 
+require('./v1/database/init.mongoose')
+
 app.use('/v1', require('./v1/routes/'))
 
 app.use((req, res, next) => {
