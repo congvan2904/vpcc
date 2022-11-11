@@ -1,8 +1,17 @@
 ### User
-http://localhost:5000/v1/user
+GET http://localhost:5000/v1/user
 
-### Contract
-http://localhost:5000/v1/contract
+### Contract CREATE
+POST  http://localhost:5000/v1/contract/create
+
+### Contract GET ALL ASC
+GET http://localhost:5000/v1/contract
+
+### Contract DELETE ALL
+DELETE  http://localhost:5000/v1/contract/delete
+
+### Contract SORT DESC
+GET http://localhost:5000/v1/contract/group
 
 ### Router #
-http://localhost:5000/v1
+GET http://localhost:5000/v1
