@@ -27,12 +27,17 @@ router.delete('/delete', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
 
-    const newContract = await contract.find().sort({ 'id_contract': 1 })
+    const newContract = await contract.find().limit(1000).sort({ 'id_contract': 1 })
+    const newarr = newContract.map(item => ({
+        item,
+        sohop: Math.ceil(item.id_contract / 50)
+    }))
     return res.status(200).json({
-        data: { newContract },
+        data: { newarr },
         message: 'success'
     })
 })
+
 router.get('/group', async (req, res, next) => {
 
     const newContract = await contract.find().sort({ 'id_contract': -1 })
