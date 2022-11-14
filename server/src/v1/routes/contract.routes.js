@@ -15,6 +15,17 @@ router.post('/create', async (req, res, next) => {
         message: 'success'
     })
 })
+
+router.post('/updates', async (req, res, next) => {
+
+    const newContract = await contract.updateMany({}, { 'user': req.body.user })
+    // console.log(newContract)
+    return res.status(200).json({
+        data: { newContract },
+        message: 'success'
+    })
+})
+
 router.delete('/delete', async (req, res, next) => {
 
     const newContract = await contract.deleteMany({})
@@ -25,9 +36,41 @@ router.delete('/delete', async (req, res, next) => {
     })
 })
 
-router.get('/', async (req, res, next) => {
+// router.get('/', async (req, res, next) => {
 
-    const newContract = await contract.find().limit(1000).sort({ 'id_contract': 1 })
+//     const newContract = await contract.find().limit(1000).sort({ 'id_contract': 1 })
+//     const newarr = newContract.map(item => ({
+//         item,
+//         sohop: Math.ceil(item.id_contract / 50)
+//     }))
+//     return res.status(200).json({
+//         data: { newarr },
+//         message: 'success'
+//     })
+// })
+
+// get page
+router.get('/', async (req, res, next) => {
+    const PAGE_SIZE = 50
+    const page = req.query.page
+
+    if (page) {
+        const skip = (+page - 1) * PAGE_SIZE
+        const newContract = await contract.find({ status: true })
+            .populate("user", "name -_id")
+            .sort({ 'id_contract': 1 }).skip(skip).limit(PAGE_SIZE)
+
+
+        const newarr = newContract.map(item => ({
+            item,
+            sohop: Math.ceil(item.id_contract / 50)
+        }))
+        return res.status(200).json({
+            data: { newarr },
+            message: 'success'
+        })
+    }
+    const newContract = await contract.find({ status: true }).sort({ 'id_contract': 1 })
     const newarr = newContract.map(item => ({
         item,
         sohop: Math.ceil(item.id_contract / 50)

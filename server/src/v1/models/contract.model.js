@@ -7,7 +7,12 @@ const contractSchema = new Schema({
         require: true
     },
     status: {
-        type: Boolean
+        type: Boolean,
+        default: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 })
 module.exports = mongoose.model('contract', contractSchema)
