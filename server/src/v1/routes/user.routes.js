@@ -1,9 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const user = require('../models/user.model')
-router.get('/', (req, res, next) => {
-
-    res.send('/v1/user')
+router.get('/', async (req, res, next) => {
+    try {
+        const response = await user.find()
+        return res.status(200).json({
+            data: response,
+            message: 'success'
+        })
+    } catch (error) {
+        console.log('router get user', error)
+    }
 })
 
 router.post('/create', async (req, res, next) => {
@@ -11,7 +18,7 @@ router.post('/create', async (req, res, next) => {
     const newUser = new user({ name: req.body.name })
     const kq = await newUser.save()
     res.status(200).json({
-        kq,
+        data: kq,
         message: 'success'
     })
 })

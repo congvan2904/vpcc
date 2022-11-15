@@ -1,0 +1,10 @@
+### User GET ALL
+GET http://localhost:5000/v1/user
+
+### User CREATE
+POST  http://localhost:5000/v1/user/create
+Content-Type: application/json
+
+{
+    "name":"Quang"
+}

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const contract = require('../models/contract.model')
+const user = require('../models/user.model')
 
 router.post('/create', async (req, res, next) => {
     for (let index = 1; index <= 6000; index++) {
@@ -79,6 +80,34 @@ router.get('/', async (req, res, next) => {
         data: { newarr },
         message: 'success'
     })
+})
+
+// get all Debt Contract
+router.get('/debt', async (req, res, next) => {
+    try {
+        const numberSecretary = await user.count()
+        const users = await user.find()
+        users.map(async (item) => {
+            const response = await contract.find({ user: item._id, status: true }).count()
+            // console.log(`${response} `)
+        })
+        const data = await contract.aggregate([
+            {
+                $group: {
+                    _id: '$user',
+                    count: { $sum: 1 }
+                }
+            }
+        ])
+        console.log(data)
+        const response = await contract.find({ status: true })
+        return res.status(200).json({
+            // data: { response },
+            message: 'success'
+        })
+    } catch (error) {
+        console.log('/debt--', error)
+    }
 })
 
 router.get('/group', async (req, res, next) => {
