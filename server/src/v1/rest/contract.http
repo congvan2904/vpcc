@@ -23,3 +23,12 @@ GET http://localhost:5000/v1/contract/group
 
 ### Contract DEBT
 GET http://localhost:5000/v1/contract/debt
+
+### find CONTRACT AND UPDATE
+PATCH  http://localhost:5000/v1/contract/find
+Content-Type: application/json
+
+{
+    "name":5952,
+    "status":false
+}

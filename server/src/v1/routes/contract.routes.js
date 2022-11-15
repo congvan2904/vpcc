@@ -119,5 +119,19 @@ router.get('/group', async (req, res, next) => {
     })
 })
 
+router.patch('/find', async (req, res, next) => {
+    try {
+        const filter = req.body.name
+        const update = req.body.status
+        console.log(`${filter} -- ${update}`)
+        const response = await user.findOneAndUpdate({ id_contract: +filter }, { status: update })
+        return res.status(200).json({
+            data: { response },
+            message: 'success'
+        })
+    } catch (error) {
+        console.log('user/find---', error)
+    }
+})
 
 module.exports = router
