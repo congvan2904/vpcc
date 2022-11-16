@@ -93,12 +93,17 @@ router.get('/debt', async (req, res, next) => {
         })
         const data = await contract.aggregate([
             {
+                state: { $eq: false }
+            },
+            {
+
                 $group: {
                     _id: '$user',
                     count: { $sum: 1 }
-                }
+                },
+
             }
-        ])
+        ]) //.option({ status: false })
         console.log(data)
         const response = await contract.find({ status: true })
         return res.status(200).json({
@@ -122,9 +127,9 @@ router.get('/group', async (req, res, next) => {
 router.patch('/find', async (req, res, next) => {
     try {
         const filter = req.body.name
-        const update = req.body.status
+        const update = req.body.status === 'true' ? true : false
         console.log(`${filter} -- ${update}`)
-        const response = await user.findOneAndUpdate({ id_contract: +filter }, { status: update })
+        const response = await contract.findOneAndUpdate({ id_contract: +filter }, { status: update })
         return res.status(200).json({
             data: { response },
             message: 'success'

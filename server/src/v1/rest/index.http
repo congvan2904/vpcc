@@ -6,7 +6,7 @@ POST  http://localhost:5000/v1/user/create
 Content-Type: application/json
 
 {
-    "name":"Quang"
+    "name":"Thong"
 }
 
 ### Contract CREATE

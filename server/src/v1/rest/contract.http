@@ -29,6 +29,6 @@ PATCH  http://localhost:5000/v1/contract/find
 Content-Type: application/json
 
 {
-    "name":5952,
+    "name":4,
     "status":false
 }
