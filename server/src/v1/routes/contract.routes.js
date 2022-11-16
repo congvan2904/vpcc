@@ -93,16 +93,16 @@ router.get('/debt', async (req, res, next) => {
         })
         const data = await contract.aggregate([
             {
-                state: { $eq: false }
+                $eq: { 'state': false }
             },
-            {
+            // {
 
-                $group: {
-                    _id: '$user',
-                    count: { $sum: 1 }
-                },
+            //     $group: {
+            //         _id: '$user',
+            //         count: { $sum: 1 }
+            //     },
 
-            }
+            // }
         ]) //.option({ status: false })
         console.log(data)
         const response = await contract.find({ status: true })
