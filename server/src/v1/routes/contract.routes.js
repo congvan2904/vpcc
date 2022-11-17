@@ -96,6 +96,7 @@ router.get('/debt', async (req, res, next) => {
         console.log({ dataFillter })
 
         const data = await contract.aggregate([
+
             {
                 $group: {
                     _id: '$user',
@@ -113,20 +114,17 @@ router.get('/debt', async (req, res, next) => {
                             }
                         }
                     }
-                },
-                // "$lookup": {
-                //     from: "user",
-                //     localField: "user",
-                //     foreignField: "_id",
-                //     as: "user"
-                // }
+                }
+
             }
         ])
-        // const newData=data.map(item=>{
-        //     item,
+        const newData = data.map(async (item) => {
+            const idUser = await user.findById(item._id)
+            // console.log(idUser)
+            return ({ ...item, idUser })
 
-        // })
-        // console.log(data)
+        })
+        console.log(newData)
         const response = await contract.find({ status: true })
         return res.status(200).json({
             data,
