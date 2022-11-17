@@ -91,23 +91,83 @@ router.get('/debt', async (req, res, next) => {
             const response = await contract.find({ user: item._id, status: true }).count()
             // console.log(`${response} `)
         })
+
+        const dataFillter = await contract.find({ status: false }).count()
+        console.log({ dataFillter })
+
         const data = await contract.aggregate([
             {
-                state: { $eq: false }
-            },
-            {
-
                 $group: {
                     _id: '$user',
-                    count: { $sum: 1 }
+                    count: {
+                        "$sum": {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$status",
+                                        false
+                                    ]
+                                },
+                                "then": 1, //If false returns 1
+                                "else": 0 // else 0
+                            }
+                        }
+                    }
                 },
-
+                // "$lookup": {
+                //     from: "user",
+                //     localField: "user",
+                //     foreignField: "_id",
+                //     as: "user"
+                // }
             }
-        ]) //.option({ status: false })
-        console.log(data)
+        ])
+        // const newData=data.map(item=>{
+        //     item,
+
+        // })
+        // console.log(data)
         const response = await contract.find({ status: true })
         return res.status(200).json({
-            // data: { response },
+            data,
+            message: 'success'
+        })
+    } catch (error) {
+        console.log('/debt--', error)
+    }
+})
+
+// TEST PUPULATE
+router.get('/populate', async (req, res, next) => {
+    try {
+
+        const data = await contract.aggregate([
+
+            {
+                $lookup:
+                {
+                    from: 'user',
+                    localField: 'user',
+                    foreignField: '_id',
+                    as: 'user'
+                }
+            },
+            {
+                $unwind: '$user'
+            },
+            {
+                $project: {
+                    user: {
+                        name: '$user.name',
+
+                    }
+                }
+            }
+        ])
+
+
+        return res.status(200).json({
+            data,
             message: 'success'
         })
     } catch (error) {
@@ -128,7 +188,7 @@ router.patch('/find', async (req, res, next) => {
     try {
         const filter = req.body.name
         const update = req.body.status === 'true' ? true : false
-        console.log(`${filter} -- ${update}`)
+        // console.log(`${filter} -- ${update}`)
         const response = await contract.findOneAndUpdate({ id_contract: +filter }, { status: update })
         return res.status(200).json({
             data: { response },
