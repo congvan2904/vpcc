@@ -10,7 +10,7 @@ const contractSchema = new Schema({
         type: Boolean,
         default: true
     },
-    user: {
+    id_user: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     }

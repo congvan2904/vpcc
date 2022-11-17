@@ -6,7 +6,7 @@ POST  http://localhost:5000/v1/contract/updates
 Content-Type: application/json
 
 {
-    "user":"636fef47abe49af17154aef1"
+    "user":"636fef4eabe49af17154aef3"
 }
 
 ### Contract GET ALL ASC
@@ -29,7 +29,7 @@ PATCH  http://localhost:5000/v1/contract/find
 Content-Type: application/json
 
 {
-    "name":1111,
+    "name":5,
     "status":false
 }
 

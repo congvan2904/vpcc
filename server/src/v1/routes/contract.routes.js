@@ -19,7 +19,7 @@ router.post('/create', async (req, res, next) => {
 
 router.post('/updates', async (req, res, next) => {
 
-    const newContract = await contract.updateMany({}, { 'user': req.body.user })
+    const newContract = await contract.updateMany({}, { id_user: req.body.user })
     // console.log(newContract)
     return res.status(200).json({
         data: { newContract },
@@ -58,7 +58,7 @@ router.get('/', async (req, res, next) => {
     if (page) {
         const skip = (+page - 1) * PAGE_SIZE
         const newContract = await contract.find({ status: true })
-            .populate("user", "name -_id")
+            .populate("id_user", "name -_id")
             .sort({ 'id_contract': 1 }).skip(skip).limit(PAGE_SIZE)
 
 
@@ -145,22 +145,21 @@ router.get('/populate', async (req, res, next) => {
                 $lookup:
                 {
                     from: 'user',
-                    localField: 'user',
+                    localField: 'id_user',
                     foreignField: '_id',
                     as: 'user'
                 }
-            },
-            {
-                $unwind: '$user'
-            },
-            {
-                $project: {
-                    user: {
-                        name: '$user.name',
-
-                    }
-                }
             }
+            // {
+            //     $unwind: '$user'
+            // },
+            // {
+            //     $project: {
+            //         user: {
+            //             name: '$user.name',
+            //         }
+            //     }
+            // }
         ])
 
 
