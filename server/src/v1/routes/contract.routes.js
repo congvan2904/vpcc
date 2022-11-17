@@ -116,7 +116,29 @@ router.get('/debt', async (req, res, next) => {
                     }
                 }
 
+            },
+            {
+                $lookup:
+                {
+                    from: 'users',
+                    localField: '_id',
+                    foreignField: '_id',
+                    as: 'user'
+                }
+            },
+            {
+                $unwind: '$user'
+            },
+            {
+                $project: {
+                    user: {
+                        name: '$user.name'
+                    },
+                    sohop: 1,
+                    count: 1
+                }
             }
+
         ])
         const arr = []
         const newData = data.map(async (item) => {
@@ -125,7 +147,7 @@ router.get('/debt', async (req, res, next) => {
             return ({ ...item, idUser })
 
         })
-        newData.map(item => console.log(item))
+        // newData.map(item => console.log(item))
         const response = await contract.find({ status: true })
         return res.status(200).json({
             data,
@@ -140,27 +162,28 @@ router.get('/debt', async (req, res, next) => {
 router.get('/populate', async (req, res, next) => {
     try {
 
-        const data = await user.aggregate([
+        const data = await contract.aggregate([
 
             {
                 $lookup:
                 {
-                    from: 'contract',
-                    localField: '_id',
-                    foreignField: 'id_user',
+                    from: 'users',
+                    localField: 'id_user',
+                    foreignField: '_id',
                     as: 'user'
                 }
+            },
+            {
+                $unwind: '$user'
+            },
+            {
+                $project: {
+                    user: {
+                        name: '$user.name'
+                    },
+                    id_contract: 1
+                }
             }
-            // {
-            //     $unwind: '$user'
-            // },
-            // {
-            //     $project: {
-            //         user: {
-            //             name: '$user.name',
-            //         }
-            //     }
-            // }
         ])
 
 
