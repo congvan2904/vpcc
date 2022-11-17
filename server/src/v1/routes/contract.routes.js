@@ -99,7 +99,7 @@ router.get('/debt', async (req, res, next) => {
 
             {
                 $group: {
-                    _id: '$user',
+                    _id: '$id_user',
                     count: {
                         "$sum": {
                             "$cond": {
@@ -118,13 +118,14 @@ router.get('/debt', async (req, res, next) => {
 
             }
         ])
+        const arr = []
         const newData = data.map(async (item) => {
             const idUser = await user.findById(item._id)
             // console.log(idUser)
             return ({ ...item, idUser })
 
         })
-        console.log(newData)
+        newData.map(item => console.log(item))
         const response = await contract.find({ status: true })
         return res.status(200).json({
             data,
@@ -139,14 +140,14 @@ router.get('/debt', async (req, res, next) => {
 router.get('/populate', async (req, res, next) => {
     try {
 
-        const data = await contract.aggregate([
+        const data = await user.aggregate([
 
             {
                 $lookup:
                 {
-                    from: 'user',
-                    localField: 'id_user',
-                    foreignField: '_id',
+                    from: 'contract',
+                    localField: '_id',
+                    foreignField: 'id_user',
                     as: 'user'
                 }
             }
