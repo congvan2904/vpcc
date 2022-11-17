@@ -93,21 +93,44 @@ router.get('/debt', async (req, res, next) => {
         })
         const data = await contract.aggregate([
             {
-                $eq: { 'state': false }
+                $group: {
+                    _id: '$user',
+                    count: {
+                        "$sum": {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$status",
+                                        false
+                                    ]
+                                },
+                                "then": 1, //If true returns 1
+                                "else": 0 // else 0
+                            }
+                        }
+                    }
+                },
+
             },
             // {
-
-            //     $group: {
-            //         _id: '$user',
-            //         count: { $sum: 1 }
-            //     },
-
+            //     $lookup: {
+            //         from: "user",
+            //         localField: "_id",
+            //         foreignField: "user",
+            //         as: "user1"
+            //     }
             // }
-        ]) //.option({ status: false })
-        console.log(data)
+        ])
+        let arr = {}
+        const dataall = data.map(async (item) => {
+            const response = await user.findById(item._id)
+            // console.log(response)
+            return ({ ...item, name: response?.name })
+        })
+        dataall.map(async (data) => console.log(await data))
         const response = await contract.find({ status: true })
         return res.status(200).json({
-            // data: { response },
+            data: { data },
             message: 'success'
         })
     } catch (error) {
