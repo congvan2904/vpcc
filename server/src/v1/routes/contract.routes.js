@@ -178,14 +178,58 @@ router.get('/debt', async (req, res, next) => {
 // TEST PUPULATE
 router.get('/populate', async (req, res, next) => {
     try {
+        const numberSecretary = await user.count()
+        const users = await user.find()
+        users.map(async (item) => {
+            const response = await contract.find({ user: item._id, status: true }).count()
+            // console.log(`${response} `)
+        })
+
+        const dataFillter = await contract.find({ status: false }).count()
+        // console.log({ dataFillter })
 
         const data = await contract.aggregate([
 
             {
+                $group: {
+                    _id: '$id_user',
+                    id_contract: {
+                        $push: {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$status",
+                                        false
+                                    ]
+                                },
+                                "then": '$id_contract', //If false returns 1
+                                "else": '$$REMOVE' // else 0
+                            }
+                        }
+                    },
+                    count: {
+                        "$sum": {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$status",
+                                        false
+                                    ]
+                                },
+                                "then": 1, //If false returns 1
+                                "else": 0 // else 0
+                            }
+                        }
+                    }
+                }
+
+            }
+            ,
+            {
                 $lookup:
                 {
                     from: 'users',
-                    localField: 'id_user',
+                    localField: '_id',
                     foreignField: '_id',
                     as: 'user'
                 }
@@ -198,18 +242,26 @@ router.get('/populate', async (req, res, next) => {
                     user: {
                         name: '$user.name'
                     },
-                    id_contract: 1
+                    id_contract: 1,
+                    count: 1
                 }
             }
+
         ])
 
+        const newData = data.map((item) => {
+
+            return ({ ...item, id_contract: item.id_contract.sort((a, b) => b - a) })
+
+        })
+        // newData.map(item => console.log(item))
 
         return res.status(200).json({
-            data,
+            data: newData,
             message: 'success'
         })
     } catch (error) {
-        console.log('/debt--', error)
+        console.log('/populate--', error)
     }
 })
 
