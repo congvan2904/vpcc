@@ -96,7 +96,9 @@ router.get('/debt', async (req, res, next) => {
         // console.log({ dataFillter })
 
         const data = await contract.aggregate([
-
+            {
+                $sort: { id_contract: 1 }
+            },
 
             {
                 $group: {
@@ -131,10 +133,8 @@ router.get('/debt', async (req, res, next) => {
                     }
                 }
 
-            },
-            {
-                $sort: { "id_contract": 1 }
-            },
+            }
+            ,
             {
                 $lookup:
                 {
