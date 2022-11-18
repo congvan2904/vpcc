@@ -93,13 +93,28 @@ router.get('/debt', async (req, res, next) => {
         })
 
         const dataFillter = await contract.find({ status: false }).count()
-        console.log({ dataFillter })
+        // console.log({ dataFillter })
 
         const data = await contract.aggregate([
+
 
             {
                 $group: {
                     _id: '$id_user',
+                    id_contract: {
+                        $addToSet: {
+                            "$cond": {
+                                "if": {
+                                    "$eq": [
+                                        "$status",
+                                        false
+                                    ]
+                                },
+                                "then": '$id_contract', //If false returns 1
+                                "else": '$$REMOVE' // else 0
+                            }
+                        }
+                    },
                     count: {
                         "$sum": {
                             "$cond": {
@@ -118,6 +133,9 @@ router.get('/debt', async (req, res, next) => {
 
             },
             {
+                $sort: { "id_contract": 1 }
+            },
+            {
                 $lookup:
                 {
                     from: 'users',
@@ -134,7 +152,7 @@ router.get('/debt', async (req, res, next) => {
                     user: {
                         name: '$user.name'
                     },
-                    sohop: 1,
+                    id_contract: 1,
                     count: 1
                 }
             }
