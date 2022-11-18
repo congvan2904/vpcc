@@ -97,7 +97,7 @@ router.get('/debt', async (req, res, next) => {
 
         const data = await contract.aggregate([
             {
-                $sort: { id_contract: 1 }
+                $sort: { id_contract: -1 }
             },
 
             {
@@ -158,17 +158,16 @@ router.get('/debt', async (req, res, next) => {
             }
 
         ])
-        const arr = []
-        const newData = data.map(async (item) => {
-            const idUser = await user.findById(item._id)
-            // console.log(idUser)
-            return ({ ...item, idUser })
+
+        const newData = data.map((item) => {
+
+            return ({ ...item, id_contract: item.id_contract.sort((a, b) => b - a) })
 
         })
         // newData.map(item => console.log(item))
-        const response = await contract.find({ status: true })
+
         return res.status(200).json({
-            data,
+            data: newData,
             message: 'success'
         })
     } catch (error) {
