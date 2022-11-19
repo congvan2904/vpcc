@@ -52,16 +52,27 @@ router.delete('/delete', async (req, res, next) => {
 
 // get page
 router.get('/', async (req, res, next) => {
-    const PAGE_SIZE = 50
-    const page = req.query.page
+    try {
+        const PAGE_SIZE = 50
+        const page = req.query.page
+        // console.log(a)
+        if (page) {
+            const skip = (+page - 1) * PAGE_SIZE
+            const newContract = await contract.find({ status: true })
+                .populate("id_user", "name -_id")
+                .sort({ 'id_contract': 1 }).skip(skip).limit(PAGE_SIZE)
 
-    if (page) {
-        const skip = (+page - 1) * PAGE_SIZE
-        const newContract = await contract.find({ status: true })
-            .populate("id_user", "name -_id")
-            .sort({ 'id_contract': 1 }).skip(skip).limit(PAGE_SIZE)
 
-
+            const newarr = newContract.map(item => ({
+                item,
+                sohop: Math.ceil(item.id_contract / 50)
+            }))
+            return res.status(200).json({
+                data: { newarr },
+                message: 'success'
+            })
+        }
+        const newContract = await contract.find({ status: true }).sort({ 'id_contract': 1 })
         const newarr = newContract.map(item => ({
             item,
             sohop: Math.ceil(item.id_contract / 50)
@@ -70,16 +81,9 @@ router.get('/', async (req, res, next) => {
             data: { newarr },
             message: 'success'
         })
+    } catch (error) {
+        next(error)
     }
-    const newContract = await contract.find({ status: true }).sort({ 'id_contract': 1 })
-    const newarr = newContract.map(item => ({
-        item,
-        sohop: Math.ceil(item.id_contract / 50)
-    }))
-    return res.status(200).json({
-        data: { newarr },
-        message: 'success'
-    })
 })
 
 // get all Debt Contract

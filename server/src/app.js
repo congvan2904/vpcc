@@ -17,8 +17,9 @@ app.use((err, req, res, next) => {
     const date = new Date(); // for now
     const getTime = date.toTimeString().split(' ')[0];
     const getUrl = req.url
+    const getMethod = req.method
     const getError = err.message
-    const message = `${getTime}---${getUrl}---${getError}`
+    const message = `${getTime} ---- ${getUrl} --- ${getMethod} --- ${getError}`
     logEvents(message)
     return res.status(err.status || 500).json({
         status: err.status || 500,
