@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path');
-var todayDate = new Date().toISOString().slice(0, 10).split('-').reverse().join('-');
-const pathLog = `../logs/${todayDate}.log`
+var getDate = new Date().toISOString().slice(0, 10).split('-').reverse().join('-');
+const pathLog = `../logs/${getDate}.log`
 const joinPath = path.join(__dirname, pathLog)
 // var directories = path.dirname
 const logEvents = async (msg) => {

@@ -14,7 +14,12 @@ app.use((req, res, next) => {
     next(error)
 })
 app.use((err, req, res, next) => {
-    logEvents(err.message)
+    const date = new Date(); // for now
+    const getTime = date.toTimeString().split(' ')[0];
+    const getUrl = req.url
+    const getError = err.message
+    const message = `${getTime}---${getUrl}---${getError}`
+    logEvents(message)
     return res.status(err.status || 500).json({
         status: err.status || 500,
         message: err.message || 'Internal Server Error'
