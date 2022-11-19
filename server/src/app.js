@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const logEvents = require('./v1/helpers/logEvents')
 
 require('./v1/database/init.mongoose')
 
@@ -13,6 +14,7 @@ app.use((req, res, next) => {
     next(error)
 })
 app.use((err, req, res, next) => {
+    logEvents(err.message)
     return res.status(err.status || 500).json({
         status: err.status || 500,
         message: err.message || 'Internal Server Error'
