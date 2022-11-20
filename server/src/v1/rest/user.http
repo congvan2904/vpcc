@@ -9,3 +9,20 @@ Content-Type: application/json
     "name":"Nguyễn Văn Công"
 }
 
+### User CREATE
+POST  http://localhost:5000/v1/user/register
+Content-Type: application/json
+
+{
+    "username":"cong",
+    "password":"1",
+    "fullname":"nguyen van cong 1",
+    "phonenumber":"1111",
+    "email":"NguyenCong@gmail.com",
+    "role":"role1",
+    "position":"Position",
+    "imagepath":"img patch",
+    "note":"Note 1"
+
+}
+

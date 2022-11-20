@@ -10,7 +10,7 @@ const joinPathMonth = path.join(__dirname, pathMonth)
 const logEvents = async (msg) => {
     fs.mkdir(joinPathMonth, (err) => {
         if (err) {
-            return console.error(err);
+            return;
         }
         console.log('Directory created successfully!');
     })

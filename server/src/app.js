@@ -5,6 +5,7 @@ const logEvents = require('./v1/helpers/logEvents')
 require('./v1/database/init.mongoose')
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/v1', require('./v1/routes/'))
 
