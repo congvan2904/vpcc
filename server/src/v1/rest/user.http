@@ -9,12 +9,12 @@ Content-Type: application/json
     "name":"Nguyễn Văn Công"
 }
 
-### User CREATE
+### User REGISTER
 POST  http://localhost:5000/v1/user/register
 Content-Type: application/json
 
 {
-    "username":"cong",
+    "username":"cong3",
     "password":"1",
     "fullname":"nguyen van cong 1",
     "phonenumber":"1111",
@@ -24,5 +24,14 @@ Content-Type: application/json
     "imagepath":"img patch",
     "note":"Note 1"
 
+}
+
+### User LOGIN
+POST  http://localhost:5000/v1/user/login
+Content-Type: application/json
+
+{
+    "username":"cong1",
+    "password":"1"
 }
 

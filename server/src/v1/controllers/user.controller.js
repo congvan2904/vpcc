@@ -40,8 +40,32 @@ module.exports = {
             }
             const user = new User(req.body)
             const saveUser = await user.save()
-            res.status(200).json({
+            return res.status(200).json({
                 data: saveUser,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    login: async (req, res, next) => {
+        try {
+            const { error } = await userValidate(req.body)
+            if (error) {
+                throw new Error(error.details[0].message)
+            }
+            const { username, password } = req.body
+            const isExist = await User.findOne({ username })
+            if (!isExist) {
+                throw new Error(`User name ${username} not Exist`)
+            }
+            const isValid = await isExist.isCheckPassword(password)
+            if (!isValid) {
+                req.status = 403
+                throw new Error(`Unauthorized`)
+            }
+            return res.status(200).json({
+                data: isExist,
                 message: 'success'
             })
         } catch (error) {
