@@ -9,3 +9,6 @@
 22:43:17 ---- /v1/user/register --- POST --- "fullname" is not allowed to be empty
 22:45:26 ---- /v1/user/register --- POST --- "email" must be a valid email
 22:49:45 ---- /v1/user/register --- POST --- "image" is not allowed
+23:02:59 ---- /v1/user/register --- POST --- cong is ready registered
+23:24:59 ---- /v1/user/register --- POST --- cong is ready registered
+23:26:50 ---- /v1/user/register --- POST --- cong3 is ready registered

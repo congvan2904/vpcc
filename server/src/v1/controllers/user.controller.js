@@ -29,13 +29,19 @@ module.exports = {
         try {
             const { username, password } = req.body
             const { error } = userValidate(req.body)
-            // console.log(error)
+
             if (error) {
                 throw new Error(error.details[0].message)
             }
-            const isCreate = await User.create(req.body)
+
+            const isExits = await User.findOne({ username })
+            if (isExits) {
+                throw new Error(`${username} is ready registered`)
+            }
+            const user = new User(req.body)
+            const saveUser = await user.save()
             res.status(200).json({
-                data: isCreate,
+                data: saveUser,
                 message: 'success'
             })
         } catch (error) {
