@@ -1,5 +1,6 @@
 const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
+const { signAccessToken } = require('../helpers/jwt')
 module.exports = {
     getUser: async (req, res, next) => {
         try {
@@ -55,17 +56,18 @@ module.exports = {
                 throw new Error(error.details[0].message)
             }
             const { username, password } = req.body
-            const isExist = await User.findOne({ username })
-            if (!isExist) {
+            const user = await User.findOne({ username })
+            if (!user) {
                 throw new Error(`User name ${username} not Exist`)
             }
-            const isValid = await isExist.isCheckPassword(password)
+            const isValid = await user.isCheckPassword(password)
             if (!isValid) {
-                req.status = 403
+                req.status = 401
                 throw new Error(`Unauthorized`)
             }
+            const accessToken = await signAccessToken(user._id)
             return res.status(200).json({
-                data: isExist,
+                accessToken,
                 message: 'success'
             })
         } catch (error) {
