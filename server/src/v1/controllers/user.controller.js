@@ -1,6 +1,7 @@
 const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
 const { signAccessToken } = require('../helpers/jwt')
+const { use } = require('../routes/user.routes')
 module.exports = {
     getUser: async (req, res, next) => {
         try {
@@ -69,6 +70,17 @@ module.exports = {
             return res.status(200).json({
                 accessToken,
                 message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    getlists: async (req, res, next) => {
+        try {
+            const { userId } = req.payload
+            console.log(userId)
+            return res.status(200).json({
+                userId
             })
         } catch (error) {
             next(error)

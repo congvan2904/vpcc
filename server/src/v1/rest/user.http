@@ -35,3 +35,6 @@ Content-Type: application/json
     "password":"1"
 }
 
+### User GET LISTS
+GET http://localhost:5000/v1/user/getlists
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkwMTA3MzIsImV4cCI6MTY2OTAxNDMzMn0.ctJnW4h755Oek_xO0wJnHtl25SDp693xdSPJgZQip30

@@ -15,6 +15,31 @@ const signAccessToken = async (userId) => {
         })
     })
 }
+
+const verifyAccessToken = (req, res, next) => {
+    try {
+        if (!req.headers['authorization']) {
+            req.status = 401
+            return next('Unauthorized')
+        }
+        const authHeader = req.headers['authorization']
+        const bearerToken = authHeader.split(' ')
+        const token = bearerToken[1]
+
+        JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+            if (err) {
+                req.status = 401
+                return next('Unauthorized')
+            }
+            req.payload = payload
+            next()
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
-    signAccessToken
+    signAccessToken,
+    verifyAccessToken
 }

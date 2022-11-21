@@ -1,0 +1,5 @@
+13:07:45 ---- /v1/getlists --- GET --- Not found
+13:08:01 ---- /v1/user/getlists --- GET --- Not found
+13:08:05 ---- /v1/user/getlists --- GET --- Not found
+13:10:54 ---- /v1/user/getlists --- GET --- Not found
+13:33:02 ---- /v1/user/getlists --- GET --- undefined
