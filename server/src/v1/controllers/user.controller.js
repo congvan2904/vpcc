@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
-const { signAccessToken } = require('../helpers/jwt')
+const { signAccessToken, signRefreshToken } = require('../helpers/jwt')
 const { use } = require('../routes/user.routes')
 module.exports = {
     getUser: async (req, res, next) => {
@@ -67,9 +67,10 @@ module.exports = {
                 throw new Error(`Unauthorized`)
             }
             const accessToken = await signAccessToken(user._id)
+            const refreshToken = await signRefreshToken(user._id)
             return res.status(200).json({
                 accessToken,
-                message: 'success'
+                refreshToken
             })
         } catch (error) {
             next(error)
