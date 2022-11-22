@@ -5,6 +5,7 @@ const { verifyAccessToken } = require('../helpers/jwt')
 
 router.post('/register', userController.register)
 router.post('/login', userController.login)
+router.post('/refresh-token', userController.refreshToken)
 router.get('/getlists', verifyAccessToken, userController.getlists)
 router.get('/', userController.getUser)
 router.post('/create', userController.createUser)

@@ -54,8 +54,19 @@ const signRefreshToken = async (userId) => {
         })
     })
 }
+
+const verifyRefreshToken = (refreshToken) => {
+    return new Promise((resolve, reject) => {
+        JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
+            if (err) reject(err.message)
+            resolve(payload)
+        })
+    })
+}
+
 module.exports = {
     signAccessToken,
     verifyAccessToken,
-    signRefreshToken
+    signRefreshToken,
+    verifyRefreshToken
 }

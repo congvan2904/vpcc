@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
-const { signAccessToken, signRefreshToken } = require('../helpers/jwt')
+const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt')
 const { use } = require('../routes/user.routes')
 module.exports = {
     getUser: async (req, res, next) => {
@@ -82,6 +82,22 @@ module.exports = {
             console.log(userId)
             return res.status(200).json({
                 userId
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    refreshToken: async (req, res, next) => {
+        try {
+            const { refreshToken } = req.body
+            if (!refreshToken) throw new Error('Bad request')
+            const payload = await verifyRefreshToken(refreshToken)
+            const { userId } = payload
+            const acessToken = await signAccessToken(userId)
+            const rToken = await signRefreshToken(userId)
+            return res.status(200).json({
+                acessToken,
+                refreshToken: rToken
             })
         } catch (error) {
             next(error)
