@@ -102,10 +102,10 @@ module.exports = {
                                     "if": {
                                         "$eq": [
                                             "$status",
-                                            false
+                                            true
                                         ]
                                     },
-                                    "then": '$id_contract', //If false returns 1
+                                    "then": '$id_contract', //If true returns 1
                                     "else": '$$REMOVE' // else 0
                                 }
                             }
@@ -116,10 +116,10 @@ module.exports = {
                                     "if": {
                                         "$eq": [
                                             "$status",
-                                            false
+                                            true
                                         ]
                                     },
-                                    "then": 1, //If false returns 1
+                                    "then": 1, //If true returns 1
                                     "else": 0 // else 0
                                 }
                             }
@@ -190,10 +190,10 @@ module.exports = {
                                     "if": {
                                         "$eq": [
                                             "$status",
-                                            false
+                                            true
                                         ]
                                     },
-                                    "then": '$id_contract', //If false returns 1
+                                    "then": '$id_contract', //If true returns 1
                                     "else": '$$REMOVE' // else 0
                                 }
                             }
@@ -204,10 +204,10 @@ module.exports = {
                                     "if": {
                                         "$eq": [
                                             "$status",
-                                            false
+                                            true
                                         ]
                                     },
-                                    "then": 1, //If false returns 1
+                                    "then": 1, //If true returns 1
                                     "else": 0 // else 0
                                 }
                             }

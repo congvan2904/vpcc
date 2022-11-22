@@ -14,7 +14,7 @@ POST  http://localhost:5000/v1/user/register
 Content-Type: application/json
 
 {
-    "username":"cong3",
+    "username":"cong4",
     "password":"1",
     "fullname":"nguyen van cong 1",
     "phonenumber":"1111",

@@ -11,3 +11,6 @@
 16:08:15 ---- /v1/user/refresh-token --- POST --- undefined
 16:08:20 ---- /v1/user/refresh-token --- POST --- undefined
 16:08:27 ---- /v1/user/refresh-token --- POST --- undefined
+16:09:49 ---- /v1/user/refresh-token --- POST --- undefined
+16:10:05 ---- /v1/user/register --- POST --- cong3 is ready registered
+16:12:29 ---- /v1/contract?page=120 --- GET --- Cannot populate path `id_user` because it is not in your schema. Set the `strictPopulate` option to false to override.
