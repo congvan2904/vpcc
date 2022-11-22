@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken')
-
+const client = require('../database/init.redis')
 const signAccessToken = async (userId) => {
     return new Promise((resolve, reject) => {
         const payload = {
@@ -50,7 +50,10 @@ const signRefreshToken = async (userId) => {
         }
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err)
-            resolve(token)
+            client.set(userId.toString(), token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
+                if (err) reject(err)
+                resolve(token)
+            })
         })
     })
 }
@@ -58,8 +61,12 @@ const signRefreshToken = async (userId) => {
 const verifyRefreshToken = (refreshToken) => {
     return new Promise((resolve, reject) => {
         JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
-            if (err) reject(err.message)
-            resolve(payload)
+            if (err) return reject(err.message)
+            client.get(payload.userId, (err, reply) => {
+                if (err) return reject(err)
+                if (refreshToken === reply) return resolve(payload)
+                return reject(new Error('Unauthorized'))
+            })
         })
     })
 }

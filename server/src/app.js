@@ -3,6 +3,7 @@ const app = express()
 const logEvents = require('./v1/helpers/logEvents')
 
 require('./v1/database/init.mongoose')
+require('./v1/database/init.redis')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

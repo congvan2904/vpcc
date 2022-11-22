@@ -14,3 +14,28 @@
 16:09:49 ---- /v1/user/refresh-token --- POST --- undefined
 16:10:05 ---- /v1/user/register --- POST --- cong3 is ready registered
 16:12:29 ---- /v1/contract?page=120 --- GET --- Cannot populate path `id_user` because it is not in your schema. Set the `strictPopulate` option to false to override.
+22:26:36 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:42 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:43 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:44 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:45 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:46 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:47 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:48 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:48 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:48 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:48 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:49 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:49 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:49 ---- /v1/user/getlists --- GET --- jwt expired
+22:26:49 ---- /v1/user/getlists --- GET --- jwt expired
+22:41:08 ---- /v1/user/getlists --- GET --- jwt expired
+22:41:51 ---- /v1/user/refresh-token --- POST --- Unauthorized
+22:44:20 ---- /v1/user/getlists --- GET --- jwt expired
+22:44:44 ---- /v1/user/getlists --- GET --- jwt expired
+22:44:50 ---- /v1/user/getlists --- GET --- jwt expired
+22:45:12 ---- /v1/user/refresh-token --- POST --- undefined
+22:45:14 ---- /v1/user/refresh-token --- POST --- undefined
+22:45:21 ---- /v1/user/refresh-token --- POST --- Unauthorized
+22:45:24 ---- /v1/user/refresh-token --- POST --- Unauthorized
+22:45:39 ---- /v1/user/refresh-token --- POST --- Unauthorized
