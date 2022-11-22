@@ -79,7 +79,6 @@ module.exports = {
     getlists: async (req, res, next) => {
         try {
             const { userId } = req.payload
-            console.log(userId)
             return res.status(200).json({
                 userId
             })

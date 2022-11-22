@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ### User GET LISTS
 GET http://localhost:5000/v1/user/getlists
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkwOTUzMzMsImV4cCI6MTY2OTA5NTM1M30.IdpwgmmsguT0m3q5LDxDYyfbhvcZOuOQFe54JN2YhQ4
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMDgwNjgsImV4cCI6MTY2OTEwODA4OH0.F5-X3fcv7rFdqGJC1dTgHFs4MAiLAUb5rXqbx-et2dA
 
 
 ### User REFRESH-TOKEN

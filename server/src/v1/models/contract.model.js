@@ -10,9 +10,26 @@ const contractSchema = new Schema({
         type: Boolean,
         default: true
     },
-    id_user: {
+    id_user_secretary: {
         type: Schema.Types.ObjectId,
         ref: 'user'
+    },
+    id_user_notary: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    name: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    date_create: {
+        type: Date,
+        default: Date.now
+    },
+    note: {
+        type: String
     }
 },
     { timestamps: true })

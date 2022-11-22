@@ -12,10 +12,10 @@ const userSchema = new Schema({
         type: String,
         require: true
     },
-    fullname: {
+    full_name: {
         type: String
     },
-    phonenumber: {
+    phone_number: {
         type: String
     },
     email: {
@@ -28,11 +28,15 @@ const userSchema = new Schema({
     position: {
         type: String
     },
-    imagepath: {
+    image_path: {
         type: String
     },
     note: {
         type: String
+    },
+    ban: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true })
 
