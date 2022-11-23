@@ -14,7 +14,7 @@ POST  http://localhost:5000/v1/user/register
 Content-Type: application/json
 
 {
-    "username":"cong4",
+    "username":"cong5",
     "password":"1",
     "fullname":"nguyen van cong 1",
     "phonenumber":"1111",
@@ -31,7 +31,7 @@ POST  http://localhost:5000/v1/user/login
 Content-Type: application/json
 
 {
-    "username":"cong1",
+    "username":"cong5",
     "password":"1"
 }
 
@@ -40,7 +40,7 @@ DELETE http://localhost:5000/v1/user/logout
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxNjE1NjksImV4cCI6MTY2OTE2NTE2OX0.KsKtQT7RUTJ0bs0DxohQnzdyIVnUyad5tM2et_FWNZk"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxNjQwOTMsImV4cCI6MTY2OTE2NzY5M30.Yl9n9wVpPrQ0bMtgipV2AmUdjBeIeOd_T-A2v2r6sHc"
 }
 
 

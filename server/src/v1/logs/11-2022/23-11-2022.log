@@ -1,0 +1,4 @@
+07:42:07 ---- /v1/user/logout --- DELETE --- undefined
+07:43:18 ---- /v1/user/logout --- DELETE --- Unauthorized
+07:52:07 ---- /v1/user/register --- POST --- cong4 is ready registered
+07:53:52 ---- /v1/user/logout --- DELETE --- Unauthorized

@@ -1,10 +1,12 @@
 const express = require("express")
 const app = express()
+const cors = require('cors')
 const logEvents = require('./v1/helpers/logEvents')
 
 require('./v1/database/init.mongoose')
 require('./v1/database/init.redis')
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
