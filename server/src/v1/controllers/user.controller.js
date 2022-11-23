@@ -2,6 +2,7 @@ const User = require('../models/user.model')
 const { userValidate } = require('../helpers/validation')
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../helpers/jwt')
 const { use } = require('../routes/user.routes')
+const client = require('../database/init.redis')
 module.exports = {
     getUser: async (req, res, next) => {
         try {
@@ -71,6 +72,23 @@ module.exports = {
             return res.status(200).json({
                 accessToken,
                 refreshToken
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    logout: async (req, res, next) => {
+        try {
+            const { refreshToken } = req.body
+            if (!refreshToken) throw new Error('Bad request')
+            const { userId } = await verifyRefreshToken(refreshToken)
+            client.del(userId.toString(), (err, reply) => {
+                if (err) {
+                    throw new Error('Internal Server Error')
+                }
+                return res.status(200).json({
+                    message: 'success'
+                })
             })
         } catch (error) {
             next(error)

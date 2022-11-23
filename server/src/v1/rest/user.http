@@ -35,9 +35,18 @@ Content-Type: application/json
     "password":"1"
 }
 
+### User LOGOUT
+DELETE http://localhost:5000/v1/user/logout
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxNjE1NjksImV4cCI6MTY2OTE2NTE2OX0.KsKtQT7RUTJ0bs0DxohQnzdyIVnUyad5tM2et_FWNZk"
+}
+
+
 ### User GET LISTS
 GET http://localhost:5000/v1/user/getlists
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMDgwNjgsImV4cCI6MTY2OTEwODA4OH0.F5-X3fcv7rFdqGJC1dTgHFs4MAiLAUb5rXqbx-et2dA
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMzE4NjQsImV4cCI6MTY2OTEzMTg4NH0.ils4MKGvBBTtOwJPtLjkHXWGEgakIHV5Db0w39j4Tvw
 
 
 ### User REFRESH-TOKEN
@@ -45,5 +54,5 @@ POST  http://localhost:5000/v1/user/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkwOTM2NTAsImV4cCI6MTY2OTA5NzI1MH0.Ho58hQVMZMqFbWKnR5Kypwg8Ext9JVX2oFF6ALsw0ZI"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMzE4MzQsImV4cCI6MTY2OTEzNTQzNH0.5_QaJVU_BuxYIy5UWT_Ki9RRZEhzyq3_Sj2iApo4ifY"
 }
