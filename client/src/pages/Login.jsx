@@ -5,8 +5,10 @@ import email from "./../assets/login/email.jpg";
 import pass from "./../assets/login/pass.png";
 import logo from '../assets/logo.png'
 import '../sass/login.scss'
+import Helmet from '../components/Helmet';
 const Login = () => {
     return (
+      <Helmet title={'Đăng nhập'}>
         <div className="main">
          <div className="sub-main">
            <div>
@@ -43,6 +45,7 @@ const Login = () => {
     
          </div>
         </div>
+        </Helmet>
       );
 }
 
