@@ -1,29 +1,49 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import profile from '../assets/login/a.png'
+import email from "./../assets/login/email.jpg";
+import pass from "./../assets/login/pass.png";
+import logo from '../assets/logo.png'
+import '../sass/login.scss'
 const Login = () => {
-  return (
-    <div>
-        <form action="">
-            <div className="group-user-name">
-                {/* <label htmlFor="">Tên đăng nhập</label> */}
-                <input type="text" placeholder='Tên đăng nhập'/>
-            </div>
-            <div className="group-password">
-                {/* <label htmlFor="">Mật khẩu</label> */}
-                <input type="text" placeholder='Mật khẩu' />
-            </div>
-            <button className="button">
-                Đăng Nhập
-            </button>
-        </form>
-        <p>
-            Bạn đã có tài khoản chưa?
-            {/* <Link to='/register'> */}
-                <button>Đăng ký</button>
-            {/* </Link> */}
-        </p>
-    </div>
-  )
+    return (
+        <div className="main">
+         <div className="sub-main">
+           <div>
+             <div className="imgs">
+               <div className="container-image">
+                 <img src={logo} alt="profile" className="profile"/>
+    
+               </div>
+    
+    
+             </div>
+             <div>
+               <h1>Trang Đăng Nhập</h1>
+               <div>
+                 <img src={email} alt="email" className="email"/>
+                 <input type="text" placeholder="Tên" className="name"/>
+               </div>
+               <div className="second-input">
+                 <img src={pass} alt="pass" className="email"/>
+                 <input type="password" placeholder="Mật khẩu" className="name"/>
+               </div>
+              <div className="login-button">
+              <button>Đăng nhập</button>
+              </div>
+               
+                <p className="link">
+                  <a href="#">Quên mật khẩu ?</a> Or<a href="/register"> Đăng ký</a>
+                </p>
+               
+     
+             </div>
+           </div>
+           
+    
+         </div>
+        </div>
+      );
 }
 
 export default Login
