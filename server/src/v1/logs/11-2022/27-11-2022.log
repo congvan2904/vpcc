@@ -54,3 +54,15 @@
 09:20:56 ---- /v1/user/getlists --- GET --- jwt expired
 09:21:21 ---- /v1/user/getlists --- GET --- jwt expired
 09:21:57 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:17 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:17 ---- /v1/user/refresh-token --- POST --- undefined
+17:31:18 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:18 ---- /v1/user/refresh-token --- POST --- undefined
+17:31:19 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:19 ---- /v1/user/refresh-token --- POST --- undefined
+17:31:20 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:20 ---- /v1/user/refresh-token --- POST --- undefined
+17:31:20 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:20 ---- /v1/user/refresh-token --- POST --- undefined
+17:31:21 ---- /v1/user/getlists --- GET --- jwt expired
+17:31:21 ---- /v1/user/refresh-token --- POST --- undefined

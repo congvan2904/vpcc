@@ -30,7 +30,7 @@ const Login = () => {
     return (
       
       <Helmet title={'Đăng nhập'}>
-        {login&&(<Navigate to="/users" replace={true} />)}
+        {login&&(<Navigate to="/dashboard" replace={true} />)}
         <div className="main">
          <div className="sub-main">
            <div>
