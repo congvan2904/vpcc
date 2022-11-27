@@ -46,7 +46,7 @@ Content-Type: application/json
 
 ### User GET LISTS
 GET http://localhost:5000/v1/user/getlists
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMzE4NjQsImV4cCI6MTY2OTEzMTg4NH0.ils4MKGvBBTtOwJPtLjkHXWGEgakIHV5Db0w39j4Tvw
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2Njk1MTQ0MDAsImV4cCI6MTY2OTUxNDQyMH0.9Z96ZbKHDU5StuX5XLj6EhAOag1wEOoOgljATqQhDq8
 
 
 ### User REFRESH-TOKEN
@@ -54,5 +54,5 @@ POST  http://localhost:5000/v1/user/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2NjkxMzE4MzQsImV4cCI6MTY2OTEzNTQzNH0.5_QaJVU_BuxYIy5UWT_Ki9RRZEhzyq3_Sj2iApo4ifY"
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdhNTRlYTY2MGFjNjJhNGM1YjkxNGYiLCJpYXQiOjE2Njk0OTgwNTMsImV4cCI6MTY2OTUwMTY1M30.jNBdc-_nQFG-9MCKGPqea2JO5VFr1E4sEtwLFvZH1II"
 }

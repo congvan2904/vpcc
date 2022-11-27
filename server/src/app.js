@@ -23,9 +23,10 @@ app.use((err, req, res, next) => {
     const getUrl = req.url
     const getMethod = req.method
     const getError = err.message
+    // console.log('err.status---', err.status)
     const message = `${getTime} ---- ${getUrl} --- ${getMethod} --- ${getError}`
     logEvents(message)
-    return res.status(err.status || 500).json({
+    return res.status(200).json({
         status: err.status || 500,
         message: err.message || 'Internal Server Error'
     })

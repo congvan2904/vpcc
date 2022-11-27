@@ -95,10 +95,19 @@ module.exports = {
         }
     },
     getlists: async (req, res, next) => {
+        // try {
+        //     const { userId } = req.payload
+        //     return res.status(200).json({
+        //         userId
+        //     })
+        // } catch (error) {
+        //     next(error)
+        // }
         try {
-            const { userId } = req.payload
+            const response = await User.find()
             return res.status(200).json({
-                userId
+                data: response,
+                message: 'success'
             })
         } catch (error) {
             next(error)
@@ -110,10 +119,10 @@ module.exports = {
             if (!refreshToken) throw new Error('Bad request')
             const payload = await verifyRefreshToken(refreshToken)
             const { userId } = payload
-            const acessToken = await signAccessToken(userId)
+            const accessToken = await signAccessToken(userId)
             const rToken = await signRefreshToken(userId)
             return res.status(200).json({
-                acessToken,
+                accessToken,
                 refreshToken: rToken
             })
         } catch (error) {

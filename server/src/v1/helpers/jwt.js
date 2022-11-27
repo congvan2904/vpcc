@@ -28,8 +28,11 @@ const verifyAccessToken = (req, res, next) => {
 
         JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
             if (err) {
-                req.status = 401
-                throw new Error(err.message)
+                if (err.name === 'TokenExpiredError') {
+                    req.status = 401
+                    throw new Error(err.message)
+                }
+
             }
             req.payload = payload
             next()
@@ -50,7 +53,7 @@ const signRefreshToken = async (userId) => {
         }
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err)
-            client.set(userId.toString(), token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
+            client.set(userId.toString(), token, 'EX', 1 * 1 * 60 * 60, (err, reply) => {
                 if (err) reject(err)
                 resolve(token)
             })
