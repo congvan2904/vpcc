@@ -4,7 +4,7 @@ import profile from '../assets/login/a.png'
 import email from "./../assets/login/email.jpg";
 import pass from "./../assets/login/pass.png";
 import logo from '../assets/logo.png'
-import '../sass/login.scss'
+// import '../sass/login.scss'
 import Helmet from '../components/Helmet';
 import instance from '../services/configAxios'
 // import axios from 'axios'
