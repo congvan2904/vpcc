@@ -22,7 +22,7 @@ export const optionsPie = {
 export const dataBar = [
   [
     "Element",
-    "Density",
+    "Hồ sơ nợ",
     { role: "style" },
     {
       sourceColumn: 0,
@@ -45,8 +45,6 @@ export const dataBar = [
 
 export const optionsBar = {
   title: "Biểu đồ cột",
-  width: 400,
-  height: 400,
   bar: { groupWidth: "95%" },
   legend: { position: "none" },
 };
