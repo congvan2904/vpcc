@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
 
@@ -74,20 +74,14 @@ const Contracts = () => {
                 </tr>
               </thead>
               <tbody>
-                {dataContract.map((contract) => (
-                  <tr>
+                {dataContract.map((contract, index) => (
+                  <tr key={index}>
                     <td>{contract.user.name}</td>
                     <td>{contract.count}</td>
                     <td>
-                      <table>
-                        <tbody>
-                          {contract.id_contract.map((item) => (
-                            <tr>
-                              <span>{item}</span>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                      {contract.id_contract.map((item, i) => (
+                        <div key={i}>{item}</div>
+                      ))}
                     </td>
                     <td>
                       <button type="button" onClick={(event) => {}}>
