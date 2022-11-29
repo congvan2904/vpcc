@@ -29,9 +29,7 @@ const Contracts = () => {
         <div className="contract-manager-group">
           <label htmlFor="">Tên thư ký</label>
           <select>
-            <option selected value="default">
-              Chọn thư ký
-            </option>
+            <option defaultValue="default">Chọn thư ký</option>
             <option value="Lực">Lực</option>
             <option value="Hồng">Hồng</option>
             <option value="Sơn">Sơn</option>
@@ -41,9 +39,7 @@ const Contracts = () => {
         <div className="contract-manager-group">
           <label htmlFor="">Tên công chứng viên</label>
           <select>
-            <option selected value="Điền">
-              Nguyễn Đức Điền
-            </option>
+            <option defaultValue="Điền">Nguyễn Đức Điền</option>
             <option value="Liên">Nguyễn Thị Kim Liên</option>
             <option value="Bay">Nguyễn Thị Bay</option>
           </select>
@@ -83,9 +79,15 @@ const Contracts = () => {
                     <td>{contract.user.name}</td>
                     <td>{contract.count}</td>
                     <td>
-                      {contract.id_contract.map((item) => (
-                        <tr>{item}</tr>
-                      ))}
+                      <table>
+                        <tbody>
+                          {contract.id_contract.map((item) => (
+                            <tr>
+                              <span>{item}</span>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </td>
                     <td>
                       <button type="button" onClick={(event) => {}}>
