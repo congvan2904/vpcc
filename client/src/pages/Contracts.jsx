@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import Contract from "../components/contract/contract";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
 
@@ -62,7 +63,7 @@ const Contracts = () => {
           <button>Thêm hồ sơ</button>
         </div>
         <div className="contract-show">
-          <form>
+          {/* <form>
             <table>
               <thead>
                 <tr>
@@ -95,7 +96,15 @@ const Contracts = () => {
                 ))}
               </tbody>
             </table>
-          </form>
+          </form> */}
+          {dataContract.map((contract, index) => (
+            <div key={index}>
+              {contract.id_contract.map((item, i) => (
+                <Contract key={i} contract={item} name={contract.user.name} />
+              ))}
+              {/* {console.log(contract.id_contract)} */}
+            </div>
+          ))}
         </div>
       </div>
     </Helmet>
