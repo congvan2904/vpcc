@@ -10,7 +10,7 @@ const Contracts = () => {
       const data = (await instance.get("contract/debt")).data;
       if (data.message === "success") {
         setDataContract(data.data);
-        console.log("data", data);
+        // console.log("data", data);
       }
     }
     fetDataContract();
@@ -98,11 +98,10 @@ const Contracts = () => {
             </table>
           </form> */}
           {dataContract.map((contract, index) => (
-            <div key={index}>
+            <div className="contract-main" key={index}>
               {contract.id_contract.map((item, i) => (
                 <Contract key={i} contract={item} name={contract.user.name} />
               ))}
-              {/* {console.log(contract.id_contract)} */}
             </div>
           ))}
         </div>

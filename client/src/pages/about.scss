@@ -14,8 +14,8 @@
         background-color: red;
     }
      
-    }
-    :hover{
+}
+:hover{
         &::before{
         width: 100%;
         transition: width .3s ease;
