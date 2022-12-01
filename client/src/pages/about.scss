@@ -1,4 +1,8 @@
 $value: 100px;
+$c_red: red;
+:root {
+  --c_green: green;
+}
 .about {
   display: flex;
   justify-content: center;
@@ -19,13 +23,19 @@ $value: 100px;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  span {
-    color: red;
+
+  .bao {
+    height: 100%;
+    width: 100%;
     position: absolute;
-    left: 50%;
-    transform-origin: 0 100px;
+    span {
+      color: red;
+      position: absolute;
+      left: 50%;
+      transform-origin: 0 $value;
+    }
+    animation: rotateText 10s linear infinite;
   }
-  animation: rotateText 10s linear infinite;
 }
 @keyframes rotateText {
   0% {
