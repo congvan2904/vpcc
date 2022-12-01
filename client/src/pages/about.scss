@@ -9,7 +9,7 @@
 .circle {
   width: 200px;
   height: 200px;
-  background-color: goldenrod;
+  background-color: white;
   border-radius: 50%;
   position: relative;
   p {
@@ -19,6 +19,7 @@
     transform: translate(-50%, -50%);
   }
   span {
+    color: red;
     position: absolute;
     left: 50%;
     transform-origin: 0 100px;
