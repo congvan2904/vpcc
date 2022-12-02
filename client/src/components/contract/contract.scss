@@ -41,23 +41,30 @@
         }
       }
       &:hover {
+        z-index: 100;
+
         transform: scale(1.4);
         background-color: pink;
         &-name-secretary {
           font-size: 35px;
           font-weight: 400;
         }
-        animation-play-state: running;
       }
-      .bao {
-        height: 100%;
-        width: 100%;
+      &-circle {
+        height: 150px;
+        width: 150px;
         position: absolute;
         span {
-          color: red;
+          color: transparent;
           position: absolute;
           left: 50%;
-          transform-origin: 0 100px;
+          transform-origin: 0 75px;
+        }
+        &:hover {
+          span {
+            color: red;
+          }
+          animation: rotateText 10s linear infinite;
         }
         animation-play-state: paused;
         // animation: rotateText 10s linear infinite;

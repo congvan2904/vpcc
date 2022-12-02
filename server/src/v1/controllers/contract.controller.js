@@ -92,7 +92,7 @@ module.exports = {
                 {
                     $sort: { id_contract: -1 }
                 },
-
+                { $limit: 10 },
                 {
                     $group: {
                         _id: '$id_user',
