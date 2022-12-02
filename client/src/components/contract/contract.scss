@@ -7,6 +7,7 @@
     }
     // flex-direction: row;
     &-item {
+      position: relative;
       width: 100px;
       height: 100px;
       border-radius: 3px;
@@ -46,6 +47,20 @@
           font-size: 35px;
           font-weight: 400;
         }
+        animation-play-state: running;
+      }
+      .bao {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        span {
+          color: red;
+          position: absolute;
+          left: 50%;
+          transform-origin: 0 100px;
+        }
+        animation-play-state: paused;
+        animation: rotateText 10s linear infinite;
       }
     }
   }
@@ -54,5 +69,13 @@
   &::before {
     width: 100%;
     transition: width 0.3s ease;
+  }
+}
+@keyframes rotateText {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

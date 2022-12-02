@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Contract from "../components/contract/contract";
+import Contract from "../components/contract/Contract";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
 
 const Contracts = () => {
   const [dataContract, setDataContract] = useState([]);
+
   useEffect(() => {
     async function fetDataContract() {
       const data = (await instance.get("contract/debt")).data;

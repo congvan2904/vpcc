@@ -6,7 +6,6 @@ const About = () => {
   let _do;
   const t2 = "Văn Thư Nguyễn văn văn văn Công";
   const t1 = ` ==== ⭐️  VĂN PHÒNG CÔNG CHỨNG NGUYỄN ĐỨC ĐIỀN  ⭐️  ==== ${t2}`;
-
   _do = 360 / t1.length;
   return (
     <>
