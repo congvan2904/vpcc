@@ -41,24 +41,23 @@
         }
       }
       &:hover {
-        z-index: 100;
-
         transform: scale(1.4);
         background-color: pink;
         &-name-secretary {
+          z-index: 2;
           font-size: 35px;
           font-weight: 400;
         }
       }
       &-circle {
-        height: 150px;
-        width: 150px;
+        height: 120px;
+        width: 120px;
         position: absolute;
         span {
           color: transparent;
           position: absolute;
           left: 50%;
-          transform-origin: 0 75px;
+          transform-origin: 0 60px;
         }
         &:hover {
           span {
@@ -66,14 +65,13 @@
           }
           animation: rotateText 10s linear infinite;
         }
-        animation-play-state: paused;
-        // animation: rotateText 10s linear infinite;
       }
     }
   }
 }
 :hover {
   &::before {
+    z-index: 100;
     width: 100%;
     transition: width 0.3s ease;
   }
