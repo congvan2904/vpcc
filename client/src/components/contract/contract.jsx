@@ -15,7 +15,7 @@ const Contract = (props) => {
   };
   return (
     <div className="contract-main-item" onClick={handleClick}>
-      <div className="contract-main-item-number">{id_contract}</div>
+      <div className="contract-main-item-number under-line">{id_contract}</div>
       <div className="contract-main-item-name-secretary">{count_contract}</div>
       <div className="contract-main-item-circle">
         {t1.split("").map((item, i) => (
