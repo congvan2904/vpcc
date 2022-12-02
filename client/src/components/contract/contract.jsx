@@ -17,7 +17,7 @@ const Contract = (props) => {
     <div className="contract-main-item" onClick={handleClick}>
       <div className="contract-main-item-number">{id_contract}</div>
       <div className="contract-main-item-name-secretary">{count_contract}</div>
-      <div className="bao">
+      <div className="contract-main-item-circle">
         {t1.split("").map((item, i) => (
           <span key={i} style={{ transform: `rotate(${i * _do}deg)` }}>
             {item}
