@@ -1,0 +1,162 @@
+// .main {
+//     text-align: center;
+//     justify-content: center;
+//     display: flex;
+//     padding-top: 90px;
+//     padding-bottom: 90px;
+//     background-color: #e1e3eb;
+//   }
+//   .sub-main {
+//     display: flex;
+//     justify-content: center;
+//     height: 550px;
+//     width: 35%;
+//     box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
+//     padding-top: 30px;
+//     border-radius: 60px;
+//     background-color: white;
+//   }
+//   .imgs {
+//       padding-top: 20px;
+//       justify-content: center;
+//       display: flex;
+//     }
+//   .container-image {
+//     background-color: rgb(223, 221, 221);
+//     border-radius: 150px;
+//     align-items: center;
+//     display: flex;
+//     justify-content: center;
+//     height: 115px;
+//     width: 115px;
+//   }
+//   .profile {
+//     height: 100px;
+//     width: 100px;
+//     border-radius: 130px;
+//   }
+
+//   input{
+//       width: 300px;
+//       height: 50px;
+//       border-radius: 60px;
+//       box-shadow: inset 0px 0px 25px 0px #888;
+//       border: none;
+//       outline: none;
+//       background-color: #fff;
+//   }
+
+//   .email{
+//       height: 25px;
+//       width: 25px;
+//       position: absolute;
+//       padding: 14px 0 0 25px;
+//   }
+
+//   .name{
+//       padding-left: 70px;
+//       font-size: 20px;
+//   }
+//   .second-input{
+//       padding-top: 20px;
+//   }
+
+//   button{
+//       width: 380px;
+//       height: 50px;
+//       border-radius: 60px;
+//       background-color: #b103fc;
+//       color: white;
+//       font-size: 25px;
+//       border: none;
+//   }
+//   .login-button{
+//       padding-top: 25px;
+//   }
+
+//   .link{
+//       font-size: 25px;
+//       font-weight: 400;
+//   }
+//    a{
+//        color: blue;
+//    }
+@use "../sass/" as *;
+
+.login {
+  width: 100wh;
+  height: 100vh;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &-wrap {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: green;
+    width: 400px;
+    border-radius: 50px;
+    &-logo {
+      width: 150px;
+      height: 150px;
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      &-input {
+        position: relative;
+        .img-login {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 50%;
+          left: 5px;
+          transform: translateY(-50%);
+        }
+        .username-input {
+          padding: 10px 15px 10px 30px;
+          font-size: 18px;
+          line-height: 1;
+          color: $main-color;
+        }
+        .password-input {
+          padding: 10px 15px 10px 30px;
+          font-size: 18px;
+          color: $main-color;
+        }
+      }
+      &-button {
+        button {
+          width: 250px;
+          height: 50px;
+          border-radius: 20px;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          font-size: 20px;
+          &:hover {
+            background-color: $third-color;
+            color: $white;
+            font-size: 23px;
+            text-transform: uppercase;
+          }
+        }
+      }
+      &-link {
+        font-size: 18px;
+        color: $white;
+        display: flex;
+        gap: 40px;
+        a {
+          display: inline-block;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
