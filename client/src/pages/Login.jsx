@@ -20,7 +20,7 @@ const Login = () => {
     const response = (await instance.post("user/login", { username, password }))
       .data;
 
-    console.log(refLogo.current);
+    // console.log(refLogo.current);
     _style = {
       transform: "rotate(720deg)",
       transition: "transform 3s ease",
