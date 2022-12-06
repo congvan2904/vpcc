@@ -24,6 +24,7 @@ const Register = () => {
         </div>
       </div>
       <div className="sub-header"></div>
+      <div className="triangle-dow"></div>
     </div>
   );
 };
