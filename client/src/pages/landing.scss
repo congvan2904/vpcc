@@ -2,17 +2,11 @@
 
 .landing {
   .header {
+    margin-top: -100px;
     display: flex;
     justify-content: space-between;
     position: relative;
-    ::after {
-      content: "";
-      width: 100%;
-      height: 2px;
-      background-color: red;
-      position: absolute;
-      top: 100%;
-    }
+
     &-logo {
       display: flex;
       align-items: center;
@@ -35,6 +29,22 @@
         }
       }
     }
+    .triangle-dow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-top: 40px solid red;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &-toggle {
+      margin-top: 0;
+    }
+    transition: margin-top 0.5s ease;
   }
   .sub-header {
     position: relative;
@@ -42,16 +52,83 @@
     height: 5px;
     background-color: rgb(199, 233, 6);
   }
-  .triangle-dow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 40px solid red;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+  &-main {
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    &-title {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      padding: 50px 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+
+      font-weight: 700;
+
+      h1 {
+        font-size: 38.5px;
+        line-height: 40px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: 30px;
+        text-shadow: 0 1px 0 #333, 0 2px 0 #333, 0 3px 0 #333, 0 4px 0 #333,
+          0 5px 0 #333, 0 3px 1px rgb(255 255 255 / 10%);
+        strong {
+          position: relative;
+
+          &::after {
+            content: "__________";
+            position: absolute;
+            top: 45%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+          }
+        }
+      }
+      .content {
+        width: 100%;
+        background-color: green;
+        display: flex;
+        &-left {
+          width: 50%;
+          background-color: blue;
+          &-title {
+            font-size: 31.5px;
+          }
+          p {
+            font-size: 17.5px;
+          }
+        }
+        &-middle {
+          width: 20%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          p {
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            background-color: pink;
+            text-align: center;
+            line-height: 150px;
+          }
+        }
+        &-right {
+          width: 30%;
+          background-color: violet;
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
 }
