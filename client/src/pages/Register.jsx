@@ -52,14 +52,23 @@ const Register = () => {
             <div className="content-left">
               <h3 className="content-left-title">sự ra đời ?</h3>
               <p>
-                Công việc văn thư và khó khăn trong việc quản lý hồ sơ.Đặc biệt
-                là những hồ sơ thư ký nợ.Chúng tôi hàng ngày phải in danh sách
-                những hồ sơ được phát hành.Sáng hôm sau chúng tôi sẽ trả lại
-                những hồ sơ cho thư ký.Sau khi thư kí viết bút lục và ký tên thì
-                gửi cho Chúng Tôi và Chúng tôi sẽ đánh dấu ✔. Nhưng vấn đề ở đây
-                là hồ sơ nợ từ chuyên viên mỗi lần đưa cho văn thư có khi lên
-                tới 150 bộ.Khiến công việc kiểm tra trên giấy tờ rất khó và
-                nhiều khi ✔ sai.
+                Công việc văn thư với khó khăn trong việc quản lý hồ sơ.Đặc biệt
+                là những hồ sơ thư ký nợ.Khi mới vào làm thì tôi viết tay danh
+                sách hồ sơ của thư ký nào làm.Nhưng do mất quá nhiều thời gian
+                thì Chúng Tôi đã lập danh sách trên Excel và Chúng tôi hàng ngày
+                phải in danh sách những hồ sơ được phát hành.Sáng hôm sau chúng
+                tôi sẽ trả lại những hồ sơ cho thư ký.Sau khi thư kí viết bút
+                lục và ký tên thì gửi cho Chúng Tôi và Chúng tôi sẽ đánh dấu ✔.
+                Nhưng vấn đề ở đây là hồ sơ nợ từ thư ký mỗi lần đưa cho văn thư
+                có khi lên tới 150 bộ.Khiến công việc kiểm tra trên giấy tờ rất
+                khó và nhiều khi ✔ sai.Đồng thời để tìm thư ký đã nợ bao nhiêu
+                hồ sơ thì rất khó.Mỗi khi Sếp hỏi hồ sơ nợ của thư ký thì Chúng
+                Tôi rất khó để trả lời.Vì vậy Chúng Tôi đã nghĩ đến việc quản lý
+                hồ sơ nợ bằng phần mền sẽ nhanh chóng và tiện lợi hơn so với
+                việc quản lý hồ sơ nợ trên gấy tờ.Đó là lý do Phần Mền Văn Thư
+                Công Chứng ra đời với 1 mục tiêu duy nhất là để nhanh chóng trả
+                lời số hồ sơ mà thư ký đã nợ là bao nhiêu và tổng số hồ sơ nợ là
+                bao nhiêu mỗi khi Sếp hỏi.
               </p>
             </div>
             <div className="content-middle">
@@ -76,10 +85,16 @@ const Register = () => {
           </div>
         </div>
         <div className="landing-main-content">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ea
-          quae enim temporibus eveniet omnis adipisci, animi necessitatibus
-          nobis corrupti, voluptatum optio? Illo, totam. Neque hic unde nemo
-          excepturi enim.
+          <div className="landing-main-content-text">
+            <div className="text-left">Phần mềm</div>
+            <div className="text-middle">Văn Thư</div>
+            <div className="text-right">Công chứng là . . .</div>
+          </div>
+          <div className="landing-main-content-body">
+            <p className="time">Thời gian</p>
+            <p className="statistical">Thống kê</p>
+            <p className="report">Báo cáo</p>
+          </div>
         </div>
         <div className="landing-main-info">Info</div>
       </div>
