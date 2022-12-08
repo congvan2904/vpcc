@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./landing.scss";
 import logo from "../assets/logo.png";
 import bgMain from "../assets/bg-nguyenducdien.jpg";
+import imgTime from "../assets/landing/time.png";
+import imgStatistical from "../assets/landing/statistical.png";
+import imgReport from "../assets/landing/report.jpg";
 import { useRef } from "react";
+import { FaPhone, FaMailBulk, FaUser } from "react-icons/fa";
+import { TiMessages } from "react-icons/ti";
 // https://codepen.io/norcal82/full/DjpyNQ
 const Register = () => {
   const refToggle = useRef(null);
@@ -91,12 +96,71 @@ const Register = () => {
             <div className="text-right">Công chứng là . . .</div>
           </div>
           <div className="landing-main-content-body">
-            <p className="time">Thời gian</p>
-            <p className="statistical">Thống kê</p>
-            <p className="report">Báo cáo</p>
+            <div
+              className="time"
+              style={{ backgroundImage: `url(${imgTime})` }}
+            >
+              Thời gian
+            </div>
+            <div
+              className="statistical"
+              style={{ backgroundImage: `url(${imgStatistical})` }}
+            >
+              Thống kê
+            </div>
+            <div
+              className="report"
+              style={{ backgroundImage: `url(${imgReport})` }}
+            >
+              Báo cáo
+            </div>
           </div>
         </div>
-        <div className="landing-main-info">Info</div>
+        <div className="landing-main-info">
+          <div className="landing-main-info-main">
+            <div className="landing-main-info-main-item">
+              <div className="item-icon">
+                <FaPhone />
+              </div>
+              <div className="item-content">0969 229 489</div>
+            </div>
+            <div className="landing-main-info-main-item">
+              <div className="item-icon">
+                <FaUser />
+              </div>
+              <div className="item-content">Nguyễn Văn Công</div>
+            </div>
+            <div className="landing-main-info-main-item">
+              <div className="item-icon">
+                <FaMailBulk />
+              </div>
+              <div className="item-content">nguyenvancong.nvc@gmail.com</div>
+            </div>
+          </div>
+          <div className="landing-main-info-extend">
+            <div className="extend-title">Thông tin liên hệ</div>
+            <div className="extend-icon">
+              <TiMessages />
+            </div>
+            <div className="extend-content">
+              <p>
+                Trong quá trình sử dụng có gì thắc mắc xin liên hệ với tôi. Tôi
+                sẽ hồi đáp sớm nhất có thể
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="footer">
+        <div className="footer-line"></div>
+        <div className="footer-content">
+          <div className="footer-content-copy">
+            Copyright 2022 © vanthucongchung.com
+          </div>
+          <div className="footer-content-design">
+            Thiết kế bởi Văn Thư - Văn phòng Công Chứng Nguyễn Đức Điền
+          </div>
+        </div>
       </div>
     </div>
   );
