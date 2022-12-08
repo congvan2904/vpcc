@@ -40,6 +40,7 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 1;
     }
     &-toggle {
       margin-top: 0;
@@ -95,16 +96,18 @@
         }
       }
       .content {
+        margin-top: 20px;
         width: 100%;
-        background-color: green;
         display: flex;
+        align-items: center;
         &-left {
+          text-align: right;
           width: 50%;
-          background-color: blue;
           &-title {
             font-size: 31.5px;
           }
           p {
+            margin-top: 10px;
             font-size: 17.5px;
           }
         }
@@ -124,7 +127,6 @@
         }
         &-right {
           width: 30%;
-          background-color: violet;
           p {
             font-size: 14px;
           }
