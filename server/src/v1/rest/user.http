@@ -1,5 +1,10 @@
 ### User GET ALL
 GET http://localhost:5000/v1/user
+Content-Type: application/json
+
+{
+    "userId":"637d6ebe1f5b65e70272d8a7"
+}
 
 ### User CREATE
 POST  http://localhost:5000/v1/user/create

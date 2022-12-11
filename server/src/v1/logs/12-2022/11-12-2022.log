@@ -1,0 +1,142 @@
+09:54:02 ---- /v1/user --- GET --- Query was already executed: users.find({})
+13:41:48 ---- /v1/user/getlists --- GET --- jwt expired
+13:41:48 ---- /v1/user/refresh-token --- POST --- undefined
+13:42:00 ---- /v1/user/getlists --- GET --- jwt expired
+13:42:00 ---- /v1/user/refresh-token --- POST --- undefined
+13:43:35 ---- /v1/user/getlists --- GET --- jwt expired
+13:45:11 ---- /v1/user/getlists --- GET --- jwt expired
+14:03:34 ---- /v1/user/getlists --- GET --- jwt expired
+14:04:31 ---- /v1/user/getlists --- GET --- jwt expired
+14:05:08 ---- /v1/user/getlists --- GET --- jwt expired
+14:05:32 ---- /v1/user/getlists --- GET --- jwt expired
+14:16:03 ---- /v1/user/getlists --- GET --- jwt expired
+14:19:24 ---- /v1/user/getlists --- GET --- jwt expired
+14:19:59 ---- /v1/user/getlists --- GET --- jwt expired
+14:22:08 ---- /v1/user/getlists --- GET --- jwt expired
+14:22:32 ---- /v1/user/getlists --- GET --- jwt expired
+14:23:18 ---- /v1/user/getlists --- GET --- jwt expired
+14:24:38 ---- /v1/user/getlists --- GET --- jwt expired
+14:24:39 ---- /v1/user/getlists --- GET --- [object Object]
+14:24:40 ---- /v1/user/getlists --- GET --- [object Object]
+14:24:42 ---- /v1/user/getlists --- GET --- [object Object]
+14:25:28 ---- /v1/user/getlists --- GET --- jwt expired
+14:25:28 ---- /v1/user/getlists --- GET --- [object Object]
+14:26:27 ---- /v1/user/getlists --- GET --- jwt expired
+14:26:27 ---- /v1/user/getlists --- GET --- [object Object]
+14:28:37 ---- /v1/user/getlists --- GET --- jwt expired
+14:28:37 ---- /v1/user/getlists --- GET --- You don't have permission
+14:29:27 ---- /v1/user/getlists --- GET --- jwt expired
+14:29:27 ---- /v1/user/getlists --- GET --- You don't have permission
+14:29:33 ---- /v1/user/getlists --- GET --- You don't have permission
+14:34:34 ---- /v1/user/getlists --- GET --- jwt expired
+14:34:34 ---- /v1/user/getlists --- GET --- You don't have permission
+14:34:37 ---- /v1/user/getlists --- GET --- You don't have permission
+14:34:38 ---- /v1/user/getlists --- GET --- You don't have permission
+14:34:41 ---- /v1/user/getlists --- GET --- You don't have permission
+14:35:56 ---- /v1/user/getlists --- GET --- jwt expired
+14:35:57 ---- /v1/user/getlists --- GET --- You don't have permission
+14:38:14 ---- /v1/user/getlists --- GET --- jwt expired
+14:38:14 ---- /v1/user/getlists --- GET --- You don't have permission
+14:39:07 ---- /v1/user/getlists --- GET --- jwt expired
+14:39:07 ---- /v1/user/getlists --- GET --- You don't have permission
+14:39:30 ---- /v1/user/getlists --- GET --- jwt expired
+14:39:30 ---- /v1/user/getlists --- GET --- You don't have permission
+14:39:33 ---- /v1/user/getlists --- GET --- You don't have permission
+14:39:34 ---- /v1/user/getlists --- GET --- You don't have permission
+14:42:28 ---- /v1/user/getlists --- GET --- jwt expired
+14:42:28 ---- /v1/user/getlists --- GET --- You don't have permission
+14:42:30 ---- /v1/user/getlists --- GET --- You don't have permission
+14:42:32 ---- /v1/user/getlists --- GET --- You don't have permission
+14:42:37 ---- /v1/user/getlists --- GET --- You don't have permission
+14:43:56 ---- /v1/user/getlists --- GET --- jwt expired
+14:43:57 ---- /v1/user/getlists --- GET --- You don't have permission
+14:45:34 ---- /v1/user/getlists --- GET --- jwt expired
+14:45:34 ---- /v1/user/getlists --- GET --- You don't have permission
+14:58:16 ---- /v1/user/getlists --- GET --- jwt expired
+14:58:17 ---- /v1/user/getlists --- GET --- You don't have permission
+14:58:20 ---- /v1/user/getlists --- GET --- You don't have permission
+15:01:17 ---- /v1/user/getlists --- GET --- jwt expired
+15:01:17 ---- /v1/user/getlists --- GET --- You don't have permission
+15:02:10 ---- /v1/user/getlists --- GET --- jwt expired
+15:07:59 ---- /v1/user/getlists --- GET --- jwt expired
+15:10:32 ---- /v1/user/getlists --- GET --- jwt expired
+15:12:03 ---- /v1/user/getlists --- GET --- jwt expired
+15:14:33 ---- /v1/user/getlists --- GET --- jwt expired
+15:16:00 ---- /v1/user/getlists --- GET --- jwt expired
+15:16:29 ---- /v1/user/getlists --- GET --- jwt expired
+15:17:08 ---- /v1/user/getlists --- GET --- jwt expired
+15:17:27 ---- /v1/user/getlists --- GET --- You don't have permission
+15:21:09 ---- /v1/user/getlists --- GET --- jwt expired
+15:21:09 ---- /v1/user/getlists --- GET --- You don't have permission
+15:24:45 ---- /v1/user/getlists --- GET --- jwt expired
+15:24:45 ---- /v1/user/getlists --- GET --- You don't have permission
+15:25:09 ---- /v1/user/getlists --- GET --- jwt expired
+15:25:09 ---- /v1/user/getlists --- GET --- You don't have permission
+15:32:41 ---- /v1/user/getlists --- GET --- jwt expired
+15:32:42 ---- /v1/user/getlists --- GET --- You don't have permission
+15:33:07 ---- /v1/user/getlists --- GET --- jwt expired
+15:33:08 ---- /v1/user/getlists --- GET --- You don't have permission
+15:34:34 ---- /v1/user/getlists --- GET --- jwt expired
+15:34:35 ---- /v1/user/getlists --- GET --- You don't have permission
+15:35:02 ---- /v1/user/getlists --- GET --- jwt expired
+15:36:56 ---- /v1/user/getlists --- GET --- jwt expired
+15:37:17 ---- /v1/user/getlists --- GET --- jwt expired
+15:37:18 ---- /v1/user/getlists --- GET --- You don't have permission
+15:37:21 ---- /v1/user/getlists --- GET --- You don't have permission
+15:37:38 ---- /v1/user/getlists --- GET --- jwt expired
+15:38:01 ---- /v1/user/getlists --- GET --- jwt expired
+15:38:02 ---- /v1/user/getlists --- GET --- You don't have permission
+15:40:30 ---- /v1/user/getlists --- GET --- jwt expired
+16:40:34 ---- /v1/contract/debt --- GET --- jwt expired
+16:40:35 ---- /v1/contract/debt --- GET --- jwt expired
+16:40:35 ---- /v1/user/refresh-token --- POST --- undefined
+16:40:35 ---- /v1/user/refresh-token --- POST --- undefined
+16:49:03 ---- /v1/contract/debt --- GET --- jwt expired
+16:49:03 ---- /v1/contract/debt --- GET --- jwt expired
+16:49:04 ---- /v1/contract/debt --- GET --- You don't have permission
+16:49:04 ---- /v1/contract/debt --- GET --- You don't have permission
+16:50:45 ---- /v1/contract/debt --- GET --- jwt expired
+16:50:45 ---- /v1/contract/debt --- GET --- jwt expired
+16:50:45 ---- /v1/contract/debt --- GET --- You don't have permission
+16:50:45 ---- /v1/contract/debt --- GET --- You don't have permission
+16:51:19 ---- /v1/contract/debt --- GET --- jwt expired
+16:51:20 ---- /v1/contract/debt --- GET --- You don't have permission
+16:53:23 ---- /v1/contract/debt --- GET --- jwt expired
+16:53:24 ---- /v1/contract/debt --- GET --- You don't have permission
+16:54:28 ---- /v1/contract/debt --- GET --- jwt expired
+16:54:28 ---- /v1/contract/debt --- GET --- You don't have permission
+16:54:32 ---- /v1/contract/debt --- GET --- You don't have permission
+16:54:33 ---- /v1/contract/debt --- GET --- You don't have permission
+16:55:32 ---- /v1/contract/debt --- GET --- jwt expired
+16:55:32 ---- /v1/contract/debt --- GET --- You don't have permission
+16:56:44 ---- /v1/contract/debt --- GET --- jwt expired
+16:56:44 ---- /v1/contract/debt --- GET --- You don't have permission
+16:56:49 ---- /v1/contract/debt --- GET --- You don't have permission
+16:56:49 ---- /v1/contract/debt --- GET --- You don't have permission
+16:57:44 ---- /v1/contract/debt --- GET --- jwt expired
+16:57:44 ---- /v1/contract/debt --- GET --- jwt expired
+16:57:45 ---- /v1/contract/debt --- GET --- You don't have permission
+16:57:45 ---- /v1/contract/debt --- GET --- You don't have permission
+16:58:06 ---- /v1/contract/debt --- GET --- jwt expired
+16:58:06 ---- /v1/contract/debt --- GET --- You don't have permission
+17:00:10 ---- /v1/contract/debt --- GET --- jwt expired
+17:00:10 ---- /v1/contract/debt --- GET --- You don't have permission
+17:02:28 ---- /v1/contract/debt --- GET --- jwt expired
+17:02:28 ---- /v1/contract/debt --- GET --- jwt expired
+17:02:28 ---- /v1/user/refresh-token --- POST --- Unauthorized
+17:02:28 ---- /v1/contract/debt --- GET --- You don't have permission
+17:07:37 ---- /v1/contract/debt --- GET --- jwt expired
+17:07:37 ---- /v1/contract/debt --- GET --- jwt expired
+17:07:37 ---- /v1/contract/debt --- GET --- You don't have permission
+17:07:37 ---- /v1/contract/debt --- GET --- You don't have permission
+17:08:22 ---- /v1/contract/debt --- GET --- jwt expired
+17:08:22 ---- /v1/contract/debt --- GET --- jwt expired
+17:08:54 ---- /v1/contract/debt --- GET --- jwt expired
+17:08:54 ---- /v1/contract/debt --- GET --- jwt expired
+17:08:54 ---- /v1/user/refresh-token --- POST --- Unauthorized
+17:09:40 ---- /v1/contract/debt --- GET --- jwt expired
+17:09:40 ---- /v1/contract/debt --- GET --- jwt expired
+17:09:40 ---- /v1/contract/debt --- GET --- You don't have permission
+17:09:40 ---- /v1/contract/debt --- GET --- You don't have permission
+17:10:07 ---- /v1/contract/debt --- GET --- jwt expired
+17:10:07 ---- /v1/contract/debt --- GET --- jwt expired
