@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Contract from "../components/contract/Contract";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
@@ -8,14 +9,18 @@ const Contracts = () => {
 
   useEffect(() => {
     async function fetDataContract() {
-      const data = (await instance.get("contract/debt")).data;
-      console.log(data.message);
-      if (data.message === "success") {
-        setDataContract(data.data);
-        return data.data;
+      try {
+        const data = (await instance.get("contract/debt")).data;
+        console.log(data.message);
+        if (data.message === "success") {
+          setDataContract(data.data);
+          return data.data;
+        }
+        setDataContract(data.message);
+        return data.message;
+      } catch (error) {
+        setDataContract(error.message);
       }
-      setDataContract(data.message);
-      return data.message;
     }
     fetDataContract();
   }, []);
@@ -101,21 +106,21 @@ const Contracts = () => {
               </tbody>
             </table>
           </form> */}
-          {dataContract === null
-            ? ""
-            : dataContract === "You don't have permission"
-            ? "You don't have permission"
-            : dataContract.map((contract, index) => (
-                <div className="contract-main" key={index}>
-                  {contract.id_contract.map((item, i) => (
-                    <Contract
-                      key={i}
-                      contract={item}
-                      name={contract.user.name}
-                    />
-                  ))}
-                </div>
-              ))}
+          {dataContract === null ? (
+            ""
+          ) : dataContract === "You don't have permission" ? (
+            "You don't have permission"
+          ) : dataContract === "jwt expired" ? (
+            <Navigate to="/" replace={true} />
+          ) : (
+            dataContract.map((contract, index) => (
+              <div className="contract-main" key={index}>
+                {contract.id_contract.map((item, i) => (
+                  <Contract key={i} contract={item} name={contract.user.name} />
+                ))}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </Helmet>

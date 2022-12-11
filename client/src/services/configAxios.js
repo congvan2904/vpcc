@@ -7,7 +7,13 @@ const instance = axios.create({
         'Content-Type': 'application/json'
     }
 })
-const getrefreshToken = async (refToken) => await instance.post('user/refresh-token', { refreshToken: refToken })
+const getrefreshToken = async (refToken) => {
+    try {
+        return await instance.post('user/refresh-token', { refreshToken: refToken })
+    } catch (error) {
+        console.log(error)
+    }
+}
 instance.interceptors.request.use(async (config) => {
     // Do something before request is sent
     if (config.url.indexOf('user/login') >= 0 || config.url.indexOf('user/refresh-token') >= 0) {
@@ -36,6 +42,10 @@ instance.interceptors.response.use(async (response) => {
         // console.log(refreshToken)
         const { accessToken, refreshToken } = (await getrefreshToken(refreshToken1)).data
         console.log('newToken.accessToken', accessToken)
+        if (!refreshToken) {
+            throw new Error('jwt expired')
+        }
+
         if (accessToken) {
             console.log('da lay accesstoken thanh cong')
             config.headers['authorization'] = `Bearer ${accessToken}`
