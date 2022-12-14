@@ -1,0 +1,31 @@
+@use "../sass/index" as *;
+
+body {
+  background-color: #000;
+  color: #fff;
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: violet;
+  border-bottom: silver solid 3px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: chocolate;
+  border-top: silver solid 3px;
+}
+
+.manager {
+  margin-top: 50px;
+  display: flex;
+  background-color: rgb(11, 173, 125);
+}
