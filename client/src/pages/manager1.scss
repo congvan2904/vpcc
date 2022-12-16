@@ -1,0 +1,18 @@
+@use "../sass/index" as *;
+
+.manager {
+  &-header {
+    display: flex;
+    font-size: 20px;
+    background-color: cyan;
+    &-today {
+      background-color: burlywood;
+    }
+    &-oldday {
+      background-color: rgb(11, 241, 11);
+    }
+  }
+  &-content {
+    background-color: yellowgreen;
+  }
+}

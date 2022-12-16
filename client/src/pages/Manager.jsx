@@ -9,7 +9,7 @@ const Manager = (props) => {
       <main className="manager">
         <div className="manager-menu">
           <div className="manager-menu-top">
-            <Link to="">
+            <Link to="/manager2">
               <div className="manager-menu-top-item">Manager</div>
             </Link>
             <Link to="/contract1">
