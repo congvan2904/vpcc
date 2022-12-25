@@ -50,6 +50,7 @@ instance.interceptors.response.use(async (response) => {
             console.log('da lay accesstoken thanh cong')
             config.headers['authorization'] = `Bearer ${accessToken}`
             await instance.setLocalToken(accessToken, refreshToken)
+
             return instance(config)
         }
     }

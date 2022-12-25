@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import profile from "../assets/login/a.png";
 import email from "./../assets/login/email.jpg";
 import pass from "./../assets/login/pass.png";
@@ -7,6 +8,8 @@ import logo from "../assets/logo.png";
 import "./login.scss";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
+import { login as loginR } from "../redux/features/authSlice";
+
 // import axios from 'axios'
 const Login = () => {
   const [username, setUsername] = useState();
@@ -14,26 +17,35 @@ const Login = () => {
   const [login, setLogin] = useState(false);
   const refLogo = useRef(null);
   const [rotation, setRotation] = useState(0);
+
+  const dispatch = useDispatch();
+  const { refreshToken } = useSelector((state) => state.auth.data);
+
+  // console.log("kq", refreshToken);
   let _style = {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = (await instance.post("user/login", { username, password }))
-      .data;
-
-    // console.log(refLogo.current);
+    // const response = (await instance.post("user/login", { username, password }))
+    //   .data;
+    const actionResult = await dispatch(loginR({ username, password }));
+    console.log("actionResult", actionResult);
     _style = {
       transform: "rotate(720deg)",
       transition: "transform 3s ease",
     };
     setRotation((state) => state - 720);
-    if (response.accessToken) {
-      await instance.setLocalToken(response.accessToken, response.refreshToken);
+    if (actionResult.payload.accessToken) {
+      await instance.setLocalToken(
+        actionResult.payload.accessToken,
+        actionResult.payload.refreshToken
+      );
       setTimeout(() => {
         setLogin(true);
       }, 3500);
     }
   };
-
+  // if (accessToken && refreshToken)
+  //   return <Navigate to="/dashboard" replace={true} />;
   return (
     <Helmet title={"Đăng nhập"}>
       {login && <Navigate to="/dashboard" replace={true} />}
