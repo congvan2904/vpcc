@@ -24,9 +24,15 @@ const authSlice = createSlice({
             state.data = action.payload;
         },
         [login.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.isLogin = true;
-            state.data = action.payload;
+            if (action.payload.accessToken) {
+                state.loading = false;
+                state.isLogin = true;
+                state.data = action.payload;
+            }
+            else {
+                state.isLogin = false;
+                state.data = action.payload;
+            }
         },
     }
 })
