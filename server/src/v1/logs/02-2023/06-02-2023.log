@@ -16,3 +16,30 @@
 10:11:10 ---- /v1/contract/debt --- GET --- jwt expired
 10:33:22 ---- /v1/contract/debt --- GET --- jwt expired
 10:33:22 ---- /v1/contract/debt --- GET --- jwt expired
+21:31:53 ---- /v1/contract/debt --- GET --- jwt expired
+21:33:24 ---- /v1/contract/debt --- GET --- jwt expired
+21:33:24 ---- /v1/contract/debt --- GET --- jwt expired
+21:33:25 ---- /v1/user/refresh-token --- POST --- Unauthorized
+21:40:36 ---- /v1/contract/debt --- GET --- jwt expired
+21:40:36 ---- /v1/contract/debt --- GET --- jwt expired
+21:41:11 ---- /v1/contract/debt --- GET --- jwt expired
+21:41:46 ---- /v1/contract/debt --- GET --- jwt expired
+21:42:13 ---- /v1/contract/debt --- GET --- jwt expired
+21:42:37 ---- /v1/contract/debt --- GET --- jwt expired
+21:42:37 ---- /v1/contract/debt --- GET --- jwt expired
+21:43:50 ---- /v1/contract/debt --- GET --- jwt expired
+21:44:37 ---- /v1/contract/debt --- GET --- jwt expired
+21:45:02 ---- /v1/contract/debt --- GET --- jwt expired
+21:45:26 ---- /v1/contract/debt --- GET --- jwt expired
+21:45:26 ---- /v1/contract/debt --- GET --- jwt expired
+21:45:47 ---- /v1/contract/debt --- GET --- jwt expired
+21:46:10 ---- /v1/contract/debt --- GET --- jwt expired
+21:46:34 ---- /v1/contract/debt --- GET --- jwt expired
+21:46:34 ---- /v1/contract/debt --- GET --- jwt expired
+21:46:34 ---- /v1/user/refresh-token --- POST --- Unauthorized
+21:47:12 ---- /v1/contract/debt --- GET --- jwt expired
+21:47:12 ---- /v1/contract/debt --- GET --- jwt expired
+21:47:39 ---- /v1/contract/debt --- GET --- jwt expired
+21:48:13 ---- /v1/contract/debt --- GET --- jwt expired
+21:48:35 ---- /v1/contract/debt --- GET --- jwt expired
+21:48:35 ---- /v1/contract/debt --- GET --- jwt expired
