@@ -6,13 +6,18 @@ import Contract from "../components/contract/Contract";
 import { Navigate } from "react-router-dom";
 const Manager2 = () => {
   const [dataContract, setDataContract] = useState([]);
-  const val = useSelector((state) => state.contracts);
+  const val = useSelector((state) => state.contracts.data);
 
   const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData() {
       const result = await dispatch(contractsR());
-      console.log(val);
+      // setDataContract(val.id_contract);
+      const { payload } = result;
+      const { data } = payload;
+      console.log(data);
+      setDataContract(data);
+      console.log(result);
     }
     fetchData();
   }, []);
@@ -98,7 +103,8 @@ const Manager2 = () => {
               </tbody>
             </table>
           </form> */}
-          {dataContract === null ? (
+
+          {/* {dataContract === null ? (
             ""
           ) : dataContract === "You don't have permission" ? (
             "You don't have permission"
@@ -112,7 +118,15 @@ const Manager2 = () => {
                 ))}
               </div>
             ))
-          )}
+          )} */}
+
+          {dataContract.map((contract, index) => (
+            <div className="contract-main" key={index}>
+              {contract.id_contract.map((item, i) => (
+                <Contract key={i} contract={item} name={contract.user.name} />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </Manager1>
