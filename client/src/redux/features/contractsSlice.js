@@ -6,6 +6,11 @@ export const contracts = createAsyncThunk('contract/debt', async () => {
     // console.log('------=>', params)
     return response
 })
+export const update_status = createAsyncThunk('contract/update_status', async ({ name, status }) => {
+    const response = await contractsService.status_contract({ name, status })
+    // console.log('------=>', params)
+    return response
+})
 
 const contractsSlice = createSlice({
     name: 'contracts',
@@ -23,6 +28,10 @@ const contractsSlice = createSlice({
             state.data = [];
         },
         [contracts.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = action.payload;
+        },
+        [update_status.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = action.payload;
         },

@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
 import "../contract/contract.scss";
+import { update_status as updateContract } from "../../redux/features/contractsSlice";
 const Contract = (props) => {
+  const dispatch = useDispatch();
   const id_contract = props.contract;
   const count_contract = props.name;
   // console.log(id_contract);
@@ -11,6 +14,10 @@ const Contract = (props) => {
   const handleClick = (event) => {
     if (event.detail === 2) {
       console.log("double click", id_contract);
+      const result = dispatch(
+        updateContract({ name: id_contract, status: false })
+      );
+      console.log(result);
     }
   };
   return (

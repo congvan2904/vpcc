@@ -1,0 +1,26 @@
+07:47:40 ---- /v1/contract/debt --- GET --- jwt expired
+07:47:40 ---- /v1/contract/debt --- GET --- jwt expired
+10:06:35 ---- /v1/contract/debt --- GET --- jwt expired
+10:06:35 ---- /v1/contract/debt --- GET --- jwt expired
+10:06:35 ---- /v1/user/refresh-token --- POST --- undefined
+10:06:35 ---- /v1/user/refresh-token --- POST --- undefined
+10:47:48 ---- /v1/contract/debt --- GET --- jwt expired
+10:47:48 ---- /v1/contract/debt --- GET --- jwt expired
+10:47:48 ---- /v1/user/refresh-token --- POST --- undefined
+10:47:48 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:05 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:05 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:05 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:05 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:07 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:07 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:07 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:08 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:09 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:09 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:09 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:09 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:11 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:11 ---- /v1/contract/debt --- GET --- jwt expired
+10:48:11 ---- /v1/user/refresh-token --- POST --- undefined
+10:48:11 ---- /v1/user/refresh-token --- POST --- undefined
