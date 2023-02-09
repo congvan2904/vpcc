@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import "../contract/contract.scss";
 import { update_status as updateContract } from "../../redux/features/contractsSlice";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 const Contract = (props) => {
+  const [refContract, setRefContract] = useState(true);
   const dispatch = useDispatch();
   const id_contract = props.contract;
   const count_contract = props.name;
@@ -12,12 +15,16 @@ const Contract = (props) => {
   _do = 360 / t1.length;
 
   const handleClick = (event) => {
+    setRefContract(!refContract);
+
+    console.log(refContract);
     if (event.detail === 2) {
       console.log("double click", id_contract);
-      const result = dispatch(
-        updateContract({ name: id_contract, status: false })
-      );
-      console.log(result);
+      dispatch(updateContract({ name: id_contract, status: false }));
+      // const result = dispatch(
+      //   updateContract({ name: id_contract, status: false })
+      // );
+      // console.log(result);
     }
   };
   return (
