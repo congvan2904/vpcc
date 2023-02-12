@@ -14,10 +14,7 @@ const Contract = (props) => {
   const handleClick = (event) => {
     if (event.detail === 2) {
       console.log("double click", id_contract);
-      const result = dispatch(
-        updateContract({ name: id_contract, status: false })
-      );
-      console.log(result);
+      dispatch(updateContract({ name: id_contract, status: false }));
     }
   };
   return (

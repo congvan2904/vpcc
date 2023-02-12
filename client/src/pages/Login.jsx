@@ -48,7 +48,7 @@ const Login = () => {
   //   return <Navigate to="/dashboard" replace={true} />;
   return (
     <Helmet title={"Đăng nhập"}>
-      {login && <Navigate to="/dashboard" replace={true} />}
+      {login && <Navigate to="/manager" replace={true} />}
       <div className="login">
         <div className="login-wrap">
           <div className="login-wrap-logo">

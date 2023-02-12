@@ -6,21 +6,8 @@ import Contract from "../components/contract/Contract";
 import { Navigate } from "react-router-dom";
 const Manager2 = () => {
   const [dataContract, setDataContract] = useState([]);
-  const val = useSelector((state) => state.contracts.data);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function fetchData() {
-      const result = await dispatch(contractsR());
-      // setDataContract(val.id_contract);
-      const { payload } = result;
-      const { data } = payload;
-      console.log(data);
-      setDataContract(data);
-      console.log(result);
-    }
-    fetchData();
-  }, []);
+  const data = useSelector((state) => state.contracts.data);
+  console.log({ data });
 
   return (
     <Manager1>
@@ -120,7 +107,7 @@ const Manager2 = () => {
             ))
           )} */}
 
-          {dataContract.map((contract, index) => (
+          {data.map((contract, index) => (
             <div className="contract-main" key={index}>
               {contract.id_contract.map((item, i) => (
                 <Contract key={i} contract={item} name={contract.user.name} />
