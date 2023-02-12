@@ -24,3 +24,19 @@
 10:48:11 ---- /v1/contract/debt --- GET --- jwt expired
 10:48:11 ---- /v1/user/refresh-token --- POST --- undefined
 10:48:11 ---- /v1/user/refresh-token --- POST --- undefined
+13:05:23 ---- /v1/contract/find --- PATCH --- jwt expired
+13:23:17 ---- /v1/contract/debt --- GET --- jwt expired
+13:23:17 ---- /v1/contract/debt --- GET --- jwt expired
+13:44:11 ---- /v1/contract/debt --- GET --- jwt expired
+13:44:11 ---- /v1/contract/debt --- GET --- jwt expired
+13:47:00 ---- /v1/contract/debt --- GET --- jwt expired
+13:47:00 ---- /v1/contract/debt --- GET --- jwt expired
+13:57:42 ---- /v1/contract/debt --- GET --- jwt expired
+13:57:42 ---- /v1/contract/debt --- GET --- jwt expired
+13:58:31 ---- /v1/contract/debt --- GET --- jwt expired
+13:58:31 ---- /v1/contract/debt --- GET --- jwt expired
+14:00:11 ---- /v1/contract/debt --- GET --- jwt expired
+14:00:11 ---- /v1/contract/debt --- GET --- jwt expired
+14:01:41 ---- /v1/contract/debt --- GET --- jwt expired
+14:01:41 ---- /v1/contract/debt --- GET --- jwt expired
+14:13:45 ---- /v1/contract/find --- PATCH --- jwt expired
