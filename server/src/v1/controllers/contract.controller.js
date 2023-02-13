@@ -24,12 +24,12 @@ module.exports = {
             // for (let index = 1; index <= 6000; index++) {
 
             const newContract = new contract({ id_contract: index, status: true })
-            await newContract.save(err => console.log(`--${index}--`, err))
+            const response = await newContract.save(err => console.log(`--${index}--`, err))
             // }
             // const newContract = await contract.find().sort({ 'id_contract': 1 })
             // console.log(newContract)
             return res.status(200).json({
-                data: { newContract },
+                data: { response },
                 message: 'success'
             })
         } catch (error) {

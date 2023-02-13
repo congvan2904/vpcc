@@ -120,3 +120,7 @@
 17:25:03 ---- /v1/contract/find --- PATCH --- jwt expired
 17:26:00 ---- /v1/contract/debt --- GET --- jwt expired
 17:26:00 ---- /v1/contract/debt --- GET --- jwt expired
+17:30:02 ---- /v1/contract/debt --- GET --- jwt expired
+17:30:02 ---- /v1/contract/debt --- GET --- jwt expired
+17:30:58 ---- /v1/contract/debt --- GET --- jwt expired
+17:30:58 ---- /v1/contract/debt --- GET --- jwt expired
