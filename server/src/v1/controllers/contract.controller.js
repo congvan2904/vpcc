@@ -19,6 +19,23 @@ module.exports = {
             next(error)
         }
     },
+    createContract: async (req, res, next) => {
+        try {
+            // for (let index = 1; index <= 6000; index++) {
+
+            const newContract = new contract({ id_contract: index, status: true })
+            await newContract.save(err => console.log(`--${index}--`, err))
+            // }
+            // const newContract = await contract.find().sort({ 'id_contract': 1 })
+            // console.log(newContract)
+            return res.status(200).json({
+                data: { newContract },
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
     updateContracts: async (req, res, next) => {
         try {
             const newContract = await contract.updateMany({}, { id_user: req.body.user })
