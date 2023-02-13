@@ -21,10 +21,6 @@ const Contract = (props) => {
     if (event.detail === 2) {
       console.log("double click", id_contract);
       dispatch(updateContract({ name: id_contract, status: false }));
-      // const result = dispatch(
-      //   updateContract({ name: id_contract, status: false })
-      // );
-      // console.log(result);
     }
   };
   return (

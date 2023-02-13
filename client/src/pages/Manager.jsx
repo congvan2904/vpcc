@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Helmet from "../components/Helmet";
 import "./manager.scss";
+import { contracts as contractsR } from "../redux/features/contractsSlice";
+
 const Manager = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    function fetchData() {
+      dispatch(contractsR());
+      // setDataContract(val.id_contract);
+      // const { payload } = result;
+      // const { data } = payload;
+      // console.log(data);
+      // console.log(result);
+    }
+    fetchData();
+  }, []);
   return (
     <Helmet title="Quản lý">
       <header className="header">Header</header>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 11:08:07 ---- /v1/contract/debt --- GET --- jwt expired
 11:08:07 ---- /v1/contract/debt --- GET --- jwt expired
 11:08:40 ---- /v1/contract/debt --- GET --- jwt expired
@@ -15,3 +16,35 @@
 11:20:45 ---- /v1/contract/debt --- GET --- jwt expired
 11:20:45 ---- /v1/contract/debt --- GET --- jwt expired
 11:21:22 ---- /v1/contract/debt --- GET --- jwt expired
+=======
+20:59:26 ---- /v1/contract/debt --- GET --- jwt expired
+20:59:26 ---- /v1/contract/debt --- GET --- jwt expired
+20:59:26 ---- /v1/user/refresh-token --- POST --- undefined
+20:59:26 ---- /v1/user/refresh-token --- POST --- undefined
+21:08:43 ---- /v1/contract/debt --- GET --- jwt expired
+21:08:43 ---- /v1/contract/debt --- GET --- jwt expired
+21:08:43 ---- /v1/user/refresh-token --- POST --- undefined
+21:08:43 ---- /v1/user/refresh-token --- POST --- undefined
+21:10:52 ---- /v1/contract/debt --- GET --- jwt expired
+21:14:17 ---- /v1/contract/debt --- GET --- jwt expired
+21:14:17 ---- /v1/contract/debt --- GET --- jwt expired
+21:15:41 ---- /v1/contract/debt --- GET --- jwt expired
+21:15:41 ---- /v1/contract/debt --- GET --- jwt expired
+21:20:30 ---- /v1/contract/find --- PATCH --- jwt expired
+21:24:23 ---- /v1/contract/debt --- GET --- jwt expired
+21:24:23 ---- /v1/contract/debt --- GET --- jwt expired
+21:36:06 ---- /v1/contract/debt --- GET --- jwt expired
+21:36:06 ---- /v1/contract/debt --- GET --- jwt expired
+21:36:27 ---- /v1/contract/debt --- GET --- jwt expired
+21:36:27 ---- /v1/contract/debt --- GET --- jwt expired
+21:37:49 ---- /v1/contract/debt --- GET --- jwt expired
+21:37:49 ---- /v1/contract/debt --- GET --- jwt expired
+21:43:06 ---- /v1/contract/debt --- GET --- jwt expired
+21:43:06 ---- /v1/contract/debt --- GET --- jwt expired
+21:47:28 ---- /v1/contract/debt --- GET --- jwt expired
+21:47:28 ---- /v1/contract/debt --- GET --- jwt expired
+21:49:25 ---- /v1/contract/debt --- GET --- jwt expired
+21:49:25 ---- /v1/contract/debt --- GET --- jwt expired
+21:50:22 ---- /v1/contract/debt --- GET --- jwt expired
+21:50:22 ---- /v1/contract/debt --- GET --- jwt expired
+>>>>>>> 57f3b1e01e44480c10d565aec3b42734e56b03e0
