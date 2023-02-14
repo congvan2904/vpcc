@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Manager1 from "./Manager1";
-import { contracts as contractsR } from "../redux/features/contractsSlice";
+import {
+  contracts as contractsR,
+  createContract,
+} from "../redux/features/contractsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Contract from "../components/contract/Contract";
 import { Navigate } from "react-router-dom";
 const Manager2 = () => {
   const [dataContract, setDataContract] = useState([]);
   const data = useSelector((state) => state.contracts.data);
-  console.log({ data });
+  // console.log({ data });
   const [inputs, setInputs] = useState({});
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
+  const dispatch = useDispatch();
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    const payload = {
+      id_contract: inputs.idAuto,
+      id_user_secretary: inputs.dropdownSecretary,
+      id_user_notary: inputs.dropdownNotary,
+      name: inputs.nameContract,
+      phone: inputs.phone,
+      date_create: inputs.dateAuto,
+      note: inputs.nameCustomer,
+    };
+    // console.log("payload--->", payload);
+    dispatch(createContract(payload));
   };
   return (
     <Manager1>

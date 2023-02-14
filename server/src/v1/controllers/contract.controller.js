@@ -21,15 +21,15 @@ module.exports = {
     },
     createContract: async (req, res, next) => {
         try {
-            // for (let index = 1; index <= 6000; index++) {
+            const payload = req.body
 
-            const newContract = new contract({ id_contract: index, status: true })
-            const response = await newContract.save(err => console.log(`--${index}--`, err))
+            // const newContract = new contract({ id_contract: index, status: true })
+            // const response = await newContract.save(err => console.log(`--${index}--`, err))
             // }
             // const newContract = await contract.find().sort({ 'id_contract': 1 })
             // console.log(newContract)
             return res.status(200).json({
-                data: { response },
+                data: payload,
                 message: 'success'
             })
         } catch (error) {
