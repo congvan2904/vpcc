@@ -19,9 +19,9 @@ const Manager2 = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const payload = {
-      id_contract: inputs.idAuto,
-      id_user_secretary: inputs.dropdownSecretary,
-      id_user_notary: inputs.dropdownNotary,
+      id_contract: +inputs.idAuto,
+      id_user_secretary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownSecretary,
+      id_user_notary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownNotary,
       name: inputs.nameContract,
       phone: inputs.phone,
       date_create: inputs.dateAuto,

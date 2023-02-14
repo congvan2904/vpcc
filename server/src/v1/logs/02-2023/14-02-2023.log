@@ -4,3 +4,14 @@
 10:58:38 ---- /v1/contract/create-contract --- POST --- jwt expired
 10:58:38 ---- /v1/user/refresh-token --- POST --- undefined
 10:59:43 ---- /v1/contract/create-contract --- POST --- jwt expired
+13:56:05 ---- /v1/contract/create-contract --- POST --- jwt expired
+13:58:32 ---- /v1/contract/create-contract --- POST --- jwt expired
+14:00:21 ---- /v1/contract/create-contract --- POST --- jwt expired
+14:01:04 ---- /v1/contract/debt --- GET --- jwt expired
+14:01:04 ---- /v1/contract/debt --- GET --- jwt expired
+14:02:16 ---- /v1/contract/debt --- GET --- jwt expired
+14:02:16 ---- /v1/contract/debt --- GET --- jwt expired
+14:02:50 ---- /v1/contract/create-contract --- POST --- jwt expired
+14:03:19 ---- /v1/contract/debt --- GET --- jwt expired
+14:03:19 ---- /v1/contract/debt --- GET --- jwt expired
+14:07:26 ---- /v1/contract/create-contract --- POST --- jwt expired
