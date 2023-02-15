@@ -1,6 +1,7 @@
 const contract = require('../models/contract.model')
 const user = require('../models/user.model')
-
+var mongoose = require('mongoose');
+var id = mongoose.Types.ObjectId('637a5547660ac62a4c5b9155');
 module.exports = {
     createContracts: async (req, res, next) => {
         try {
@@ -22,8 +23,17 @@ module.exports = {
     createContract: async (req, res, next) => {
         try {
             const payload = req.body
+            const dataIn = {
+                id_contract: +6002,
+                id_user_secretary: "637a5547660ac62a4c5b9155", // inputs.dropdownSecretary,
+                id_user_notary: "637a5547660ac62a4c5b9155", // inputs.dropdownNotary,
+                name: 'HDUQ 222',
+                phone: '999999',
+                // date_create: inputs.dateAuto,
+                note: 'NG V C 222',
+            };
 
-            const newContract = new contract(payload)
+            const newContract = new contract(dataIn)
             const response = await newContract.save(err => console.log(`----`, err))
             // }
             // const newContract = await contract.find().sort({ 'id_contract': 1 })

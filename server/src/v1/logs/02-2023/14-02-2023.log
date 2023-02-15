@@ -15,3 +15,10 @@
 14:03:19 ---- /v1/contract/debt --- GET --- jwt expired
 14:03:19 ---- /v1/contract/debt --- GET --- jwt expired
 14:07:26 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:05:42 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:15:57 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:43:51 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:47:13 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:47:46 ---- /v1/contract/create-contract --- POST --- jwt expired
+20:53:28 ---- /v1/contract/create-contract --- POST --- jwt expired
+21:11:45 ---- /v1/contract/create-contract --- POST --- jwt expired

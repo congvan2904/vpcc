@@ -20,11 +20,11 @@ const Manager2 = () => {
     e.preventDefault();
     const payload = {
       id_contract: +inputs.idAuto,
-      id_user_secretary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownSecretary,
-      id_user_notary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownNotary,
+      id_user_secretary: "637a5547660ac62a4c5b9155", // inputs.dropdownSecretary,
+      id_user_notary: "637a5547660ac62a4c5b9155", // inputs.dropdownNotary,
       name: inputs.nameContract,
       phone: inputs.phone,
-      date_create: inputs.dateAuto,
+      // date_create: inputs.dateAuto,
       note: inputs.nameCustomer,
     };
     // console.log("payload--->", payload);
