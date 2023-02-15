@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { users as usersT } from "../redux/features/usersSlice";
+import { createUser, users as usersT } from "../redux/features/usersSlice";
 import instance from "../services/configAxios";
 import Manager from "./Manager";
 
@@ -21,16 +21,10 @@ const Users = () => {
     e.preventDefault();
 
     const payload = {
-      id_contract: +inputs.idAuto,
-      id_user_secretary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownSecretary,
-      id_user_notary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownNotary,
-      name: inputs.nameContract,
-      phone: inputs.phone,
-      date_create: inputs.dateAuto,
-      note: inputs.nameCustomer,
+      ...inputs,
     };
     // console.log("payload--->", payload);
-    // dispatch(createContract(payload));
+    dispatch(createUser(payload));
   };
   const getUsers = async () => {
     try {
@@ -131,6 +125,12 @@ const Users = () => {
               value={inputs.name}
               onChange={handleInputChange}
             />
+            <label htmlFor="">Ban</label>
+            <select name="ban" value={inputs.name} onChange={handleInputChange}>
+              <option defaultValue="default">Chọn </option>
+              <option value="false">Không</option>
+              <option value="true">Có</option>
+            </select>
           </div>
           <div className="contract-manager-group">
             <button onClick={handleSubmitForm}>Thêm</button>

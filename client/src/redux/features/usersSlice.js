@@ -5,6 +5,11 @@ export const users = createAsyncThunk('users/get', async () => {
     // console.log('------=>', response)
     return response.data
 })
+export const createUser = createAsyncThunk('users/create', async (payload) => {
+    const response = await usersService.create_user(payload)
+    console.log('------=>', response)
+    return response.data
+})
 
 const usersSlice = createSlice({
     name: 'users',
@@ -24,6 +29,11 @@ const usersSlice = createSlice({
         [users.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = action.payload;
+        },
+        [createUser.fulfilled]: (state, action) => {
+            state.loading = false;
+            const getData = current(state.data)
+            state.data = [...getData, action.payload];
         },
 
     }

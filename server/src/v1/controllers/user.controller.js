@@ -17,11 +17,12 @@ module.exports = {
     },
     createUser: async (req, res, next) => {
         try {
-
-            const newUser = new User({ name: req.body.name })
-            const kq = await newUser.save()
+            const { username, full_name, phone, email, role, position, image, note, ban } = req.body
+            const userInfo = { username, password: username, fullname: full_name, phone_number: phone, email, role, position, image_path: image, note, ban }
+            const newUser = new User(userInfo)
+            const response = await newUser.save()
             res.status(200).json({
-                data: kq,
+                data: response,
                 message: 'success'
             })
         } catch (error) {
@@ -95,14 +96,6 @@ module.exports = {
         }
     },
     getlists: async (req, res, next) => {
-        // try {
-        //     const { userId } = req.payload
-        //     return res.status(200).json({
-        //         userId
-        //     })
-        // } catch (error) {
-        //     next(error)
-        // }
         try {
             const response = await User.find()
             return res.status(200).json({
