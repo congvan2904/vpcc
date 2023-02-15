@@ -19,6 +19,7 @@ const Users = () => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
+
     const payload = {
       id_contract: +inputs.idAuto,
       id_user_secretary: "637d6ebe1f5b65e70272d8a7", // inputs.dropdownSecretary,
