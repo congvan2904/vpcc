@@ -30,10 +30,10 @@ const Manager = (props) => {
             <Link to="/contract1">
               <div className="manager-menu-top-item">Contract</div>
             </Link>
-            <Link to="">
+            <Link to="/users">
               <div className="manager-menu-top-item">User</div>
             </Link>
-            <Link to="">
+            <Link to="/dashboard">
               <div className="manager-menu-top-item">Report</div>
             </Link>
           </div>

@@ -1,6 +1,7 @@
-import React from 'react'
-import { Chart } from "react-google-charts"
-import './chart.scss'
+import React from "react";
+import { Chart } from "react-google-charts";
+import "./chart.scss";
+import Manager from "./Manager";
 export const dataPie = [
   ["Hồ Sơ", "Số bộ"],
   ["Hồng", 5.85],
@@ -10,7 +11,7 @@ export const dataPie = [
   ["Tiện", 5.85],
   ["Tin", 5.85],
   ["Ngân", 5.85],
-  ["Quang", 5.85]
+  ["Quang", 5.85],
 ];
 
 export const optionsPie = {
@@ -51,28 +52,28 @@ export const optionsBar = {
 
 const Dashboard = () => {
   return (
-  <>
-    <h1>Dashboard</h1>
-    <div className="wrap-chart">
-      <Chart
-      chartType="PieChart"
-      data={dataPie}
-      options={optionsPie}
-      width={"100%"}
-      height={"100%"}
-      />
-    </div>
-    <div className="wrap-chart-bar">
-    <Chart
-      chartType="BarChart"
-      width="100%"
-      height="100%"
-      data={dataBar}
-      options={optionsBar}
-    />
-    </div>
-  </>
-  )
-}
+    <Manager>
+      <h1>Dashboard</h1>
+      <div className="wrap-chart">
+        <Chart
+          chartType="PieChart"
+          data={dataPie}
+          options={optionsPie}
+          width={"100%"}
+          height={"100%"}
+        />
+      </div>
+      <div className="wrap-chart-bar">
+        <Chart
+          chartType="BarChart"
+          width="100%"
+          height="100%"
+          data={dataBar}
+          options={optionsBar}
+        />
+      </div>
+    </Manager>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
