@@ -1,7 +1,6 @@
 const contract = require('../models/contract.model')
 const user = require('../models/user.model')
-var mongoose = require('mongoose');
-var id = mongoose.Types.ObjectId('637a5547660ac62a4c5b9155');
+
 module.exports = {
     createContracts: async (req, res, next) => {
         try {
@@ -62,7 +61,7 @@ module.exports = {
             const newContract = await contract.deleteMany({})
             // console.log(newContract)
             return res.status(200).json({
-                data: { newContract },
+                data: newContract,
                 message: 'success'
             })
         } catch (error) {

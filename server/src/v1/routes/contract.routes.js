@@ -12,7 +12,7 @@ router.post('/create-contract', verifyAccessToken, authPage(['VT', 'role1']), co
 
 router.post('/updates', contractController.updateContracts)
 
-router.delete('/delete', contractController.deleteContracts)
+router.delete('/deletes', verifyAccessToken, authPage(['VT', 'role1']), contractController.deleteContracts)
 
 // get page
 router.get('/', verifyAccessToken, authPage(['VT', 'role1']), contractController.getPageContract)

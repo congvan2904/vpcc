@@ -8,6 +8,9 @@ const contractsService = {
     },
     create_contract: async (payload) => {
         return (await api.post('contract/create-contract', payload)).data
+    },
+    delete_contracts: async () => {
+        return (await api.delete('contract/deletes')).data
     }
 }
 
