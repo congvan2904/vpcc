@@ -22,24 +22,24 @@ module.exports = {
     },
     createContract: async (req, res, next) => {
         try {
-            const payload = req.body
+            const { idAuto, dropdownSecretary, dropdownNotary, nameContract, phone, dateAuto, nameCustomer } = req.body
             const dataIn = {
-                id_contract: +6002,
-                id_user_secretary: "637a5547660ac62a4c5b9155", // inputs.dropdownSecretary,
-                id_user_notary: "637a5547660ac62a4c5b9155", // inputs.dropdownNotary,
-                name: 'HDUQ 222',
-                phone: '999999',
-                // date_create: inputs.dateAuto,
-                note: 'NG V C 222',
+                id_contract: +idAuto,
+                id_user_secretary: dropdownSecretary, // inputs.dropdownSecretary,
+                id_user_notary: dropdownNotary, // inputs.dropdownNotary,
+                name: nameContract,
+                phone: phone,
+                date_create: dateAuto,
+                note: nameCustomer,
             };
 
             const newContract = new contract(dataIn)
-            const response = await newContract.save(err => console.log(`----`, err))
+            const response = await newContract.save(err => console.log(`----createContract---`, err))
             // }
             // const newContract = await contract.find().sort({ 'id_contract': 1 })
-            // console.log(newContract)
+            // console.log('response----', newContract)
             return res.status(200).json({
-                data: response,
+                data: newContract,
                 message: 'success'
             })
         } catch (error) {
@@ -122,7 +122,7 @@ module.exports = {
                 { $limit: 30 },
                 {
                     $group: {
-                        _id: '$id_user',
+                        _id: '$id_user_secretary',
                         id_contract: {
                             $addToSet: {
                                 "$cond": {
@@ -170,7 +170,7 @@ module.exports = {
                 {
                     $project: {
                         user: {
-                            name: '$user.name'
+                            name: '$user.username'
                         },
                         id_contract: 1,
                         count: 1

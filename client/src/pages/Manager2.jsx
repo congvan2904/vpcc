@@ -10,7 +10,22 @@ import { Navigate } from "react-router-dom";
 const Manager2 = () => {
   const [dataContract, setDataContract] = useState([]);
   const data = useSelector((state) => state.contracts.data);
-  // console.log({ data });
+  const { data: dataUsers, loading } = useSelector((state) => state.users);
+  // const dateTime = Date.now();
+  // console.log({ dateTime });
+  const getCurrentDateInput = () => {
+    const dateObj = new Date();
+
+    // get the month in this format of 04, the same for months
+    const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+    const day = ("0" + dateObj.getDate()).slice(-2);
+    const year = dateObj.getFullYear();
+
+    const shortDate = `${year}-${month}-${day}`;
+
+    return shortDate;
+  };
+
   const [inputs, setInputs] = useState({});
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -19,13 +34,7 @@ const Manager2 = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const payload = {
-      id_contract: +inputs.idAuto,
-      id_user_secretary: "637a5547660ac62a4c5b9155", // inputs.dropdownSecretary,
-      id_user_notary: "637a5547660ac62a4c5b9155", // inputs.dropdownNotary,
-      name: inputs.nameContract,
-      phone: inputs.phone,
-      // date_create: inputs.dateAuto,
-      note: inputs.nameCustomer,
+      ...inputs,
     };
     // console.log("payload--->", payload);
     dispatch(createContract(payload));
@@ -62,10 +71,13 @@ const Manager2 = () => {
               onChange={handleInputChange}
             >
               <option defaultValue="default">Chọn thư ký</option>
-              <option value="Lực">Lực</option>
-              <option value="Hồng">Hồng</option>
-              <option value="Sơn">Sơn</option>
-              <option value="Thủy">Thủy</option>
+              {dataUsers.map((e) => {
+                return (
+                  <option value={e._id} key={e._id}>
+                    {e.username}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="contract-manager-group">
@@ -75,9 +87,14 @@ const Manager2 = () => {
               value={inputs.name}
               onChange={handleInputChange}
             >
-              <option defaultValue="Điền">Nguyễn Đức Điền</option>
-              <option value="Liên">Nguyễn Thị Kim Liên</option>
-              <option value="Bay">Nguyễn Thị Bay</option>
+              <option defaultValue="default">Chọn công chứng viên</option>
+              {dataUsers.map((e) => {
+                return (
+                  <option value={e._id} key={e._id}>
+                    {e.username}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="contract-manager-group">
@@ -87,6 +104,7 @@ const Manager2 = () => {
               id=""
               name="dateAuto"
               value={inputs.name}
+              defaultValue={getCurrentDateInput()}
               onChange={handleInputChange}
             />
             <label htmlFor="">Ngày theo hồ sơ</label>
@@ -95,6 +113,7 @@ const Manager2 = () => {
               id=""
               name="date"
               value={inputs.name}
+              defaultValue={getCurrentDateInput()}
               onChange={handleInputChange}
             />
           </div>

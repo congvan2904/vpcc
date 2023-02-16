@@ -3,17 +3,17 @@ import contractsService from "../../services/contracts.service";
 
 export const contracts = createAsyncThunk('contract/debt', async () => {
     const response = await contractsService.contracts()
-    // console.log('------=>', params)
+    // console.log('--contracts----=>', response)
     return response.data
 })
 export const update_status = createAsyncThunk('contract/update_status', async ({ name, status }) => {
     const response = await contractsService.status_contract({ name, status })
-    console.log('------=>', response.data.response.id_contract)
+    // console.log('------=>', response.data.response.id_contract)
     return response.data.response.id_contract
 })
 export const createContract = createAsyncThunk('contract/create_contract', async (payload) => {
     const response = await contractsService.create_contract(payload)
-    console.log('------=>', response)
+    // console.log('---createContract---=>', response)
     return response.data
 })
 
@@ -55,7 +55,22 @@ const contractsSlice = createSlice({
         },
         [createContract.fulfilled]: (state, action) => {
             state.loading = false;
-            // state.data = action.payload;
+            const getData = current(state.data)
+            const getIdSecretary = action.payload.id_user_secretary
+            const getIdContract = action.payload.id_contract
+            // console.log('state', getData)
+            // console.log('payload', action.payload)
+            getData.map(contract => {
+                const getIdUser = contract._id
+                // const fil = getRrr.filter(item => item !== +getId)
+                // console.log({ fil })
+                if (getIdUser === getIdSecretary) {
+                    state.data = [{ ...contract, id_contract: [+getIdContract, ...contract.id_contract], count: contract.id_contract.length + 1 }]
+                    // console.log('update-->', state.data)
+                }
+                return state.data
+            })
+            // state.data = [...getData, action.payload];
             // console.log('redux', state.data)
         },
     }

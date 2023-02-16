@@ -7,7 +7,7 @@ export const users = createAsyncThunk('users/get', async () => {
 })
 export const createUser = createAsyncThunk('users/create', async (payload) => {
     const response = await usersService.create_user(payload)
-    console.log('------=>', response)
+    // console.log('------=>', response)
     return response.data
 })
 
