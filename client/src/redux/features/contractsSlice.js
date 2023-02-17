@@ -18,15 +18,21 @@ export const createContract = createAsyncThunk('contract/create_contract', async
 })
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
     const response = await contractsService.get_contract_group_sort()
-    // console.log('---createContract---=>', response)
+    console.log('---getContractGroupSort---=>', response)
     return response.data
+})
+export const deleteContracts = createAsyncThunk('contract/deletes', async () => {
+    const response = await contractsService.delete_contracts()
+    // console.log('---createContract---=>', response)
+    return response.data.deletedCount
 })
 
 const contractsSlice = createSlice({
     name: 'contracts',
     initialState: {
         loading: false,
-        data: []
+        data: [],
+        number: 0
     },
     reducers: {},
     extraReducers: {
@@ -39,16 +45,18 @@ const contractsSlice = createSlice({
         },
         [contracts.fulfilled]: (state, action) => {
             state.loading = false;
+            state.number = 0;
             state.data = action.payload;
             // console.log('redux', state.data)
         },
         [getContractGroupSort.fulfilled]: (state, action) => {
             state.loading = false;
-            state.data = action.payload;
+            // state.data = action.payload;
             // console.log('redux', state.data)
         },
         [update_status.fulfilled]: (state, action) => {
             state.loading = false;
+            state.number = 0;
             const getId = action.payload;
             // console.log({ getId })
             const getData = current(state.data)
@@ -65,6 +73,7 @@ const contractsSlice = createSlice({
         },
         [createContract.fulfilled]: (state, action) => {
             state.loading = false;
+            state.number = 0;
             const getData = current(state.data)
             const getIdSecretary = action.payload.id_user_secretary
             const getIdContract = action.payload.id_contract
@@ -82,6 +91,11 @@ const contractsSlice = createSlice({
             })
             // state.data = [...getData, action.payload];
             // console.log('redux', state.data)
+        },
+        [deleteContracts.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = [];
+            state.number = action.payload
         },
     }
 })

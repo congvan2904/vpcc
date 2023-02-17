@@ -10,8 +10,11 @@ const contractsService = {
         return (await api.post('contract/create-contract', payload)).data
     },
     get_contract_group_sort: async () => {
-        return (await api.post('contract/group-sort')).data
+        return (await api.get('contract/group-sort')).data
     },
+    delete_contracts: async () => {
+        return (await api.delete('contract/deletes')).data
+    }
 }
 
 export default contractsService

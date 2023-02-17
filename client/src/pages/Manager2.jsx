@@ -3,13 +3,15 @@ import Manager1 from "./Manager1";
 import {
   contracts as contractsR,
   createContract,
+  deleteContracts,
+  getContractGroupSort,
 } from "../redux/features/contractsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Contract from "../components/contract/Contract";
 import { Navigate } from "react-router-dom";
 const Manager2 = () => {
   const [dataContract, setDataContract] = useState([]);
-  const data = useSelector((state) => state.contracts.data);
+  const { data, number } = useSelector((state) => state.contracts);
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   // const dateTime = Date.now();
   // console.log({ dateTime });
@@ -38,6 +40,14 @@ const Manager2 = () => {
     };
     // console.log("payload--->", payload);
     dispatch(createContract(payload));
+  };
+  const handleDeleteContracts = (e) => {
+    e.preventDefault();
+    dispatch(deleteContracts());
+  };
+  const handlegetContracts = (e) => {
+    e.preventDefault();
+    dispatch(getContractGroupSort());
   };
   return (
     <Manager1>
@@ -145,6 +155,8 @@ const Manager2 = () => {
           </div>
           <div className="contract-manager-group">
             <button onClick={handleSubmitForm}>Thêm hồ sơ</button>
+            <button onClick={handleDeleteContracts}>Xóa tất cả hồ sơ</button>
+            <button onClick={handlegetContracts}>Test</button>
           </div>
           <div className="contract-show">
             {data.map((contract, index) => (
@@ -154,6 +166,7 @@ const Manager2 = () => {
                 ))}
               </div>
             ))}
+            {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
           </div>
         </div>
       </form>
