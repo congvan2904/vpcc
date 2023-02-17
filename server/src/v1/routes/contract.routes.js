@@ -27,4 +27,6 @@ router.get('/group', verifyAccessToken, authPage(['VT', 'role1']), contractContr
 
 router.patch('/find', verifyAccessToken, authPage(['VT', 'role1']), contractController.findContract)
 
+router.get('/group-sort', verifyAccessToken, authPage(['VT', 'role1']), contractController.getContractsSort)
+
 module.exports = router

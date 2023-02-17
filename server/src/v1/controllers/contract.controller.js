@@ -306,5 +306,24 @@ module.exports = {
         } catch (error) {
             next(error)
         }
-    }
+    },
+    // SORT Date - Name User - Id Contract
+    getContractsSort: async (req, res, next) => {
+        try {
+
+            const dataFillter = await contract.find({ status: true })
+            const newData = dataFillter.sort((a, b) => {
+                let compareDate = new Date(b.date_create) - new Date(a.date_create);
+                let compareNameUser = a.id_user_secretary.localeCompare(b.id_user_secretary);
+                let compareIdContract = b.id_contract - a.id_contract;
+                return compareDate || compareNameUser || compareIdContract
+            })
+            return res.status(200).json({
+                data: newData,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

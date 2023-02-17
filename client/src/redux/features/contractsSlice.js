@@ -16,6 +16,11 @@ export const createContract = createAsyncThunk('contract/create_contract', async
     // console.log('---createContract---=>', response)
     return response.data
 })
+export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
+    const response = await contractsService.get_contract_group_sort()
+    // console.log('---createContract---=>', response)
+    return response.data
+})
 
 const contractsSlice = createSlice({
     name: 'contracts',
@@ -33,6 +38,11 @@ const contractsSlice = createSlice({
             state.data = [];
         },
         [contracts.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = action.payload;
+            // console.log('redux', state.data)
+        },
+        [getContractGroupSort.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = action.payload;
             // console.log('redux', state.data)

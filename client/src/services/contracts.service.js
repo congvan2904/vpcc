@@ -8,7 +8,10 @@ const contractsService = {
     },
     create_contract: async (payload) => {
         return (await api.post('contract/create-contract', payload)).data
-    }
+    },
+    get_contract_group_sort: async () => {
+        return (await api.post('contract/group-sort')).data
+    },
 }
 
 export default contractsService
