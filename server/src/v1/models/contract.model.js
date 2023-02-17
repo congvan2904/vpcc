@@ -12,11 +12,11 @@ const contractSchema = new Schema({
     },
     id_user_secretary: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'users'
     },
     id_user_notary: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'users'
     },
     name: {
         type: String

@@ -310,13 +310,15 @@ module.exports = {
     getContractsSort: async (req, res, next) => {
         try {
 
-            const dataFillter = await contract.find({ status: true })
+            let dataFillter = await contract.find({ status: true }).populate('id_user_secretary', ['username'])
             const newData = dataFillter.sort((a, b) => {
                 let compareDate = new Date(b.date_create) - new Date(a.date_create);
-                let compareNameUser = a.id_user_secretary - b.id_user_secretary;
+                let compareNameUser = a.id_user_secretary.username - b.id_user_secretary.username;
                 let compareIdContract = b.id_contract - a.id_contract;
+                console.log(a.id_user_secretary.username)
                 return compareDate || compareNameUser || compareIdContract
             })
+
             return res.status(200).json({
                 data: newData,
                 message: 'success'
