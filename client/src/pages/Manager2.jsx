@@ -162,7 +162,13 @@ const Manager2 = () => {
             {data.map((contract, index) => (
               <div className="contract-main" key={index}>
                 {contract.id_contract.map((item, i) => (
-                  <Contract key={i} contract={item} name={contract.user.name} />
+                  <Contract
+                    key={i}
+                    idContract={item[0]}
+                    numberContract={item[1]}
+                    dateContract={item[2]}
+                    name={contract.username}
+                  />
                 ))}
               </div>
             ))}

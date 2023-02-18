@@ -1,3 +1,5 @@
+const groupBy = require('../helpers/groupDataByKey')
+const reverseObj = require('../helpers/reverseObjectKey')
 const contract = require('../models/contract.model')
 const user = require('../models/user.model')
 
@@ -116,7 +118,7 @@ module.exports = {
 
             const data = await contract.aggregate([
                 {
-                    $sort: { id_contract: -1 }
+                    $sort: { id_user_secretary: 1 }
                 },
                 { $limit: 30 },
                 {
@@ -131,7 +133,7 @@ module.exports = {
                                             true
                                         ]
                                     },
-                                    "then": '$id_contract', //If true returns 1
+                                    "then": ['$_id', '$id_contract', '$date_create'], //If true returns 1
                                     "else": '$$REMOVE' // else 0
                                 }
                             }
@@ -168,19 +170,17 @@ module.exports = {
                 },
                 {
                     $project: {
-                        user: {
-                            name: '$user.username'
-                        },
+                        username: '$user.username',
                         id_contract: 1,
                         count: 1
                     }
                 }
 
             ])
+            const sUserName = data.sort((a, b) => a.username.localeCompare(b.username))
 
-            const newData = data.map((item) => {
-
-                return ({ ...item, id_contract: item.id_contract.sort((a, b) => b - a) })
+            const newData = sUserName.map((item) => {
+                return ({ ...item, id_contract: item.id_contract.sort((a, b) => b[1] - a[1]) })
 
             })
             // newData.map(item => console.log(item))
@@ -292,12 +292,13 @@ module.exports = {
             next(error)
         }
     },
+    //update status contract
     findContract: async (req, res, next) => {
         try {
             const filter = req.body.name
             const update = req.body.status === 'true' ? true : false
             // console.log(`${filter} -- ${update}`)
-            const response = await contract.findOneAndUpdate({ id_contract: +filter }, { status: update })
+            const response = await contract.findOneAndUpdate({ _id: filter }, { status: update })
             return res.status(200).json({
                 data: { response },
                 message: 'success'
@@ -310,17 +311,72 @@ module.exports = {
     getContractsSort: async (req, res, next) => {
         try {
 
-            let dataFillter = await contract.find({ status: true }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
-            const newData = dataFillter.sort((a, b) => {
-                let compareDate = new Date(b.date_create) - new Date(a.date_create);
-                let compareNameUser = a.id_user_secretary.username - b.id_user_secretary.username;
-                let compareIdContract = b.id_contract - a.id_contract;
-                console.log(a.id_user_secretary.username)
-                return compareDate || compareNameUser || compareIdContract
-            })
-            const grouped = newData.group(item => item.date_create);
+            const dataFillter = await contract.find({ status: true }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+            // const newData = dataFillter.sort((a, b) => {
+            //     let compareDate = new Date(b.date_create) - new Date(a.date_create);
+            //     let compareNameUser = a.id_user_secretary.username - b.id_user_secretary.username;
+            //     let compareIdContract = b.id_contract - a.id_contract;
+            //     console.log(a.id_user_secretary.username)
+            //     return compareDate || compareNameUser || compareIdContract
+            // })
+
+            const grouped = groupBy(dataFillter, 'date_create');
+            // const arrGroup = [...grouped]
+            // const newData = reverseObj(grouped)
+            // const newData2 = Object.keys(grouped).reverse();
+            // const sortObject = o => Object.keys(o).reverse().reduce((r, k) => (r[k] = o[k], r), {})
+            // const newData3 = sortObject(grouped)
+            const data = await contract.aggregate([
+                {
+                    $sort: { date_create: -1 }
+                },
+                // { $limit: 100 },
+                {
+                    $group: {
+                        _id: '$id_user_secretary',
+                        id_contract: {
+                            $addToSet: {
+                                "$cond": {
+                                    "if": {
+                                        "$eq": [
+                                            "$status",
+                                            true
+                                        ]
+                                    },
+                                    "then": ['$_id', '$id_contract', '$date_create'], //If true returns 1
+                                    "else": '$$REMOVE' // else 0
+                                }
+                            }
+                        },
+                    }
+
+                }
+                ,
+
+                {
+                    $lookup:
+                    {
+                        from: 'users',
+                        localField: '_id',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+                },
+                {
+                    $unwind: '$user'
+                },
+                {
+                    $project: {
+
+                        name: '$user.username'
+                        ,
+                        id_contract: 1
+                    }
+                }
+
+            ])
             return res.status(200).json({
-                data: grouped,
+                data: data,
                 message: 'success'
             })
         } catch (error) {

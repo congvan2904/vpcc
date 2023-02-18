@@ -6,8 +6,9 @@ import { Navigate } from "react-router-dom";
 const Contract = (props) => {
   // const [refContract, setRefContract] = useState(true);
   const dispatch = useDispatch();
-  const id_contract = props.contract;
+  const number_contract = props.numberContract;
   const count_contract = props.name;
+  const id_contract = props.idContract;
   // console.log(id_contract);
   let _do;
   const t2 = "Văn Thư Nguyễn văn văn văn Công";
@@ -19,13 +20,15 @@ const Contract = (props) => {
 
     // console.log(refContract);
     if (event.detail === 2) {
-      console.log("double click", id_contract);
+      console.log("double click", number_contract);
       dispatch(updateContract({ name: id_contract, status: false }));
     }
   };
   return (
     <div className="contract-main-item" onClick={handleClick}>
-      <div className="contract-main-item-number under-line">{id_contract}</div>
+      <div className="contract-main-item-number under-line">
+        {number_contract}
+      </div>
       <div className="contract-main-item-name-secretary">{count_contract}</div>
       <div className="contract-main-item-circle">
         {t1.split("").map((item, i) => (

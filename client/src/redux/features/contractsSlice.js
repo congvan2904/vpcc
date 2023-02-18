@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import groupBy from "../../helpers/groupDataByKey";
 import contractsService from "../../services/contracts.service";
 
 export const contracts = createAsyncThunk('contract/debt', async () => {
     const response = await contractsService.contracts()
-    // console.log('--contracts----=>', response)
+    console.log('--contracts----=>', response.data)
     return response.data
 })
 export const update_status = createAsyncThunk('contract/update_status', async ({ name, status }) => {
@@ -18,7 +19,8 @@ export const createContract = createAsyncThunk('contract/create_contract', async
 })
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
     const response = await contractsService.get_contract_group_sort()
-    console.log('---getContractGroupSort---=>', response)
+    // const groupByDate = groupBy(response.data, 'date_create').reverse()
+    console.log('---getContractGroupSort---=>', response.data)
     return response.data
 })
 export const deleteContracts = createAsyncThunk('contract/deletes', async () => {
