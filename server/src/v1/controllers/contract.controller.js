@@ -310,7 +310,7 @@ module.exports = {
     getContractsSort: async (req, res, next) => {
         try {
 
-            let dataFillter = await contract.find({ status: true }).populate('id_user_secretary', ['username'])
+            let dataFillter = await contract.find({ status: true }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
             const newData = dataFillter.sort((a, b) => {
                 let compareDate = new Date(b.date_create) - new Date(a.date_create);
                 let compareNameUser = a.id_user_secretary.username - b.id_user_secretary.username;
@@ -318,9 +318,9 @@ module.exports = {
                 console.log(a.id_user_secretary.username)
                 return compareDate || compareNameUser || compareIdContract
             })
-
+            const grouped = newData.group(item => item.date_create);
             return res.status(200).json({
-                data: newData,
+                data: grouped,
                 message: 'success'
             })
         } catch (error) {
