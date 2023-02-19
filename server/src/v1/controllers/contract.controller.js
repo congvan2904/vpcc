@@ -35,12 +35,11 @@ module.exports = {
             };
 
             const newContract = new contract(dataIn)
-            const response = await newContract.save(err => console.log(`----createContract---`, err))
-            // }
-            // const newContract = await contract.find().sort({ 'id_contract': 1 })
-            // console.log('response----', newContract)
+            const response = await newContract.save()
+            const getUserName = await user.findById(dropdownSecretary)
+            const dataGroup = { ...(response.toObject()), username: getUserName.username }
             return res.status(200).json({
-                data: newContract,
+                data: dataGroup,
                 message: 'success'
             })
         } catch (error) {
@@ -300,7 +299,7 @@ module.exports = {
             // console.log(`${filter} -- ${update}`)
             const response = await contract.findOneAndUpdate({ _id: filter }, { status: update })
             return res.status(200).json({
-                data: { response },
+                data: response,
                 message: 'success'
             })
         } catch (error) {

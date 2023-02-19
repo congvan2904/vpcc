@@ -4,17 +4,17 @@ import contractsService from "../../services/contracts.service";
 
 export const contracts = createAsyncThunk('contract/debt', async () => {
     const response = await contractsService.contracts()
-    console.log('--contracts----=>', response.data)
+    // console.log('--contracts----=>', response.data)
     return response.data
 })
 export const update_status = createAsyncThunk('contract/update_status', async ({ name, status }) => {
     const response = await contractsService.status_contract({ name, status })
-    // console.log('------=>', response.data.response.id_contract)
-    return response.data.response.id_contract
+    // console.log('--update_status----=>', response.data)
+    return response.data
 })
 export const createContract = createAsyncThunk('contract/create_contract', async (payload) => {
     const response = await contractsService.create_contract(payload)
-    // console.log('---createContract---=>', response)
+    // console.log('---createContract---=>', response.data)
     return response.data
 })
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
@@ -59,17 +59,24 @@ const contractsSlice = createSlice({
         [update_status.fulfilled]: (state, action) => {
             state.loading = false;
             state.number = 0;
-            const getId = action.payload;
-            // console.log({ getId })
             const getData = current(state.data)
-            // console.log('data-->', getData)
-            getData.map(contract => {
-                const getRrr = contract.id_contract
-                const fil = getRrr.filter(item => item !== +getId)
-                // console.log({ fil })
-                state.data = [{ ...contract, id_contract: fil, count: fil.length }]
-                // console.log('update-->', state.data)
-                return state.data
+            const getIdSecretary = action.payload.id_user_secretary
+            const getIdContract = action.payload._id
+            const getNumberContract = action.payload.id_contract
+            const getDate = action.payload.date_create
+            // console.log(getIdSecretary + '---' + getIdContract)
+            // console.log('payload', action.payload)
+            getData.map(user => {
+                const getIdUser = user._id
+                // const fil = getRrr.filter(item => item !== +getId)
+                // console.log({ fil }
+                if (getIdUser === getIdSecretary) {
+                    const redata = getData.filter(item => item._id !== getIdSecretary)
+                    const removeNumberContract = user.id_contract.filter(item => item[0] !== getIdContract)
+                    state.data = [{ ...user, id_contract: removeNumberContract, count: user.id_contract.length - 1 }, ...redata]
+                    // console.log('state---->update--->>>', state.data)
+                }
+                return state
             })
 
         },
@@ -78,18 +85,28 @@ const contractsSlice = createSlice({
             state.number = 0;
             const getData = current(state.data)
             const getIdSecretary = action.payload.id_user_secretary
-            const getIdContract = action.payload.id_contract
+            const getIdContract = action.payload._id
+            const getNumberContract = action.payload.id_contract
+            const getDate = action.payload.date_create
+            const getUserName = action.payload.username
             // console.log('state', getData)
-            // console.log('payload', action.payload)
-            getData.map(contract => {
-                const getIdUser = contract._id
-                // const fil = getRrr.filter(item => item !== +getId)
-                // console.log({ fil })
+            const findUser = getData.findIndex(item => item._id === getIdSecretary)
+            if (findUser < 0) {
+                state.data = [{ _id: getIdSecretary, id_contract: [[getIdContract, +getNumberContract, getDate]], count: 1, username: getUserName }, ...getData]
+                return state
+            }
+            // if (getData.length < 1) {
+            //     state.data = [{ _id: getIdSecretary, id_contract: [[getIdContract, +getNumberContract, getDate]], count: 1, username: '' }]
+            //     return state
+            // }
+            getData.map(user => {
+                const getIdUser = user._id
+
                 if (getIdUser === getIdSecretary) {
-                    state.data = [{ ...contract, id_contract: [+getIdContract, ...contract.id_contract], count: contract.id_contract.length + 1 }]
-                    // console.log('update-->', state.data)
+                    const redata = getData.filter(item => item._id !== getIdSecretary)
+                    state.data = [{ ...user, id_contract: [[getIdContract, +getNumberContract, getDate], ...user.id_contract], count: user.id_contract.length + 1 }, ...redata]
                 }
-                return state.data
+                return state
             })
             // state.data = [...getData, action.payload];
             // console.log('redux', state.data)
