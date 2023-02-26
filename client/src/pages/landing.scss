@@ -1,12 +1,26 @@
-@use "../sass/index";
+@use "../sass/index" as *;
 
 .landing {
+  // background-color: linear-gradient(
+  //   90deg,
+  //   rgba(27, 18, 29, 1) 0%,
+  //   rgba(18, 15, 47, 1) 50%,
+  //   rgba(27, 18, 29, 1) 100%
+  // );
+  // background-image: linear-gradient(
+  //   90deg,
+  //   $main-purple 0%,
+  //   $main-pink 50%,
+  //   $main-color 100%
+  // );
+  background: linear-gradient(90deg, blue, red);
   .header {
     margin-top: -100px;
     display: flex;
     justify-content: space-between;
     position: relative;
-
+    color: $second-color;
+    background-color: red;
     &-logo {
       display: flex;
       align-items: center;
@@ -24,8 +38,107 @@
         :nth-child(1) {
           text-transform: uppercase;
         }
+        :nth-child(2) {
+          text-transform: uppercase;
+          transition: 0.5s linear;
+        }
         :nth-last-child(1) {
           text-transform: capitalize;
+          // display: none;
+          height: 0;
+          opacity: 0;
+          transition: height 0ms 600ms, opacity 600ms 0ms;
+        }
+        &:hover p {
+          color: #fff;
+          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+          &:nth-last-child(1) {
+            // display: block;
+            height: auto;
+            opacity: 1;
+            transition: height 0ms 0ms, opacity 800ms 0ms;
+          }
+          &:nth-child(2) {
+            letter-spacing: 4px;
+          }
+        }
+      }
+    }
+    &-address {
+      font-size: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &-menu {
+      margin-right: 5px;
+      margin-top: 5px;
+      &-item {
+        .glow-on-hover {
+          width: 220px;
+          height: 50px;
+          border: none;
+          outline: none;
+          color: rgb(255, 255, 255);
+          font-size: 20px;
+          background: #111;
+          cursor: pointer;
+          position: relative;
+          z-index: 0;
+          border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+          content: "";
+          background: linear-gradient(
+            45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000
+          );
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          background-size: 400%;
+          z-index: -1;
+          filter: blur(5px);
+          width: calc(100% + 4px);
+          height: calc(100% + 4px);
+          animation: glowing 20s linear infinite;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+          border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+          color: #000;
+        }
+
+        .glow-on-hover:active:after {
+          background: transparent;
+        }
+
+        .glow-on-hover:hover:before {
+          opacity: 1;
+        }
+
+        .glow-on-hover:after {
+          z-index: -1;
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgb(0, 255, 26);
+          left: 0;
+          top: 0;
+          border-radius: 10px;
         }
       }
     }
@@ -70,18 +183,20 @@
       align-items: center;
       margin: 0 auto;
       padding: 50px 20px;
-      background-color: rgba(0, 0, 0, 0.8);
+      // background-color: rgba(0, 0, 0, 0.8);
 
       font-weight: 700;
 
       h1 {
-        font-size: 38.5px;
+        font-size: 50px;
         line-height: 40px;
         text-transform: uppercase;
         letter-spacing: 4px;
         margin-bottom: 30px;
         text-shadow: 0 1px 0 #333, 0 2px 0 #333, 0 3px 0 #333, 0 4px 0 #333,
           0 5px 0 #333, 0 3px 1px rgb(255 255 255 / 10%);
+        // mix-blend-mode: multiply;
+        // background-color: red;
         strong {
           position: relative;
 
@@ -96,7 +211,7 @@
         }
       }
       .content {
-        margin-top: 20px;
+        margin-top: 40px;
         width: 100%;
         display: flex;
         align-items: center;
@@ -106,9 +221,12 @@
           &-title {
             font-size: 31.5px;
           }
-          p {
-            margin-top: 10px;
-            font-size: 17.5px;
+          &-main {
+            margin-top: 15px;
+            .main-sub {
+              margin-top: 10px;
+              font-size: 17.5px;
+            }
           }
         }
         &-middle {
@@ -127,15 +245,24 @@
         }
         &-right {
           width: 30%;
-          p {
-            font-size: 14px;
+          &-title {
+            font-size: 31.5px;
+          }
+          &-main {
+            &-intro {
+              font-size: 25px;
+            }
+            .main-sub {
+              margin-top: 10px;
+              font-size: 17.5px;
+            }
           }
         }
       }
     }
     &-content {
       margin-top: 50px;
-      background-color: rgba(0, 0, 0, 0.8);
+      // background-color: rgba(0, 0, 0, 0.8);
       display: flex;
       height: 200px;
       padding: 20px 10px;
@@ -162,14 +289,18 @@
         flex-grow: 1;
         justify-content: space-around;
         align-items: center;
+        font-size: 30px;
         .time {
           width: 150px;
           height: 150px;
           background-position: center;
           background-size: cover;
           text-align: center;
-          line-height: 150px;
-          color: violet;
+          line-height: 1;
+          color: yellow;
+          background-color: transparent;
+          display: flex;
+          align-items: center;
         }
         .statistical {
           width: 150px;
@@ -177,8 +308,10 @@
           background-position: center;
           background-size: cover;
           text-align: center;
-          line-height: 150px;
-          color: violet;
+          line-height: 1;
+          color: white;
+          display: flex;
+          align-items: center;
         }
         .report {
           width: 150px;
@@ -186,8 +319,10 @@
           background-position: center;
           background-size: cover;
           text-align: center;
-          line-height: 150px;
-          color: violet;
+          line-height: 1;
+          color: white;
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -195,7 +330,7 @@
     &-info {
       margin-top: 50px;
       padding: 50px 30px;
-      background-color: rgba(0, 0, 0, 0.8);
+      // background-color: rgba(0, 0, 0, 0.8);
       display: flex;
       line-height: 40px;
       &-main {
@@ -247,9 +382,20 @@
       margin-top: 50px;
       display: flex;
       justify-content: space-between;
-      font-size: 16px;
-      line-height: 18px;
+      font-size: 20px;
+      line-height: 22px;
       color: white;
     }
+  }
+}
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
