@@ -387,6 +387,18 @@
       color: white;
     }
   }
+  .map {
+    position: relative;
+    text-align: right;
+    height: 1077px;
+    width: 1080px;
+    #gmap_canvas {
+      overflow: hidden;
+      background: none !important;
+      height: 1077px;
+      width: 1080px;
+    }
+  }
 }
 @keyframes glowing {
   0% {
