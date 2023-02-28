@@ -8,6 +8,7 @@ import imgReport from "../assets/landing/report.svg";
 import { useRef } from "react";
 import { FaPhone, FaMailBulk, FaUser } from "react-icons/fa";
 import { TiMessages } from "react-icons/ti";
+import MapsGoogle from "../components/map/MapsGoogle";
 // https://codepen.io/norcal82/full/DjpyNQ
 const Register = () => {
   const refToggle = useRef(null);
@@ -22,6 +23,10 @@ const Register = () => {
     // } else {
     //   refToggle.current.classList.remove("header-toggle");
     // }
+  };
+  const [isShowMap, setIsShowMap] = useState(false);
+  const handleShowmap = (e) => {
+    setIsShowMap((pre) => !pre);
   };
   return (
     <div className="landing">
@@ -38,7 +43,7 @@ const Register = () => {
         </div>
         <div className="header-address">
           <div className="header-address-title">Địa chỉ</div>
-          <div className="header-address-main">
+          <div className="header-address-main" onClick={handleShowmap}>
             393C Nguyễn Bình, Phú Xuân, Nhà Bè
           </div>
         </div>
@@ -183,16 +188,17 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="map">
+      {/* <div className="map">
         <iframe
           id="gmap_canvas"
-          src="https://maps.google.com/maps?q=393c nguyen binh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=vpcc%20nguyen%20duc%20dien&t=&z=13&ie=UTF8&iwloc=&output=embed"
           frameborder="0"
           scrolling="no"
           marginheight="0"
           marginwidth="0"
         ></iframe>
-      </div>
+      </div> */}
+      <MapsGoogle isToggle={isShowMap} />
     </div>
   );
 };
