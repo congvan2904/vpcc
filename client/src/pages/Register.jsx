@@ -202,17 +202,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-      {/* <div className="map">
-        <iframe
-          id="gmap_canvas"
-          src="https://maps.google.com/maps?q=vpcc%20nguyen%20duc%20dien&t=&z=13&ie=UTF8&iwloc=&output=embed"
-          frameborder="0"
-          scrolling="no"
-          marginheight="0"
-          marginwidth="0"
-        ></iframe>
-      </div> */}
-      {/* <MapsGoogle isToggle={isShowMap} /> */}
     </div>
   );
 };

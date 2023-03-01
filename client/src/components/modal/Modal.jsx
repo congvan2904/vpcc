@@ -19,8 +19,8 @@ const Modal = ({ children, shown, close }) => {
           <div className="search">
             Tìm đường đến Phòng Công Chứng Nguyễn Đức Điền – Nhà Bè
           </div>
-          <div className="button">
-            <button onClick={close}>Đóng</button>
+          <div className="button" onClick={close}>
+            x
           </div>
         </div>
 

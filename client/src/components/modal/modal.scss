@@ -1,3 +1,4 @@
+@use "../../sass/" as *;
 .modal {
   &-backdrop {
     position: absolute;
@@ -10,7 +11,14 @@
     &-header {
       display: flex;
       justify-content: space-between;
-      background-color: #04db5e;
+      align-items: center;
+      background-color: turquoise;
+      color: $black;
+      font-size: 25px;
+      .button {
+        cursor: pointer;
+        margin-right: 10px;
+      }
     }
   }
 }
