@@ -5,7 +5,7 @@ function MapsGoogle() {
       <div className="gmap_canvas">
         <iframe
           id="gmap_canvas"
-          src="https://maps.google.com/maps?q=vpcc%20nguyen%20duc%20dien&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=vpcc%20nguyen%20duc%20dien&t=&z=15&ie=UTF8&iwloc=&output=embed"
         ></iframe>
       </div>
     </div>
