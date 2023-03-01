@@ -9,6 +9,7 @@ import { useRef } from "react";
 import { FaPhone, FaMailBulk, FaUser } from "react-icons/fa";
 import { TiMessages } from "react-icons/ti";
 import MapsGoogle from "../components/map/MapsGoogle";
+import Modal from "../components/modal/Modal";
 // https://codepen.io/norcal82/full/DjpyNQ
 const Register = () => {
   const refToggle = useRef(null);
@@ -24,9 +25,9 @@ const Register = () => {
     //   refToggle.current.classList.remove("header-toggle");
     // }
   };
-  const [isShowMap, setIsShowMap] = useState(false);
+  const [modalShown, toggleModal] = useState(false);
   const handleShowmap = (e) => {
-    setIsShowMap((pre) => !pre);
+    // setIsShowMap((pre) => !pre);
   };
   return (
     <div className="landing">
@@ -43,7 +44,12 @@ const Register = () => {
         </div>
         <div className="header-address">
           <div className="header-address-title">Địa chỉ</div>
-          <div className="header-address-main" onClick={handleShowmap}>
+          <div
+            className="header-address-main"
+            onClick={() => {
+              toggleModal(!modalShown);
+            }}
+          >
             393C Nguyễn Bình, Phú Xuân, Nhà Bè
           </div>
         </div>
@@ -55,6 +61,14 @@ const Register = () => {
         <div className="triangle-dow" onClick={handleClick}>
           <p></p>
         </div>
+        <Modal
+          shown={modalShown}
+          close={() => {
+            toggleModal(false);
+          }}
+        >
+          <MapsGoogle />
+        </Modal>
       </div>
       <div className="sub-header"></div>
       <div
@@ -198,7 +212,7 @@ const Register = () => {
           marginwidth="0"
         ></iframe>
       </div> */}
-      <MapsGoogle isToggle={isShowMap} />
+      {/* <MapsGoogle isToggle={isShowMap} /> */}
     </div>
   );
 };
