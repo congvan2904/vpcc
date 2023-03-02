@@ -202,6 +202,10 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <div className="circle-main">
+        <div className="vuong"></div>
+        <div className="circle-1"></div>
+      </div>
     </div>
   );
 };
