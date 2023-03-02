@@ -399,11 +399,85 @@
       transform: translateX(-50%);
       animation: rotate 3s infinite;
     }
-    .circle-1 {
+    .circle-11 {
       position: absolute;
       width: 140px;
       height: 140px;
       background-color: #0b42e6;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+  .circle {
+    width: 160px;
+    height: 160px;
+    background-color: yellow;
+    position: relative;
+    left: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    &-1 {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background-color: rgb(2, 0, 128);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      overflow: hidden;
+      background-image: conic-gradient(
+        green 0deg 90deg,
+        transparent 90deg 180deg,
+        green 180deg 270deg,
+        transparent 270deg
+      );
+      animation: rotate_circle 3s infinite linear;
+    }
+    &-2 {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background-color: #00ffd5;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      overflow: hidden;
+      background-image: conic-gradient(
+        #7a00ff 0deg 60deg,
+        transparent 60deg 180deg,
+        #7a00ff 180deg 240deg,
+        transparent 240deg
+      );
+      animation: invert_rotate_circle 2s infinite linear;
+    }
+    &-3 {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: #ff0000;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      overflow: hidden;
+      background-image: conic-gradient(
+        #00ffd5 0deg 120deg,
+        transparent 120deg 180deg,
+        #00ffd5 180deg 300deg,
+        transparent 300deg
+      );
+      animation: rotate_circle 1s infinite linear;
+    }
+    &-4 {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background-color: gray;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -436,5 +510,15 @@
   }
   100% {
     transform: translateX(-50%) rotate(360deg);
+  }
+}
+@keyframes rotate_circle {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes invert_rotate_circle {
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
   }
 }
