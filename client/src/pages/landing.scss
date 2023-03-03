@@ -227,15 +227,119 @@
         &-middle {
           width: 20%;
           display: flex;
-          align-items: center;
           justify-content: center;
-          p {
-            height: 150px;
-            width: 150px;
+          align-items: center;
+          background-color: transparent;
+          .circle {
+            width: 140px;
+            height: 140px;
+            background-color: transparent;
+            position: relative;
             border-radius: 50%;
-            background-color: pink;
-            text-align: center;
-            line-height: 150px;
+            overflow: hidden;
+
+            &-name-office {
+              position: absolute;
+              width: 140px;
+              height: 140px;
+              background-color: transparent;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              background-image: conic-gradient(
+                red 0deg 270deg,
+                transparent 270deg
+              );
+              animation: invert_rotate_circle 10s infinite linear;
+            }
+            &-number {
+              position: absolute;
+              width: 124px;
+              height: 124px;
+              background-color: $main-green;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              background-image: conic-gradient(
+                $main-blue 0deg 120deg,
+                transparent 120deg 180deg,
+                $main-blue 180deg 300deg,
+                transparent 300deg
+              );
+              animation: rotate_circle 8s infinite linear;
+            }
+            &-name-notary {
+              position: absolute;
+              width: 114px;
+              height: 114px;
+              background-color: $main-green;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              background-image: conic-gradient(
+                $main-color 0deg 120deg,
+                transparent 120deg 180deg,
+                $main-color 180deg 300deg,
+                transparent 300deg
+              );
+              animation: invert_rotate_circle 7s infinite linear;
+            }
+            &-save {
+              position: absolute;
+              width: 104px;
+              height: 104px;
+              background-color: $main-green;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              background-image: conic-gradient(
+                $main-blue 0deg 90deg,
+                transparent 90deg 180deg,
+                $main-blue 180deg 270deg,
+                transparent 270deg
+              );
+              animation: rotate_circle 4s infinite linear;
+            }
+            &-excerpt {
+              position: absolute;
+              width: 100px;
+              height: 100px;
+              background-color: $main-green;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              background-image: conic-gradient(
+                #6653a5 0deg 120deg,
+                transparent 120deg 360deg
+              );
+              animation: invert_rotate_circle 5.5s infinite linear;
+            }
+            &-text {
+              position: absolute;
+              width: 90px;
+              height: 90px;
+              background-color: $main-green;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              overflow: hidden;
+              text-align: center;
+              line-height: 90px;
+              font-size: 23px;
+              text-transform: capitalize;
+              line-break: auto;
+            }
           }
         }
         &-right {
@@ -404,80 +508,6 @@
       width: 140px;
       height: 140px;
       background-color: #0b42e6;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      overflow: hidden;
-    }
-  }
-  .circle {
-    width: 160px;
-    height: 160px;
-    background-color: yellow;
-    position: relative;
-    left: 50%;
-    border-radius: 50%;
-    overflow: hidden;
-    &-1 {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      background-color: rgb(2, 0, 128);
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      overflow: hidden;
-      background-image: conic-gradient(
-        green 0deg 90deg,
-        transparent 90deg 180deg,
-        green 180deg 270deg,
-        transparent 270deg
-      );
-      animation: rotate_circle 3s infinite linear;
-    }
-    &-2 {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background-color: #00ffd5;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      overflow: hidden;
-      background-image: conic-gradient(
-        #7a00ff 0deg 60deg,
-        transparent 60deg 180deg,
-        #7a00ff 180deg 240deg,
-        transparent 240deg
-      );
-      animation: invert_rotate_circle 2s infinite linear;
-    }
-    &-3 {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background-color: #ff0000;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      overflow: hidden;
-      background-image: conic-gradient(
-        #00ffd5 0deg 120deg,
-        transparent 120deg 180deg,
-        #00ffd5 180deg 300deg,
-        transparent 300deg
-      );
-      animation: rotate_circle 1s infinite linear;
-    }
-    &-4 {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      background-color: gray;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
