@@ -108,7 +108,14 @@ const Register = () => {
               </div>
             </div>
             <div className="content-middle">
-              <p>Văn Thư</p>
+              <div className="circle">
+                <div className="circle-name-office"></div>
+                <div className="circle-number"></div>
+                <div className="circle-name-notary"></div>
+                <div className="circle-save"></div>
+                <div className="circle-excerpt"></div>
+                <div className="circle-text">văn thư</div>
+              </div>
             </div>
             <div className="content-right">
               <h3 className="content-right-title">sự ra đời ?</h3>
@@ -202,7 +209,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-      {/* <div className="circle-main">
+      <div className="circle-main">
         <div className="vuong"></div>
         <div className="circle-11"></div>
       </div>
@@ -211,7 +218,7 @@ const Register = () => {
         <div className="circle-2"></div>
         <div className="circle-3"></div>
         <div className="circle-4"></div>
-      </div> */}
+      </div>
     </div>
   );
 };
