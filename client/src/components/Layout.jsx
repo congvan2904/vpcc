@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "../pages/About";
 import Contracts from "../pages/Contracts";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
 import Users from "../pages/Users";
 import ConfigRoutes from "../routes/ConfigRoutes";
 import Footer from "./Footer";

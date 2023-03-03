@@ -4,6 +4,7 @@ import About from "../pages/About";
 import Contract1 from "../pages/Contract1";
 import Contracts from "../pages/Contracts";
 import Dashboard from "../pages/Dashboard";
+import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import Manager from "../pages/Manager";
 import Manager1 from "../pages/Manager1";
@@ -16,7 +17,8 @@ import Users from "../pages/Users";
 const ConfigRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/users" element={<Users />} />
       <Route path="/contracts" element={<Contracts />} />
