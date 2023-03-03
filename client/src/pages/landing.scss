@@ -2,7 +2,7 @@
 .landing {
   background: linear-gradient(90deg, blue, red);
   .header {
-    margin-top: -100px;
+    margin-top: -120px;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -140,6 +140,24 @@
       align-items: center;
       &-main {
         cursor: pointer;
+        z-index: 0;
+        position: relative;
+        &::before {
+          content: "";
+          width: 0;
+          height: 100%;
+          background-color: red;
+          z-index: 1;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: width 3s linear;
+        }
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+        }
       }
     }
     &-menu {
