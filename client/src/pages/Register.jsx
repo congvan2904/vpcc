@@ -108,14 +108,7 @@ const Register = () => {
               </div>
             </div>
             <div className="content-middle">
-              <div className="circle">
-                <div className="circle-name-office"></div>
-                <div className="circle-number"></div>
-                <div className="circle-name-notary"></div>
-                <div className="circle-save"></div>
-                <div className="circle-excerpt"></div>
-                <div className="circle-text">văn thư</div>
-              </div>
+              <p>Văn Thư</p>
             </div>
             <div className="content-right">
               <h3 className="content-right-title">sự ra đời ?</h3>
