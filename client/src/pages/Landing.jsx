@@ -221,10 +221,10 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        {/* <div className="circle-main">
-        <div className="vuong"></div>
-        <div className="circle-11"></div>
-      </div> */}
+        <div className="circle-main">
+          <div className="vuong"></div>
+          <div className="circle-11"></div>
+        </div>
       </div>
     </Helmet>
   );
