@@ -156,6 +156,10 @@
         &:hover {
           &::before {
             width: 100%;
+            content: "ban vao de xem duong";
+            text-align: center;
+            word-break: break-all;
+            overflow-wrap: break-word;
           }
         }
       }
