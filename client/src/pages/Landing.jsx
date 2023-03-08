@@ -15,12 +15,14 @@ import { Link } from "react-router-dom";
 // https://codepen.io/norcal82/full/DjpyNQ
 const Landing = () => {
   const refToggle = useRef(null);
+  const refHide = useRef(null);
   // const [toogle, setToogle] = useState(false);
   const handleClick = (event) => {
     // 👇️ toggle class on click
     // setToogle(!toogle);
     // console.log(toogle);
     refToggle.current.classList.toggle("header-toggle");
+    refHide.current.classList.toggle("triangle-dow-text-hide");
     // if (!toogle) {
     //   refToggle.current.classList.add("header-toggle");
     // } else {
@@ -70,9 +72,16 @@ const Landing = () => {
               </Link>
             </div>
           </div>
-          <div className="triangle-dow" onClick={handleClick}>
-            <p></p>
+          <div className="triangle-dow"></div>
+          <div
+            className="triangle-dow-text "
+            onClick={handleClick}
+            ref={refHide}
+          >
+            <div className="triangle-dow-text-h"></div>
+            <div className="triangle-dow-text-v"></div>
           </div>
+
           <Modal
             shown={modalShown}
             close={() => {
