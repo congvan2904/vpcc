@@ -142,31 +142,33 @@
         cursor: pointer;
         z-index: 0;
         position: relative;
+        opacity: 1;
+        transition: opacity 0.5s linear;
         &::before {
-          content: "";
-          width: 0;
+          content: "Bấm vào để tìm đường";
+          width: 100%;
           height: 100%;
           background-color: red;
           z-index: 1;
           position: absolute;
           top: 0;
           left: 0;
-          transition: width 3s linear;
+          transition: opacity 0.8s linear;
+          opacity: 0;
+          text-align: center;
         }
         &:hover {
+          // opacity: 0;
+
           &::before {
-            width: 100%;
-            content: "ban vao de xem duong";
-            text-align: center;
-            word-break: break-all;
-            overflow-wrap: break-word;
+            opacity: 1;
           }
         }
       }
     }
     &-menu {
-      margin-right: 5px;
-      margin-top: 5px;
+      margin-right: 15px;
+      margin-top: 15px;
       &-item {
         .glow-on-hover {
           width: 220px;
@@ -186,7 +188,7 @@
           content: "";
           background: linear-gradient(
             45deg,
-            #ff0000,
+            #f6e7d8,
             #ff7300,
             #fffb00,
             #48ff00,
@@ -194,16 +196,16 @@
             #002bff,
             #7a00ff,
             #ff00c8,
-            #ff0000
+            #f6e7d8
           );
           position: absolute;
-          top: -2px;
-          left: -2px;
+          top: -4px;
+          left: -4px;
           background-size: 400%;
           z-index: -1;
           filter: blur(5px);
-          width: calc(100% + 4px);
-          height: calc(100% + 4px);
+          width: calc(100% + 8px);
+          height: calc(100% + 8px);
           animation: glowing 20s linear infinite;
           opacity: 0;
           transition: opacity 0.3s ease-in-out;
@@ -247,6 +249,48 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &-text {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        color: #000;
+        height: 40px;
+        width: 40px;
+        opacity: 1;
+        transition: opacity 0.5s linear;
+
+        &-h {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 15px;
+          height: 5px;
+          background-color: #fff;
+          z-index: 1;
+        }
+        &-v {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 5px;
+          height: 15px;
+          background-color: #fff;
+          z-index: 1;
+        }
+        &:hover :nth-child(1) {
+          transform: translate(-50%, calc(-50% - 5px));
+        }
+        &-hide * {
+          opacity: 0;
+        }
+      }
     }
     &-toggle {
       margin-top: 0;
@@ -635,6 +679,17 @@
   100% {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
       0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
 @keyframes rotate {
