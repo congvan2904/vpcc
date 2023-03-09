@@ -29,6 +29,9 @@ const Landing = () => {
     //   refToggle.current.classList.remove("header-toggle");
     // }
   };
+  let _do;
+  const t1 = "✺ Tiết kiệm ✦ ✦ thời gian ✺ ";
+  _do = 360 / t1.length;
   const [modalShown, toggleModal] = useState(false);
   const handleClickHome = () => {
     window.location.replace("https://congchungnhabe.com/");
@@ -164,17 +167,37 @@ const Landing = () => {
               <div className="text-right">Công chứng là . . .</div>
             </div>
             <div className="landing-main-content-body">
-              <div
-                className="time"
-                style={{ backgroundImage: `url(${imgTime})` }}
-              >
-                Tiết kiệm thời gian
+              <div className="time">
+                <div className="time-image">
+                  <img src={imgTime} />
+                  <p>Tiết kiệm thời gian</p>
+                </div>
+                <div className="main-circle">
+                  {t1.split("").map((item, i) => (
+                    <span
+                      key={i}
+                      style={{ transform: `rotate(${i * _do}deg)` }}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div
                 className="statistical"
                 style={{ backgroundImage: `url(${imgStatistical})` }}
               >
-                Thống kê nhanh chóng
+                <p>Thống kê nhanh chóng</p>
+                <div className="main-circle">
+                  {t1.split("").map((item, i) => (
+                    <span
+                      key={i}
+                      style={{ transform: `rotate(${i * _do}deg)` }}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div
                 className="report"
