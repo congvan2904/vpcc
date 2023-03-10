@@ -29,9 +29,13 @@ const Landing = () => {
     //   refToggle.current.classList.remove("header-toggle");
     // }
   };
-  let _do;
+  let _do1, _do2, _do3;
   const t1 = "✺ Tiết kiệm ✦ ✦ thời gian ✺ ";
-  _do = 360 / t1.length;
+  const t2 = "✺ Thống kê ✦ ✦ nhanh chóng ✺ ";
+  const t3 = "✺ Báo cáo ✦ ❋ ✦ dễ dàng ✺ ❋";
+  _do1 = 360 / t1.length;
+  _do2 = 360 / t2.length;
+  _do3 = 360 / t3.length;
   const [modalShown, toggleModal] = useState(false);
   const handleClickHome = () => {
     window.location.replace("https://congchungnhabe.com/");
@@ -176,7 +180,7 @@ const Landing = () => {
                   {t1.split("").map((item, i) => (
                     <span
                       key={i}
-                      style={{ transform: `rotate(${i * _do}deg)` }}
+                      style={{ transform: `rotate(${i * _do2}deg)` }}
                     >
                       {item}
                     </span>
@@ -188,11 +192,11 @@ const Landing = () => {
                 style={{ backgroundImage: `url(${imgStatistical})` }}
               >
                 <p>Thống kê nhanh chóng</p>
-                <div className="main-circle">
-                  {t1.split("").map((item, i) => (
+                <div className="statistical-main-circle">
+                  {t2.split("").map((item, i) => (
                     <span
                       key={i}
-                      style={{ transform: `rotate(${i * _do}deg)` }}
+                      style={{ transform: `rotate(${i * _do1}deg)` }}
                     >
                       {item}
                     </span>
@@ -203,7 +207,17 @@ const Landing = () => {
                 className="report"
                 style={{ backgroundImage: `url(${imgReport})` }}
               >
-                Báo cáo dễ dàng
+                <p>Báo cáo dễ dàng</p>
+                <div className="report-main-circle">
+                  {t3.split("").map((item, i) => (
+                    <span
+                      key={i}
+                      style={{ transform: `rotate(${i * _do1}deg)` }}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -236,8 +250,8 @@ const Landing = () => {
               <div className="extend-content">
                 <p>
                   Trong quá trình sử dụng có gì thắc mắc xin liên hệ với tôi.
-                  Tôi sẽ hồi đáp sớm nhất có thể
                 </p>
+                <p>Tôi sẽ hồi đáp sớm nhất khi có thể</p>
               </div>
             </div>
           </div>
@@ -249,7 +263,8 @@ const Landing = () => {
               Copyright 2022 © vanthucongchung.com
             </div>
             <div className="footer-content-design">
-              Thiết kế bởi Văn Thư - Văn phòng Công Chứng Nguyễn Đức Điền
+              Thiết kế bởi Văn Thư - Văn phòng{" "}
+              <p className="animate-charcter"> Công</p> Chứng Nguyễn Đức Điền
             </div>
           </div>
         </div>
