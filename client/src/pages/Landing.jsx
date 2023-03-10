@@ -74,14 +74,14 @@ const Landing = () => {
           </div>
           <div className="header-menu">
             <div className="header-menu-item">
-              {/* <Link to="/login"> */}
-              <button className="glow-on-hover">Đăng Nhập</button>
-              {/* </Link> */}
+              <Link to="/login">
+                <button className="glow-on-hover">Đăng Nhập</button>
+              </Link>
             </div>
           </div>
           <div className="triangle-dow"></div>
           <div
-            className="triangle-dow-text "
+            className="triangle-dow-text"
             onClick={handleClick}
             ref={refHide}
           >
@@ -227,16 +227,20 @@ const Landing = () => {
                 <div className="item-icon">
                   <FaPhone />
                 </div>
-                <div className="item-content">0969 229 489</div>
+                <div className="item-content">
+                  <span class="title-word title-word-1">091 </span>
+                  <span class="title-word title-word-2">181 </span>
+                  <span class="title-word title-word-3">4004</span>
+                </div>
               </div>
               <div className="landing-main-info-main-item">
-                <div className="item-icon">
+                <div className="item-icon-user">
                   <FaUser />
                 </div>
                 <div className="item-content">Nguyễn Văn Công</div>
               </div>
               <div className="landing-main-info-main-item">
-                <div className="item-icon">
+                <div className="item-icon-email">
                   <FaMailBulk />
                 </div>
                 <div className="item-content">nguyenvancong.nvc@gmail.com</div>
