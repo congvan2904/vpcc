@@ -263,8 +263,10 @@ const Landing = () => {
               Copyright 2022 © vanthucongchung.com
             </div>
             <div className="footer-content-design">
-              Thiết kế bởi Văn Thư - Văn phòng{" "}
-              <p className="animate-charcter"> Công</p> Chứng Nguyễn Đức Điền
+              <p className="design">Thiết kế bởi Văn Thư </p> {"  -  "}
+              <p className="animate-charcter"> Văn</p> phòng{" "}
+              <p className="animate-charcter"> Công</p> Chứng{" "}
+              <p className="animate-charcter">Nguyễn</p> Đức Điền
             </div>
           </div>
         </div>
