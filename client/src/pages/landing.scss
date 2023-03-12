@@ -5,6 +5,7 @@
     margin-top: -120px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     color: $second-color;
     background-color: red;
@@ -103,6 +104,9 @@
       &-text {
         text-align: center;
         font-size: 20px;
+        p {
+          white-space: nowrap;
+        }
         :nth-child(1) {
           text-transform: uppercase;
         }
@@ -144,6 +148,7 @@
         position: relative;
         opacity: 1;
         transition: opacity 0.5s linear;
+        text-align: center;
         &::before {
           content: "Bấm vào để tìm đường";
           width: 100%;
@@ -177,7 +182,7 @@
           outline: none;
           color: rgb(255, 255, 255);
           font-size: 20px;
-          background: #111;
+          background-color: transparent;
           cursor: pointer;
           position: relative;
           z-index: 0;
@@ -296,6 +301,152 @@
       margin-top: 0;
     }
     transition: margin-top 0.5s ease;
+    @include tablet {
+      margin-top: -100px;
+      &-logo {
+        &-image {
+          width: 100px;
+          height: 100px;
+
+          &::before {
+            inset: -10px 20px;
+          }
+          &::after {
+            inset: 4px;
+          }
+          &-content {
+            inset: 4px;
+            border: 2px solid #f6e7d8;
+
+            h2 {
+              font-size: 14px;
+              letter-spacing: 1.5px;
+
+              span {
+                font-size: 12.5px;
+                padding: 2.5px 0;
+              }
+            }
+            button {
+              border-radius: 4px;
+              font-size: 10px;
+
+              transition: 0.5s;
+              &:hover {
+                letter-spacing: 4px;
+              }
+            }
+          }
+          &:hover {
+            &::before {
+              inset: -15px;
+            }
+          }
+        }
+        &-text {
+          font-size: 16px;
+
+          &:hover p {
+            &:nth-child(2) {
+              letter-spacing: 2px;
+            }
+          }
+        }
+      }
+      &-address {
+        font-size: 16px;
+      }
+      &-menu {
+        margin-right: 8px;
+        margin-top: 8px;
+        &-item {
+          .glow-on-hover {
+            width: 110px;
+            height: 30px;
+            font-size: 15px;
+
+            border-radius: 5px;
+          }
+
+          .glow-on-hover:before {
+            width: calc(100% + 4px);
+
+            border-radius: 10px;
+          }
+        }
+      }
+
+      &-toggle {
+        margin-top: 0;
+      }
+    }
+    @include mobile {
+      margin-top: -80px;
+      &-logo {
+        &-image {
+          width: 80px;
+          height: 80px;
+
+          &::before {
+            inset: -10px 20px;
+          }
+          &::after {
+            inset: 4px;
+          }
+          &-content {
+            inset: 4px;
+            border: 2px solid #f6e7d8;
+
+            h2 {
+              font-size: 10px;
+            }
+            button {
+              border-radius: 2px;
+              font-size: 10px;
+              padding: 2px 4px;
+              &:hover {
+                letter-spacing: 1.5px;
+              }
+            }
+          }
+        }
+        &-text {
+          font-size: 10px;
+
+          &:hover p {
+            &:nth-child(2) {
+              letter-spacing: 1.2px;
+            }
+          }
+        }
+      }
+      &-address {
+        font-size: 10px;
+      }
+      &-menu {
+        margin-right: 6px;
+        margin-top: 6px;
+        &-item {
+          .glow-on-hover {
+            width: 90px;
+            height: 25px;
+            font-size: 11.5px;
+
+            border-radius: 4px;
+          }
+
+          .glow-on-hover:before {
+            width: calc(100% + 4px);
+
+            border-radius: 10px;
+          }
+        }
+      }
+
+      &-toggle {
+        margin-top: 0;
+      }
+    }
   }
   .sub-header {
     position: relative;
@@ -305,8 +456,6 @@
   }
   &-main {
     position: relative;
-    width: 100%;
-    // height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -320,7 +469,6 @@
       align-items: center;
       margin: 0 auto;
       padding: 50px 20px;
-      // background-color: rgba(0, 0, 0, 0.8);
 
       font-weight: 700;
 
@@ -330,7 +478,7 @@
         text-transform: uppercase;
         letter-spacing: 4px;
         margin-bottom: 30px;
-
+        text-align: center;
         text-shadow: 0 1px 0 #333, 0 2px 0 #333, 0 3px 0 #333, 0 4px 0 #333,
           0 5px 0 #333, 0 3px 1px rgb(255 255 255 / 10%);
         animation-play-state: paused;
@@ -372,11 +520,9 @@
           }
         }
         &-middle {
-          width: 20%;
           display: flex;
           justify-content: center;
-          align-items: center;
-          background-color: transparent;
+          width: 20%;
           .circle {
             width: 140px;
             height: 140px;
@@ -548,6 +694,7 @@
           display: flex;
           align-items: center;
           position: relative;
+          z-index: 0;
           .main-circle {
             position: absolute;
             top: 50%;
@@ -555,8 +702,7 @@
             transform: translate(-50%, -50%);
             height: 220px;
             width: 220px;
-            perspective: 1500;
-            transform-style: preserve-3d;
+
             span {
               opacity: 0;
               position: absolute;
@@ -565,6 +711,8 @@
             }
           }
           &:hover :nth-child(2) {
+            z-index: 2;
+
             span {
               opacity: 1;
               color: $second-color;
@@ -610,7 +758,7 @@
           color: white;
           display: flex;
           align-items: center;
-
+          z-index: 0;
           position: relative;
           p {
             transition: opacity 0.5s linear;
@@ -761,6 +909,349 @@
         }
       }
     }
+    @include tablet {
+      &-title {
+        h1 {
+          font-size: 28px;
+
+          letter-spacing: 2.5px;
+          margin-bottom: 15px;
+
+          text-shadow: 0 1px 0 #333, 0 2px 0 #333, 0 3px 0 #333, 0 4px 0 #333,
+            0 5px 0 #333, 0 3px 1px rgb(255 255 255 / 10%);
+          animation-play-state: paused;
+          &:hover {
+            -webkit-animation: glow 1s ease-in-out infinite alternate;
+            -moz-animation: glow 1s ease-in-out infinite alternate;
+            animation: glow 1s ease-in-out infinite alternate;
+          }
+          strong {
+            &::after {
+              content: "";
+            }
+          }
+        }
+        .content {
+          &-left {
+            text-align: right;
+            width: 50%;
+            &-title {
+              font-size: 22.5px;
+            }
+            &-main {
+              margin-top: 14px;
+              .main-sub {
+                margin-top: 10px;
+                font-size: 16.5px;
+              }
+            }
+          }
+          &-middle {
+            width: 20%;
+            .circle {
+              width: 100px;
+              height: 100px;
+
+              &-name-office {
+                width: 100px;
+                height: 100px;
+              }
+              &-number {
+                width: 90px;
+                height: 90px;
+              }
+              &-name-notary {
+                width: 80px;
+                height: 80px;
+              }
+              &-save {
+                width: 70px;
+                height: 70px;
+              }
+              &-excerpt {
+                width: 60px;
+                height: 60px;
+              }
+              &-text {
+                width: 55px;
+                height: 55px;
+
+                line-height: 55px;
+                font-size: 14px;
+              }
+            }
+          }
+          &-right {
+            width: 30%;
+            &-title {
+              font-size: 22.5px;
+            }
+            &-main {
+              &-intro {
+                font-size: 25px;
+              }
+              .main-sub {
+                margin-top: 10px;
+                font-size: 16.5px;
+              }
+            }
+          }
+        }
+      }
+      &-content {
+        margin-top: 20px;
+
+        &-text {
+          // display: flex;
+          // flex-direction: column;
+          // flex-grow: 1;
+          font-size: 23.5px;
+          // line-height: 40px;
+          // justify-content: space-between;
+        }
+        &-body {
+          font-size: 20px;
+
+          .time {
+            width: 100px;
+            height: 100px;
+
+            .main-circle {
+              height: 150px;
+              width: 150px;
+
+              span {
+                transform-origin: 0px 75px;
+              }
+            }
+          }
+          .statistical {
+            width: 100px;
+            height: 100px;
+
+            &-main-circle {
+              height: 150px;
+              width: 150px;
+
+              span {
+                transform-origin: 0px 75px;
+              }
+            }
+          }
+          .report {
+            width: 130px;
+            height: 130px;
+
+            &-main-circle {
+              height: 130px;
+              width: 130px;
+
+              span {
+                transform-origin: 0px 65px;
+              }
+            }
+          }
+        }
+      }
+
+      &-info {
+        margin-top: 20px;
+        padding: 30px 20px;
+
+        line-height: 20px;
+        &-main {
+          font-size: 18px;
+          &-item {
+            &:hover .item-icon {
+              font-size: 20px;
+            }
+
+            .item-content {
+              margin-left: 15px;
+              padding: 10px 0;
+            }
+          }
+        }
+        &-extend {
+          .extend-title {
+            font-size: 25px;
+            line-height: 30px;
+          }
+          .extend-icon {
+            font-size: 35px;
+            padding: 10px 0;
+          }
+          .extend-content {
+            font-size: 16.5px;
+          }
+        }
+      }
+    }
+    @include mobile {
+      &-title {
+        padding: 20px;
+        h1 {
+          font-size: 24px;
+          letter-spacing: 2px;
+          margin-bottom: 12px;
+        }
+        .content {
+          flex-direction: column;
+          &-left {
+            text-align: left;
+            width: 100%;
+            &-title {
+              font-size: 16.5px;
+            }
+            &-main {
+              margin-top: 12px;
+              .main-sub {
+                margin-top: 15px;
+                font-size: 13.5px;
+              }
+            }
+          }
+          &-middle {
+            padding: 10px;
+            width: 100%;
+            .circle {
+              width: 100px;
+              height: 100px;
+
+              &-name-office {
+                width: 100px;
+                height: 100px;
+              }
+              &-number {
+                width: 90px;
+                height: 90px;
+              }
+              &-name-notary {
+                width: 80px;
+                height: 80px;
+              }
+              &-save {
+                width: 70px;
+                height: 70px;
+              }
+              &-excerpt {
+                width: 60px;
+                height: 60px;
+              }
+              &-text {
+                width: 55px;
+                height: 55px;
+
+                line-height: 55px;
+                font-size: 14px;
+              }
+            }
+          }
+          &-right {
+            width: 100%;
+            &-title {
+              font-size: 18.5px;
+            }
+            &-main {
+              .main-sub {
+                margin-top: 12px;
+                font-size: 14.5px;
+              }
+            }
+          }
+        }
+      }
+      &-content {
+        margin-top: 10px;
+        flex-direction: column;
+        &-text {
+          font-size: 23.5px;
+          line-height: 25px;
+        }
+        &-body {
+          justify-content: space-between;
+          font-size: 18px;
+          margin-top: 10px;
+          .time {
+            width: 90px;
+            height: 90px;
+
+            .main-circle {
+              height: 130px;
+              width: 130px;
+
+              span {
+                transform-origin: 0px 65px;
+              }
+            }
+          }
+          .statistical {
+            width: 90px;
+            height: 90px;
+
+            &-main-circle {
+              height: 130px;
+              width: 130px;
+
+              span {
+                transform-origin: 0px 65px;
+              }
+            }
+          }
+          .report {
+            width: 110px;
+            height: 110px;
+
+            &-main-circle {
+              height: 130px;
+              width: 130px;
+
+              span {
+                transform-origin: 0px 65px;
+              }
+            }
+          }
+        }
+      }
+
+      &-info {
+        width: 100%;
+        margin-top: 20px;
+        padding: 20px;
+        line-height: 20px;
+        flex-direction: column-reverse;
+        align-items: center;
+        &-main {
+          margin-top: 10px;
+          font-size: 14px;
+          width: 100%;
+          &-item {
+            &:hover .item-icon {
+              font-size: 15px;
+            }
+
+            .item-content {
+              margin-left: 10px;
+              padding: 5px 0;
+            }
+          }
+        }
+        &-extend {
+          width: 100%;
+          .extend-title {
+            font-size: 22px;
+            line-height: 25px;
+          }
+          .extend-icon {
+            font-size: 20px;
+            padding: 10px 0;
+          }
+          .extend-content {
+            font-size: 15px;
+          }
+        }
+      }
+    }
   }
   .footer {
     position: relative;
@@ -832,37 +1323,56 @@
         }
       }
     }
-  }
-  .circle-main {
-    width: 150px;
-    height: 150px;
-    background-color: yellow;
-    position: relative;
-    left: 50%;
-    // border-radius: 50%;
-    overflow: hidden;
-    border-width: 5px;
-    border-color: red, green, green; /* gradient with required colors */
-    border-style: solid;
-    .vuong {
-      position: absolute;
-      width: 50px;
-      height: 150px;
-      background-color: red;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: rotate 3s infinite;
+    @include tablet {
+      margin-top: 10px;
+      padding: 30px 20px;
+      &-line {
+        height: 3px;
+      }
+      &-content {
+        margin-top: 10px;
+        display: flex;
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        &-design {
+          .design {
+            &:hover {
+              font-size: 16.5px;
+            }
+          }
+          .animate-charcter {
+            font-size: 16.5px;
+          }
+        }
+      }
     }
-    .circle-11 {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      background-color: #0b42e6;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      overflow: hidden;
+    @include mobile {
+      margin-top: 10px;
+      padding: 25px 15px;
+      &-line {
+        height: 2.5px;
+      }
+      &-content {
+        margin-top: 15px;
+        flex-direction: column-reverse;
+        font-size: 14px;
+        line-height: 18px;
+        &-copy {
+          margin-top: 10px;
+          margin-bottom: 20px;
+        }
+        &-design {
+          .design {
+            &:hover {
+              font-size: 14.5px;
+            }
+          }
+          .animate-charcter {
+            font-size: 14.5px;
+          }
+        }
+      }
     }
   }
 }

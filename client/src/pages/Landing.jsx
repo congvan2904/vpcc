@@ -12,6 +12,7 @@ import MapsGoogle from "../components/map/MapsGoogle";
 import Modal from "../components/modal/Modal";
 import Helmet from "../components/Helmet";
 import { Link } from "react-router-dom";
+import Grid from "../components/grid/Grid";
 // https://codepen.io/norcal82/full/DjpyNQ
 const Landing = () => {
   const refToggle = useRef(null);
@@ -64,7 +65,7 @@ const Landing = () => {
           <div className="header-address">
             <div className="header-address-title">Địa chỉ</div>
             <div
-              className="header-address-main before"
+              className="header-address-main "
               onClick={() => {
                 toggleModal(!modalShown);
               }}
@@ -146,7 +147,7 @@ const Landing = () => {
                 </div>
               </div>
               <div className="content-right">
-                <h3 className="content-right-title">sự ra đời ?</h3>
+                <h3 className="content-right-title">Sự ra đời ?</h3>
                 <div className="content-right-main">
                   <div className="content-right-main-intro">
                     {/* Phần mềm văn thư công chứng ra đời với mục tiêu là : */}
