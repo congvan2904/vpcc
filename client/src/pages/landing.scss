@@ -1109,14 +1109,15 @@
     }
     @include mobile {
       &-title {
-        padding: 20px;
+        padding: 40px 20px;
         h1 {
           font-size: 24px;
           letter-spacing: 2px;
-          margin-bottom: 12px;
+          line-height: 1;
         }
         .content {
           flex-direction: column;
+          margin-top: 20px;
           &-left {
             text-align: left;
             width: 100%;
@@ -1189,7 +1190,7 @@
           line-height: 25px;
         }
         &-body {
-          justify-content: space-between;
+          justify-content: space-around;
           font-size: 18px;
           margin-top: 10px;
           .time {
