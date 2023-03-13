@@ -694,7 +694,10 @@
           display: flex;
           align-items: center;
           position: relative;
-          z-index: 0;
+          z-index: 1;
+          &:hover ~ * {
+            z-index: 0;
+          }
           .main-circle {
             position: absolute;
             top: 50%;
@@ -703,6 +706,7 @@
             height: 220px;
             width: 220px;
 
+            z-index: 1;
             span {
               opacity: 0;
               position: absolute;
@@ -710,10 +714,10 @@
               transform-origin: 0px 110px;
             }
           }
-          &:hover :nth-child(2) {
-            z-index: 2;
 
+          &:hover :nth-child(2) {
             span {
+              z-index: 2;
               opacity: 1;
               color: $second-color;
             }
@@ -758,8 +762,11 @@
           color: white;
           display: flex;
           align-items: center;
-          z-index: 0;
+          z-index: 1;
           position: relative;
+          &:hover ~ * {
+            z-index: 0;
+          }
           p {
             transition: opacity 0.5s linear;
           }
@@ -772,6 +779,7 @@
             width: 240px;
 
             span {
+              z-index: 0;
               opacity: 0;
               position: absolute;
               left: 50%;
@@ -781,8 +789,12 @@
           &:hover p {
             opacity: 0;
           }
+          &:hover {
+            z-index: 1;
+          }
           &:hover :nth-child(2) {
             span {
+              z-index: 2;
               opacity: 1;
               color: $white;
             }
@@ -799,8 +811,11 @@
           color: white;
           display: flex;
           align-items: center;
-
+          z-index: 1;
           position: relative;
+          &:hover ~ * {
+            z-index: 0;
+          }
           p {
             transition: opacity 0.5s linear;
           }
@@ -811,8 +826,9 @@
             transform: translate(-50%, -50%);
             height: 160px;
             width: 160px;
-
+            z-index: 0;
             span {
+              z-index: 0;
               opacity: 0;
               position: absolute;
               left: 50%;
@@ -822,8 +838,12 @@
           &:hover p {
             opacity: 0;
           }
+          &:hover {
+            z-index: 1;
+          }
           &:hover :nth-child(2) {
             span {
+              z-index: 2;
               opacity: 1;
               color: $white;
             }
