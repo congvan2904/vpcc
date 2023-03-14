@@ -1,0 +1,10 @@
+@use "../../sass/" as *;
+.manager {
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 3px solid #0281f7;
+  }
+}
