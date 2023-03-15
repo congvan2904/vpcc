@@ -1,6 +1,6 @@
 @use "../../sass/" as *;
 
-.manager {
+.manage {
   &-body {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -10,10 +10,54 @@
       display: flex;
       &-icons {
         border-right: 3px solid $third-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 50px;
+        align-items: center;
+        .icons-top {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          padding: 5px;
+          &-item {
+            position: relative;
+            &:hover {
+              cursor: pointer;
+            }
+            .active {
+              position: absolute;
+              top: 0;
+              left: -4px;
+              width: 2px;
+              height: 100%;
+              background-color: $white;
+            }
+          }
+        }
+        .icons-bottom {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          padding: 10px;
+          &-item {
+            position: relative;
+            &:hover {
+              cursor: pointer;
+              outline: 2px dotted #e15606;
+              outline-offset: 4px;
+              transform: scale(1);
+            }
+          }
+        }
       }
       &-extend {
         border-right: 3px solid $third-color;
       }
     }
+  }
+  &-right {
+    width: 100%;
+    height: 100%;
   }
 }

@@ -1,52 +1,76 @@
 import "./body.scss";
+import imgContract from "../../assets/manage/contract.svg";
+import imgContracts from "../../assets/manage/contracts.svg";
+import imgUser from "../../assets/manage/user.svg";
+import imgAccount from "../../assets/manage/account.svg";
+import imgManage from "../../assets/manage/setting.svg";
+import { useRef, useState } from "react";
 const IconsTop = [
   {
     display: "Hợp đồng mới",
     path: "./contracts",
-    icon: "",
+    icon: imgContract,
   },
   {
     display: "Hợp đồng ",
     path: "./contracts",
-    icon: "",
+    icon: imgContracts,
   },
   {
     display: "Người dùng",
     path: "./contracts",
-    icon: "",
+    icon: imgUser,
   },
 ];
 const IconsBottom = [
   {
     display: "Thông tin tài khoản",
     path: "./contracts",
-    icon: "",
+    icon: imgAccount,
   },
   {
     display: "Quản lý ",
     path: "./contracts",
-    icon: "",
+    icon: imgManage,
   },
 ];
 const Body = () => {
+  const refActive = useRef(null);
+  const [active, setActive] = useState("");
+
+  const toggleActive = (event) => {
+    setActive(event.target.alt);
+  };
   return (
-    <div className="manager-body">
-      <div className="manager-body-left">
-        <div className="manager-body-left-icons">
+    <div className="manage-body">
+      <div className="manage-body-left">
+        <div className="manage-body-left-icons">
           <ul className="icons-top">
             {IconsTop.map((item) => (
-              <li className="icons-top-item">{item.display}</li>
+              <li
+                className="icons-top-item"
+                key={item.display}
+                onClick={toggleActive}
+              >
+                <img src={item.icon} alt={item.display} />
+                <div
+                  ref={refActive}
+                  className={active === item.display ? "active" : ""}
+                ></div>
+              </li>
             ))}
           </ul>
           <ul className="icons-bottom">
             {IconsBottom.map((item) => (
-              <li className="icons-bottom-item">{item.display}</li>
+              <li className="icons-bottom-item" key={item.display}>
+                <img src={item.icon} alt={item.display} />
+              </li>
             ))}
           </ul>
         </div>
-        <div className="manager-body-left-extend">extend</div>
+        <div className="manage-body-left-extend">extend</div>
       </div>
-      <div className="manager-body-right">Right</div>
+      <div className="manage-body-right">Right</div>
     </div>
   );
 };
