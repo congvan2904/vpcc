@@ -1,30 +1,7 @@
 @use "../sass/" as *;
-.manager01 {
+.manager {
+  background-color: $black;
   width: 100vw;
   height: 100vh;
-  background-color: $black;
-  display: flex;
-  flex-direction: column;
   position: relative;
-  &-header01 {
-    background-color: $black;
-    border-bottom: 2px solid $third-color;
-  }
-  &-body {
-    display: flex;
-    &-left {
-      display: flex;
-      &-icon {
-        border-right: 2px solid $third-color;
-      }
-      &-content {
-        border-right: 2px solid $third-color;
-      }
-    }
-    &-right {
-    }
-  }
-  &-footer {
-    border-top: 2px solid $third-color;
-  }
 }

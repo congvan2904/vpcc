@@ -1,0 +1,19 @@
+@use "../../sass/" as *;
+
+.manager {
+  &-body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    height: 100%;
+    &-left {
+      display: flex;
+      &-icons {
+        border-right: 3px solid $third-color;
+      }
+      &-extend {
+        border-right: 3px solid $third-color;
+      }
+    }
+  }
+}
