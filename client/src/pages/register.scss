@@ -1,68 +1,30 @@
-.bao {
+@use "../sass/" as *;
+.manager01 {
   width: 100vw;
   height: 100vh;
-  background-color: lightgreen;
+  background-color: $black;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  .cha {
-    width: 60%;
-    height: 60%;
-    background-color: green;
-    position: relative;
+  flex-direction: column;
+  position: relative;
+  &-header01 {
+    background-color: $black;
+    border-bottom: 2px solid $third-color;
+  }
+  &-body {
     display: flex;
-    font-size: 20px;
-    .con1 {
-      width: 100px;
-      height: 100px;
-      color: white;
-      background-color: blue;
-      position: relative;
-      z-index: 1;
-      &-text {
-        position: absolute;
-        white-space: nowrap;
-        background-color: blue;
+    &-left {
+      display: flex;
+      &-icon {
+        border-right: 2px solid $third-color;
       }
-      &:hover ~ * {
-        z-index: 0;
+      &-content {
+        border-right: 2px solid $third-color;
       }
     }
-    .con2 {
-      width: 100px;
-      height: 100px;
-      color: black;
-      background-color: red;
-      position: relative;
-      z-index: 1;
-
-      &-text {
-        position: absolute;
-        white-space: nowrap;
-        background-color: red;
-        transform: translateX(-50%);
-      }
-      &:hover ~ * {
-        z-index: 0;
-      }
+    &-right {
     }
-    .con3 {
-      width: 100px;
-      height: 100px;
-      color: yellow;
-      background-color: purple;
-      position: relative;
-      z-index: 1;
-
-      &-text {
-        position: absolute;
-        white-space: nowrap;
-        background-color: purple;
-        transform: translateX(-50%);
-      }
-      &:hover ~ * {
-        z-index: 0;
-      }
-    }
+  }
+  &-footer {
+    border-top: 2px solid $third-color;
   }
 }

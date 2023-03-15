@@ -1,24 +1,16 @@
 import "./register.scss";
 const Register = () => {
   return (
-    <div className="bao">
-      <div className="cha">
-        <div className="con1">
-          <div className="con1-text">
-            Day la con cua 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-          </div>
+    <div className="manager01">
+      <div className="manager01-header01">Header</div>
+      <div className="manager01-body">
+        <div className="manager01-body-left">
+          <div className="manager01-body-left-icon">Icon Left</div>
+          <div className="manager01-body-left-content">Content Left</div>
         </div>
-        <div className="con2">
-          <div className="con2-text">
-            Day la con cua 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-          </div>
-        </div>
-        <div className="con3">
-          <div className="con3-text">
-            Day la con cua 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-          </div>
-        </div>
+        <div className="manager01-body-right">Right</div>
       </div>
+      <div className="manager01-footer">Footer</div>
     </div>
   );
 };
