@@ -8,6 +8,7 @@
     height: 100%;
     &-left {
       display: flex;
+
       &-icons {
         border-right: 3px solid $third-color;
         display: flex;
@@ -23,8 +24,16 @@
 
           &-item {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             &:hover {
               cursor: pointer;
+              .tool-tip {
+                visibility: visible;
+                opacity: 1;
+              }
             }
             .active {
               position: absolute;
@@ -33,15 +42,6 @@
               width: 2px;
               height: 100%;
               background-color: $white;
-            }
-            .tooltip-right {
-              position: absolute;
-              left: calc(100% + 3px);
-              top: 0;
-              width: 150px;
-              height: 30px;
-              background-color: crimson;
-              line-height: 1;
             }
           }
         }
@@ -57,17 +57,75 @@
               outline: 2px dotted #e15606;
               outline-offset: 4px;
               transform: scale(1);
+              .tool-tip {
+                visibility: visible;
+                opacity: 1;
+              }
             }
+          }
+        }
+        .tool-tip {
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: crimson;
+          white-space: nowrap;
+          padding: 8px 20px;
+          left: calc(100% + 15px);
+          border: 2px solid seagreen;
+          transform-style: preserve-3d;
+          &::before,
+          &::after {
+            position: absolute;
+            content: "";
+            width: 15px;
+            height: 15px;
+            background-color: seagreen;
+            top: 50%;
+            left: 0;
+            transform: translate(-30%, -50%) rotate(45deg) translateZ(-1px);
+          }
+          &::after {
+            left: calc(0% + 2px);
+            width: 14px;
+            background-color: crimson;
+            transform: translate(-30%, -50%) rotate(45deg) translateZ(1px);
           }
         }
       }
       &-extend {
-        border-right: 3px solid $third-color;
+        // border-right: 3px solid $third-color;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: width 0.5s linear;
+        display: flex;
+        min-width: 100px;
+
+        .extend-content {
+          background-color: #fff;
+          width: 100%;
+        }
+
+        .extend-resize {
+          width: 3px;
+          height: 100%;
+          background-color: $third-color;
+          cursor: col-resize;
+        }
+      }
+      .extend {
+        width: 300px;
+        opacity: 1;
+        visibility: visible;
       }
     }
-  }
-  &-right {
-    width: 100%;
-    height: 100%;
+    &-right {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(169, 253, 2);
+    }
   }
 }

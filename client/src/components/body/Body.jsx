@@ -36,10 +36,35 @@ const IconsBottom = [
 ];
 const Body = () => {
   const refActive = useRef(null);
+  const refExtend = useRef(null);
   const [active, setActive] = useState("");
 
   const toggleActive = (event) => {
-    setActive(event.target.alt);
+    active === event.target.alt ? setActive("") : setActive(event.target.alt);
+  };
+  const [initialPos, setInitialPos] = useState(null);
+  const [initialSize, setInitialSize] = useState(null);
+  const [initialSizeRight, setInitialSizeRight] = useState(null);
+
+  const initial = (e) => {
+    let resizable = document.getElementById("Resizable-left");
+    let resizableRight = document.getElementById("Resizable-right");
+
+    setInitialPos(e.clientX);
+    setInitialSize(resizable.offsetWidth);
+    setInitialSizeRight(resizableRight.offsetWidth);
+  };
+
+  const resize = (e) => {
+    let resizable = document.getElementById("Resizable-left");
+    let resizableRight = document.getElementById("Resizable-right");
+
+    resizable.style.width = `${
+      parseInt(initialSize) + parseInt(e.clientX - initialPos)
+    }px`;
+    resizableRight.style.width = `${
+      parseInt(initialSizeRight) + parseInt(e.clientX + initialPos)
+    }px`;
   };
   return (
     <div className="manage-body">
@@ -57,7 +82,7 @@ const Body = () => {
                   ref={refActive}
                   className={active === item.display ? "active" : ""}
                 ></div>
-                <div className="tooltip-right">{item.display}</div>
+                <div className="tool-tip">{item.display}</div>
               </li>
             ))}
           </ul>
@@ -65,13 +90,28 @@ const Body = () => {
             {IconsBottom.map((item) => (
               <li className="icons-bottom-item" key={item.display}>
                 <img src={item.icon} alt={item.display} />
+                <div className="tool-tip">{item.display}</div>
               </li>
             ))}
           </ul>
         </div>
-        <div className="manage-body-left-extend">extend</div>
+        <div
+          id="Resizable-left"
+          className={`manage-body-left-extend ${active === "" ? "" : "extend"}`}
+          ref={refExtend}
+        >
+          <div className="extend-content">extend</div>
+          <div
+            className="extend-resize"
+            draggable="true"
+            onDragStart={initial}
+            onDrag={resize}
+          ></div>
+        </div>
       </div>
-      <div className="manage-body-right">Right</div>
+      <div id="Resizable-right" className="manage-body-right">
+        Right
+      </div>
     </div>
   );
 };
