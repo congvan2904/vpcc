@@ -20,6 +20,7 @@
           flex-direction: column;
           gap: 15px;
           padding: 5px;
+
           &-item {
             position: relative;
             &:hover {
@@ -32,6 +33,15 @@
               width: 2px;
               height: 100%;
               background-color: $white;
+            }
+            .tooltip-right {
+              position: absolute;
+              left: calc(100% + 3px);
+              top: 0;
+              width: 150px;
+              height: 30px;
+              background-color: crimson;
+              line-height: 1;
             }
           }
         }

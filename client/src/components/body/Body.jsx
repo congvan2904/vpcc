@@ -57,6 +57,7 @@ const Body = () => {
                   ref={refActive}
                   className={active === item.display ? "active" : ""}
                 ></div>
+                <div className="tooltip-right">{item.display}</div>
               </li>
             ))}
           </ul>
