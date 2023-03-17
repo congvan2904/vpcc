@@ -46,16 +46,24 @@
               padding: 8px 20px;
               left: calc(100% + 5px);
               border: 2px solid seagreen;
+              z-index: 0;
+              &::before,
               &::after {
                 content: "";
                 width: 22px;
                 height: 22px;
-                background-color: red;
+                background-color: seagreen;
                 position: absolute;
                 top: 50%;
                 left: 0;
                 transform: translate(-10%, -50%) rotate(45deg);
-                border: 2px solid seagreen;
+                z-index: -1;
+              }
+              &::after {
+                left: calc(0% + 2px);
+                width: 21px;
+                background-color: red;
+                z-index: 1;
               }
             }
           }
