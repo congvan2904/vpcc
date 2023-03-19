@@ -4,22 +4,69 @@ import imgContracts from "../../assets/manage/contracts.svg";
 import imgUser from "../../assets/manage/user.svg";
 import imgAccount from "../../assets/manage/account.svg";
 import imgManage from "../../assets/manage/setting.svg";
+
+import imgToday from "../../assets/manage/today.png";
+import imgTomorrow from "../../assets/manage/tomorrow.png";
+import imgSearchContract from "../../assets/manage/searchcontract.png";
+
 import { useRef, useState } from "react";
-const IconsTop = [
+import ExtendContent from "./ExtendContent";
+import BodyRight from "./BodyRight";
+export const IconsTop = [
   {
     display: "Hợp đồng mới",
-    path: "./contracts",
     icon: imgContract,
+    extend: [
+      {
+        display: "Hôm nay",
+        icon: imgToday,
+        path: "/new-contract-today",
+      },
+      {
+        display: "Những ngày trước",
+        icon: imgTomorrow,
+        path: "/new-contract-old",
+      },
+      {
+        display: "Tìm kiếm",
+        icon: imgSearchContract,
+        path: "/new-contract-search",
+      },
+    ],
   },
   {
     display: "Hợp đồng ",
     path: "./contracts",
     icon: imgContracts,
+    extend: [
+      {
+        display: "Hợp đồng nợ",
+        icon: "",
+        path: "/debt-contracts",
+      },
+      {
+        display: "Tìm kiếm hợp đồng nợ",
+        icon: "",
+        path: "/debt-contracts-search",
+      },
+    ],
   },
   {
     display: "Người dùng",
     path: "./contracts",
     icon: imgUser,
+    extend: [
+      {
+        display: "Danh sách",
+        icon: "",
+        path: "/users",
+      },
+      {
+        display: "Tìm kiếm ",
+        icon: "",
+        path: "/users-search",
+      },
+    ],
   },
 ];
 const IconsBottom = [
@@ -34,18 +81,24 @@ const IconsBottom = [
     icon: imgManage,
   },
 ];
-const Body = () => {
+const Body = (props) => {
   const refActive = useRef(null);
   const refExtend = useRef(null);
   const [active, setActive] = useState("");
 
-  const toggleActive = (event) => {
-    active === event.target.alt ? setActive("") : setActive(event.target.alt);
-  };
   const [initialPos, setInitialPos] = useState(null);
   const [initialSize, setInitialSize] = useState(null);
   const [initialSizeRight, setInitialSizeRight] = useState(null);
 
+  const toggleActive = (event) => {
+    active === event.target.alt ? setActive("") : setActive(event.target.alt);
+    let getResized = document.getElementsByClassName("resized")[0];
+    refExtend.current.classList.contains("resized") &&
+      (getResized.style.width = "0");
+    // refExtend.current.classList.contains("resized") &&
+    //   refExtend.current.classList.contains("extend") &&
+    //   (getResized.style.width = `${initialSize}px`);
+  };
   const initial = (e) => {
     let resizable = document.getElementById("Resizable-left");
     let resizableRight = document.getElementById("Resizable-right");
@@ -65,6 +118,7 @@ const Body = () => {
     resizableRight.style.width = `${
       parseInt(initialSizeRight) + parseInt(e.clientX + initialPos)
     }px`;
+    refExtend.current.classList.add("resized");
   };
   return (
     <div className="manage-body">
@@ -100,7 +154,8 @@ const Body = () => {
           className={`manage-body-left-extend ${active === "" ? "" : "extend"}`}
           ref={refExtend}
         >
-          <div className="extend-content">extend</div>
+          {/* <div className="extend-content">extend</div> */}
+          <ExtendContent title={active} />
           <div
             className="extend-resize"
             draggable="true"
@@ -110,7 +165,7 @@ const Body = () => {
         </div>
       </div>
       <div id="Resizable-right" className="manage-body-right">
-        Right
+        <BodyRight />
       </div>
     </div>
   );

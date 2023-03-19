@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import BodyRightNewContractOld from "../components/body/BodyRightNewContractOld";
+import BodyRightNewContractSearch from "../components/body/BodyRightNewContractSearch";
+import BodyRightNewContractToday from "../components/body/BodyRightNewContractToday";
 import About from "../pages/About";
 import Contract1 from "../pages/Contract1";
 import Contracts from "../pages/Contracts";
@@ -29,6 +32,15 @@ const ConfigRoutes = () => {
       <Route path="/manager1" element={<Manager1 />} />
       <Route path="/manager2" element={<Manager2 />} />
       <Route path="/manager3" element={<Manager3 />} />
+      <Route
+        path="/new-contract-today"
+        element={<BodyRightNewContractToday />}
+      />
+      <Route path="/new-contract-old" element={<BodyRightNewContractOld />} />
+      <Route
+        path="/new-contract-search"
+        element={<BodyRightNewContractSearch />}
+      />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

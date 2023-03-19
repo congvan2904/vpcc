@@ -1,0 +1,41 @@
+.extend-content {
+  width: 100%;
+  &-title {
+    text-transform: uppercase;
+    padding: 15px 20px 20px;
+    font-size: 20px;
+  }
+  &-body {
+    // padding: 0px 20px 20px;
+    font-size: 18px;
+    .extend-data {
+      display: flex;
+      flex-direction: column;
+      grid-gap: 10px;
+      &-item {
+        padding: 5px 20px;
+        display: flex;
+        align-items: center;
+        &:hover {
+          cursor: pointer;
+          outline: 2px dotted chocolate;
+          background-color: gray;
+          z-index: 1;
+        }
+        img {
+          width: 25px;
+          height: 25px;
+        }
+        &-content {
+          margin-left: 10px;
+        }
+      }
+      .extend-active {
+        outline: 2px solid chocolate;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

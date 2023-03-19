@@ -1,0 +1,13 @@
+.manage-body-right {
+  &-header {
+    border: 3px solid salmon;
+    width: auto;
+    .new-contract {
+      font-size: 18px;
+    }
+  }
+  &-body {
+    height: 100%;
+    border: 3px solid yellow;
+  }
+}
