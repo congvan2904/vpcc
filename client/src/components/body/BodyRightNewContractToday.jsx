@@ -1,6 +1,7 @@
 import "./body-right-new-contract-today.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import formatPhoneNumber from "../../helpers/formatPhoneNumber";
 
 const BodyRightNewContractToday = () => {
   const [dataContract, setDataContract] = useState([]);
@@ -21,7 +22,13 @@ const BodyRightNewContractToday = () => {
 
   const [inputs, setInputs] = useState({});
   const handleInputChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    if (e.target.name === "phone") {
+      const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+      setInputs({ ...inputs, [e.target.name]: formattedPhoneNumber });
+    } else setInputs({ ...inputs, [e.target.name]: e.target.value });
+
+    // const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+    // setInputs({ phone: formattedPhoneNumber });
   };
   const dispatch = useDispatch();
   const handleSubmitForm = (e) => {
@@ -45,17 +52,39 @@ const BodyRightNewContractToday = () => {
       <div className="manage-body-right-header">
         <form>
           <div className="new-contract">
-            <div className="new-contract-manager">
-              <div className="new-contract-manager-group">
-                <label htmlFor="">Số công chứng </label>
+            <div className="new-contract-group">
+              <label htmlFor="">Số công chứng </label>
+              <div className="tooltip">
                 <input
+                  id="number_contract"
                   type="text"
-                  placeholder="Số công chứng"
+                  placeholder="SCC"
                   name="idAuto"
                   value={inputs.name}
                   onChange={handleInputChange}
                 />
-                {/* <label htmlFor="">Số công chứng hồ sơ</label>
+                <span className="tooltip-text">
+                  Số công chứng.Nếu chưa có số công chứng thì điền số vào.Nếu có
+                  số công chứng rồi thì số công chứng sẽ tự động tăng khi thêm
+                  hồ sơ
+                </span>
+              </div>
+              <label htmlFor="">Ngày </label>
+              <div className="tooltip">
+                <input
+                  type="date"
+                  id=""
+                  name="dateAuto"
+                  value={inputs.name}
+                  defaultValue={getCurrentDateInput()}
+                  onChange={handleInputChange}
+                />
+                <span className="tooltip-text">
+                  Ngày công chứng.Ngày sẽ tự động theo đúng ngày hệ thống.Nếu
+                  muốn cũng có thể thay đổi ngày
+                </span>
+              </div>
+              {/* <label htmlFor="">Số công chứng hồ sơ</label>
                 <input
                   type="text"
                   placeholder="Số công chứng"
@@ -63,9 +92,9 @@ const BodyRightNewContractToday = () => {
                   value={inputs.name}
                   onChange={handleInputChange}
                 /> */}
-              </div>
             </div>
-            <div className="new-contract-manager-group">
+
+            <div className="new-contract-group">
               <label htmlFor="">Tên thư ký</label>
               <select
                 name="dropdownSecretary"
@@ -81,8 +110,6 @@ const BodyRightNewContractToday = () => {
                   );
                 })}
               </select>
-            </div>
-            <div className="new-contract-manager-group">
               <label htmlFor="">Tên công chứng viên</label>
               <select
                 name="dropdownNotary"
@@ -99,37 +126,22 @@ const BodyRightNewContractToday = () => {
                 })}
               </select>
             </div>
-            <div className="new-contract-manager-group">
-              <label htmlFor="">Ngày </label>
-              <input
-                type="date"
-                id=""
-                name="dateAuto"
-                value={inputs.name}
-                defaultValue={getCurrentDateInput()}
-                onChange={handleInputChange}
-              />
-              {/* <label htmlFor="">Ngày theo hồ sơ</label>
-              <input
-                type="date"
-                id=""
-                name="date"
-                value={inputs.name}
-                defaultValue={getCurrentDateInput()}
-                onChange={handleInputChange}
-              /> */}
-            </div>
-            <div className="new-contract-manager-group">
+            <div className="new-contract-group">
               <label htmlFor="">Tên hồ sơ</label>
               <input
+                id="name_contract"
                 type="text"
                 placeholder="Tên hồ sơ"
                 name="nameContract"
                 value={inputs.name}
                 onChange={handleInputChange}
               />
+            </div>
+
+            <div className="new-contract-group">
               <label htmlFor="">Tên khách hàng</label>
               <input
+                id="name_customer"
                 type="text"
                 placeholder="Tên Khách Hàng"
                 name="nameCustomer"
@@ -138,14 +150,15 @@ const BodyRightNewContractToday = () => {
               />
               <label htmlFor="">Số điện thoại</label>
               <input
+                id="phone_number"
                 type="text"
                 placeholder="Số điện thoại"
                 name="phone"
-                value={inputs.name}
                 onChange={handleInputChange}
+                value={inputs["phone"] || ""}
               />
             </div>
-            <div className="new-contract-manager-group">
+            <div className="new-contract-group">
               <button onClick={handleSubmitForm}>Thêm hồ sơ</button>
               <button onClick={handleDeleteContracts}>Xóa tất cả hồ sơ</button>
               <button onClick={handlegetContracts}>Test</button>
