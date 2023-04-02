@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Empty from "../empty/Empty";
 import BodyRightDebtContracts from "./BodyRightDebtContracts";
 import BodyRightDebtContractsSearch from "./BodyRightDebtContractsSearch";
@@ -7,9 +8,23 @@ import BodyRightNewContractSearch from "./BodyRightNewContractSearch";
 import BodyRightNewContractToday from "./BodyRightNewContractToday";
 import BodyRightUsers from "./BodyRightUsers";
 import BodyRightUsersSearch from "./BodyRightUsersSearch";
-
+import { contracts as contractsR } from "../../redux/features/contractsSlice";
+import { users as usersT } from "../../redux/features/usersSlice";
 const BodyRight = () => {
   const select = useSelector((state) => state.showRightBar.select);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    function fetchData() {
+      dispatch(contractsR());
+      dispatch(usersT());
+      // setDataContract(val.id_contract);
+      // const { payload } = result;
+      // const { data } = payload;
+      // console.log(data);
+      // console.log(result);
+    }
+    fetchData();
+  }, []);
   const dataSelect = [
     {
       choose: "/new-contract-today",

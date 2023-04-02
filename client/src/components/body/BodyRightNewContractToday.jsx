@@ -2,6 +2,12 @@ import "./body-right-new-contract-today.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import formatPhoneNumber from "../../helpers/formatPhoneNumber";
+import Contract from "../contract/Contract";
+import {
+  createContract,
+  deleteContracts,
+  getContractGroupSort,
+} from "../../redux/features/contractsSlice";
 
 const BodyRightNewContractToday = () => {
   const [dataContract, setDataContract] = useState([]);
@@ -37,15 +43,15 @@ const BodyRightNewContractToday = () => {
       ...inputs,
     };
     // console.log("payload--->", payload);
-    // dispatch(createContract(payload));
+    dispatch(createContract(payload));
   };
   const handleDeleteContracts = (e) => {
     e.preventDefault();
-    // dispatch(deleteContracts());
+    dispatch(deleteContracts());
   };
   const handlegetContracts = (e) => {
     e.preventDefault();
-    // dispatch(getContractGroupSort());
+    dispatch(getContractGroupSort());
   };
   return (
     <>
@@ -163,26 +169,26 @@ const BodyRightNewContractToday = () => {
               <button onClick={handleDeleteContracts}>Xóa tất cả hồ sơ</button>
               <button onClick={handlegetContracts}>Test</button>
             </div>
-            {/* <div className="new-contract-show">
-            {data.map((contract, index) => (
-              <div className="new-contract-main" key={index}>
-                {contract.id_contract.map((item, i) => (
-                  <Contract
-                    key={i}
-                    idContract={item[0]}
-                    numberContract={item[1]}
-                    dateContract={item[2]}
-                    name={contract.username}
-                  />
-                ))}
-              </div>
-            ))}
-            {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
-          </div> */}
+            <div className="new-contract-show"></div>
           </div>
         </form>
       </div>
-      <div className="manage-body-right-body"></div>
+      <div className="manage-body-right-body">
+        {data.map((contract, index) => (
+          <div className="new-contract-main" key={index}>
+            {contract.id_contract.map((item, i) => (
+              <Contract
+                key={i}
+                idContract={item[0]}
+                numberContract={item[1]}
+                dateContract={item[2]}
+                name={contract.username}
+              />
+            ))}
+          </div>
+        ))}
+        {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
+      </div>
     </>
   );
 };
