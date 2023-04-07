@@ -382,4 +382,27 @@ module.exports = {
             next(error)
         }
     },
+    getContractsToday: async (req, res, next) => {
+        const start = new Date()
+        start.setHours(0, 0, 0, 0)
+        const end = new Date()
+        end.setHours(23, 59, 59, 999)
+        // const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+        try {
+            // console.log(' Date.now  ---', new Date())
+            const dataFillter = await contract.find({
+                date_create: {
+                    $gte: start,
+                    $lte: end
+                }
+            }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+            // console.log({ dataFillter })
+            return res.status(200).json({
+                data: dataFillter,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

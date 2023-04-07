@@ -14,6 +14,9 @@ const contractsService = {
     },
     delete_contracts: async () => {
         return (await api.delete('contract/deletes')).data
+    },
+    get_contracts_today: async () => {
+        return (await api.get('contract/today')).data
     }
 }
 

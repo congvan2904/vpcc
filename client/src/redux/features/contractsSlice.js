@@ -20,9 +20,18 @@ export const createContract = createAsyncThunk('contract/create_contract', async
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
     const response = await contractsService.get_contract_group_sort()
     // const groupByDate = groupBy(response.data, 'date_create').reverse()
-    console.log('---getContractGroupSort---=>', response.data)
+    // console.log('---getContractGroupSort---=>', response.data)
     return response.data
 })
+
+export const getContractsToday = createAsyncThunk('contract/today', async () => {
+    const response = await contractsService.get_contracts_today()
+    // const groupByDate = groupBy(response.data, 'date_create').reverse()
+    // console.log('---getContractToday---=>', response.data)
+    return response.data
+})
+
+
 export const deleteContracts = createAsyncThunk('contract/deletes', async () => {
     const response = await contractsService.delete_contracts()
     // console.log('---createContract---=>', response)
@@ -115,6 +124,10 @@ const contractsSlice = createSlice({
             state.loading = false;
             state.data = [];
             state.number = action.payload
+        },
+        [getContractsToday.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = action.payload;
         },
     }
 })

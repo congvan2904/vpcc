@@ -86,5 +86,11 @@
   &-body {
     flex-grow: 1;
     border: 3px solid yellow;
+    .new-contract-main {
+      .main-header {
+        display: flex;
+        gap: 10px;
+      }
+    }
   }
 }

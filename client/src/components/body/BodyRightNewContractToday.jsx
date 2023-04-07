@@ -8,10 +8,14 @@ import {
   deleteContracts,
   getContractGroupSort,
 } from "../../redux/features/contractsSlice";
+import ContractCompact from "../contract/ContractCompact";
+import ContractFull from "../contract/ContractFull";
 
 const BodyRightNewContractToday = () => {
   const [dataContract, setDataContract] = useState([]);
   const { data, number } = useSelector((state) => state.contracts);
+
+  // console.log({ data });
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   const getCurrentDateInput = () => {
     const dateObj = new Date();
@@ -174,20 +178,47 @@ const BodyRightNewContractToday = () => {
         </form>
       </div>
       <div className="manage-body-right-body">
-        {data.map((contract, index) => (
-          <div className="new-contract-main" key={index}>
-            {contract.id_contract.map((item, i) => (
-              <Contract
-                key={i}
-                idContract={item[0]}
-                numberContract={item[1]}
-                dateContract={item[2]}
-                name={contract.username}
-              />
-            ))}
+        <div className="new-contract-main">
+          <div className="main-header">
+            <div className="header-contract">So Cong Chung</div>
+            <div className="header-header-secretary">Thu ky</div>
+            <div className="header-notary">Cong chung vien</div>
+            <div className="header-name">Hop dong</div>
+            <div className="header-customer">Khach hang</div>
+            <div className="header-phone">Dien thoai</div>
           </div>
-        ))}
-        {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
+          {data &&
+            data.map((item, index) => (
+              <>
+                {/* <Contract
+                  key={i}
+                  idContract={item[0]}
+                  numberContract={item[1]}
+                  dateContract={item[2]}
+                  name={contract.username}
+                />
+                <ContractCompact
+                  key={i}
+                  idContract={item[0]}
+                  numberContract={item[1]}
+                  dateContract={item[2]}
+                  name={contract.username}
+                /> */}
+                <ContractFull
+                  key={item["id"]}
+                  idContract={item["id"]}
+                  numberContract={item["id_contract"]}
+                  name={item["name"]}
+                  notary={item["id_user_notary"].username}
+                  secretary={item["id_user_secretary"].username}
+                  name_customer={item["note"]}
+                  phone={item["phone"]}
+                />
+              </>
+            ))}
+
+          {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
+        </div>
       </div>
     </>
   );

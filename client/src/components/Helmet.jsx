@@ -1,12 +1,6 @@
-import React from 'react'
-
 const Helmet = (props) => {
-    document.title=`${props.title} - Công Chứng NĐĐ`
-  return (
-    <div>
-         {props.children}
-    </div>
-  )
-}
+  document.title = `${props.title} - Công Chứng NĐĐ`;
+  return <>{props.children}</>;
+};
 
-export default Helmet
+export default Helmet;
