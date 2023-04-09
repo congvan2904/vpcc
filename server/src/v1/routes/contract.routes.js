@@ -10,6 +10,9 @@ router.post('/create', contractController.createContracts)
 //create one contract
 router.post('/create-contract', verifyAccessToken, authPage(['VT', 'role1']), contractController.createContract)
 
+//create one contract Today
+router.post('/create-contract-today', verifyAccessToken, authPage(['VT', 'role1']), contractController.createContractToday)
+
 router.post('/updates', contractController.updateContracts)
 
 router.delete('/deletes', verifyAccessToken, authPage(['VT', 'role1']), contractController.deleteContracts)

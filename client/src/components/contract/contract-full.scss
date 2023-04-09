@@ -1,12 +1,26 @@
-.contract-main-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-  //   .item-name-contract,
-  //   .item-customer,
-  //   .item-phone {
-  //     white-space: nowrap;
-  //   }
+table,
+th,
+td {
+  border: 1px solid wheat;
+  max-width: 950px;
+}
+thead {
+  tr {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+tbody {
+  tr {
+    &:hover {
+      background-color: gray;
+    }
+    &:active {
+      background-color: green;
+    }
+  }
+}
+td {
+  text-align: center;
 }

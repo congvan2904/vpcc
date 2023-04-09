@@ -19,9 +19,27 @@ const Login = () => {
   const [rotation, setRotation] = useState(0);
 
   const dispatch = useDispatch();
-  // const { refreshToken } = useSelector((state) => state.auth.data);
-
-  // console.log("kq", refreshToken);
+  const handleKeyDown = async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const actionResult = await dispatch(loginR({ username, password }));
+      console.log("actionResult", actionResult);
+      _style = {
+        transform: "rotate(720deg)",
+        transition: "transform 3s ease",
+      };
+      setRotation((state) => state - 720);
+      if (actionResult.payload.accessToken) {
+        await instance.setLocalToken(
+          actionResult.payload.accessToken,
+          actionResult.payload.refreshToken
+        );
+        setTimeout(() => {
+          setLogin(true);
+        }, 3500);
+      }
+    }
+  };
   let _style = {};
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,6 +99,7 @@ const Login = () => {
                 placeholder="Mật khẩu"
                 className="password-input"
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div className="login-wrap-content-button">

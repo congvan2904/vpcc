@@ -17,6 +17,11 @@ export const createContract = createAsyncThunk('contract/create_contract', async
     // console.log('---createContract---=>', response.data)
     return response.data
 })
+export const createContractToday = createAsyncThunk('contract/create_contract_today', async (payload) => {
+    const response = await contractsService.create_contract_today(payload)
+    console.log('---createContract---=>', response.data)
+    return response.data
+})
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
     const response = await contractsService.get_contract_group_sort()
     // const groupByDate = groupBy(response.data, 'date_create').reverse()
@@ -128,6 +133,10 @@ const contractsSlice = createSlice({
         [getContractsToday.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = action.payload;
+        },
+        [createContractToday.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.data = [...state.data, action.payload];
         },
     }
 })

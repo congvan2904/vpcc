@@ -21,14 +21,22 @@ const ContractFull = (props) => {
     // }
   };
   return (
-    <div className="contract-main-item" onClick={handleClick}>
-      <div className="item-id">{number_contract}</div>
-      <div className="item-secretary">{secretary}</div>
-      <div className="item-notary">{notary}</div>
-      <div className="item-name-contract">{nameContract}</div>
-      <div className="item-customer">{nameCustomer}</div>
-      <div className="item-phone">{phone}</div>
-    </div>
+    // <div className="contract-item" onClick={handleClick}>
+    //   <div className="item-id">{number_contract}</div>
+    //   <div className="item-secretary">{secretary}</div>
+    //   <div className="item-notary">{notary}</div>
+    //   <div className="item-name-contract">{nameContract}</div>
+    //   <div className="item-customer">{nameCustomer}</div>
+    //   <div className="item-phone">{phone}</div>
+    // </div>
+    <tr>
+      <td>{number_contract}</td>
+      <td>{secretary}</td>
+      <td>{notary}</td>
+      <td>{nameContract}</td>
+      <td>{nameCustomer}</td>
+      <td>{phone}</td>
+    </tr>
   );
 };
 

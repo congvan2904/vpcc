@@ -24,6 +24,37 @@ module.exports = {
     createContract: async (req, res, next) => {
         try {
             const { idAuto, dropdownSecretary, dropdownNotary, nameContract, phone, dateAuto, nameCustomer } = req.body
+            const date = new Date()
+            const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+            const dataIn = {
+                id_contract: +idAuto,
+                id_user_secretary: dropdownSecretary, // inputs.dropdownSecretary,
+                id_user_notary: dropdownNotary, // inputs.dropdownNotary,
+                name: nameContract,
+                phone: phone,
+                date_create: dateAuto || today,
+                note: nameCustomer,
+            };
+
+            const newContract = new contract(dataIn)
+            const response = await newContract.save()
+            const getUserName = await user.findById(dropdownSecretary)
+            const dataGroup = { ...(response.toObject()), username: getUserName.username }
+            return res.status(200).json({
+                data: dataGroup,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    createContractToday: async (req, res, next) => {
+        try {
+            const { idAuto, dropdownSecretary, dropdownNotary, nameContract, phone, dateAuto, nameCustomer } = req.body
+            const date = new Date()
+            const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
             const dataIn = {
                 id_contract: +idAuto,
                 id_user_secretary: dropdownSecretary, // inputs.dropdownSecretary,
@@ -36,10 +67,10 @@ module.exports = {
 
             const newContract = new contract(dataIn)
             const response = await newContract.save()
-            const getUserName = await user.findById(dropdownSecretary)
-            const dataGroup = { ...(response.toObject()), username: getUserName.username }
+            const dataFillter = await contract.findById(response._id).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+            console.log({ dataFillter })
             return res.status(200).json({
-                data: dataGroup,
+                data: dataFillter,
                 message: 'success'
             })
         } catch (error) {

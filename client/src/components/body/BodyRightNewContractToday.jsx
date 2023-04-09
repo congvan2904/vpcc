@@ -1,10 +1,11 @@
 import "./body-right-new-contract-today.scss";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import formatPhoneNumber from "../../helpers/formatPhoneNumber";
 import Contract from "../contract/Contract";
 import {
   createContract,
+  createContractToday,
   deleteContracts,
   getContractGroupSort,
 } from "../../redux/features/contractsSlice";
@@ -14,7 +15,8 @@ import ContractFull from "../contract/ContractFull";
 const BodyRightNewContractToday = () => {
   const [dataContract, setDataContract] = useState([]);
   const { data, number } = useSelector((state) => state.contracts);
-
+  const refDate = useRef(null);
+  const refNameCustomer = useRef(null);
   // console.log({ data });
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   const getCurrentDateInput = () => {
@@ -34,11 +36,17 @@ const BodyRightNewContractToday = () => {
   const handleInputChange = (e) => {
     if (e.target.name === "phone") {
       const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-      setInputs({ ...inputs, [e.target.name]: formattedPhoneNumber });
-    } else setInputs({ ...inputs, [e.target.name]: e.target.value });
-
-    // const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-    // setInputs({ phone: formattedPhoneNumber });
+      setInputs({
+        ...inputs,
+        [e.target.name]: formattedPhoneNumber,
+        dateAuto: refDate.current.value,
+      });
+    } else
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.value,
+        dateAuto: refDate.current.value,
+      });
   };
   const dispatch = useDispatch();
   const handleSubmitForm = (e) => {
@@ -47,7 +55,23 @@ const BodyRightNewContractToday = () => {
       ...inputs,
     };
     // console.log("payload--->", payload);
-    dispatch(createContract(payload));
+    dispatch(createContractToday(payload));
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const payload = {
+        ...inputs,
+      };
+      // console.log("payload--->", payload);
+      dispatch(createContractToday(payload));
+    }
+  };
+  const handleChangerFocus = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      refNameCustomer.current.focus();
+    }
   };
   const handleDeleteContracts = (e) => {
     e.preventDefault();
@@ -83,25 +107,18 @@ const BodyRightNewContractToday = () => {
               <div className="tooltip">
                 <input
                   type="date"
-                  id=""
+                  id="dateAuto"
                   name="dateAuto"
                   value={inputs.name}
                   defaultValue={getCurrentDateInput()}
                   onChange={handleInputChange}
+                  ref={refDate}
                 />
                 <span className="tooltip-text">
                   Ngày công chứng.Ngày sẽ tự động theo đúng ngày hệ thống.Nếu
                   muốn cũng có thể thay đổi ngày
                 </span>
               </div>
-              {/* <label htmlFor="">Số công chứng hồ sơ</label>
-                <input
-                  type="text"
-                  placeholder="Số công chứng"
-                  name="id"
-                  value={inputs.name}
-                  onChange={handleInputChange}
-                /> */}
             </div>
 
             <div className="new-contract-group">
@@ -157,15 +174,18 @@ const BodyRightNewContractToday = () => {
                 name="nameCustomer"
                 value={inputs.name}
                 onChange={handleInputChange}
+                onKeyDown={handleChangerFocus}
               />
               <label htmlFor="">Số điện thoại</label>
               <input
+                ref={refNameCustomer}
                 id="phone_number"
                 type="text"
                 placeholder="Số điện thoại"
                 name="phone"
                 onChange={handleInputChange}
                 value={inputs["phone"] || ""}
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div className="new-contract-group">
@@ -179,43 +199,34 @@ const BodyRightNewContractToday = () => {
       </div>
       <div className="manage-body-right-body">
         <div className="new-contract-main">
-          <div className="main-header">
-            <div className="header-contract">So Cong Chung</div>
-            <div className="header-header-secretary">Thu ky</div>
-            <div className="header-notary">Cong chung vien</div>
-            <div className="header-name">Hop dong</div>
-            <div className="header-customer">Khach hang</div>
-            <div className="header-phone">Dien thoai</div>
-          </div>
-          {data &&
-            data.map((item, index) => (
-              <>
-                {/* <Contract
-                  key={i}
-                  idContract={item[0]}
-                  numberContract={item[1]}
-                  dateContract={item[2]}
-                  name={contract.username}
-                />
-                <ContractCompact
-                  key={i}
-                  idContract={item[0]}
-                  numberContract={item[1]}
-                  dateContract={item[2]}
-                  name={contract.username}
-                /> */}
-                <ContractFull
-                  key={item["id"]}
-                  idContract={item["id"]}
-                  numberContract={item["id_contract"]}
-                  name={item["name"]}
-                  notary={item["id_user_notary"].username}
-                  secretary={item["id_user_secretary"].username}
-                  name_customer={item["note"]}
-                  phone={item["phone"]}
-                />
-              </>
-            ))}
+          {data && (
+            <table>
+              <thead>
+                <tr>
+                  <th className="header-contract">So Cong Chung</th>
+                  <th className="header-header-secretary">Thu ky</th>
+                  <th className="header-notary">Cong chung vien</th>
+                  <th className="header-name">Hop dong</th>
+                  <th className="header-customer">Khach hang</th>
+                  <th className="header-phone">Dien thoai</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <ContractFull
+                    idContract={item["_id"]}
+                    numberContract={item["id_contract"]}
+                    name={item["name"]}
+                    notary={item["id_user_notary"].username}
+                    secretary={item["id_user_secretary"].username}
+                    name_customer={item["note"]}
+                    phone={item["phone"]}
+                    key={item["_id"]}
+                  />
+                ))}
+              </tbody>
+            </table>
+          )}
 
           {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
         </div>
