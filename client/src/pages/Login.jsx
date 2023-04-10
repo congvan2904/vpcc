@@ -14,16 +14,30 @@ import { login as loginR } from "../redux/features/authSlice";
 const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [inputs, setInputs] = useState({});
+
   const [login, setLogin] = useState(false);
   const refLogo = useRef(null);
+  const refUsername = useRef(null);
+
+  const refPassword = useRef(null);
+
   const [rotation, setRotation] = useState(0);
 
   const dispatch = useDispatch();
+  const handleKeyDownUsername = (event) => {
+    // event.preventDefault();
+    event.key === "Enter" && refPassword.current.focus();
+  };
+  const handleInputChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const actionResult = await dispatch(loginR({ username, password }));
-      console.log("actionResult", actionResult);
+      const payload = { ...inputs };
+      const actionResult = await dispatch(loginR(payload));
+      // console.log("actionResult", actionResult);
       _style = {
         transform: "rotate(720deg)",
         transition: "transform 3s ease",
@@ -43,10 +57,9 @@ const Login = () => {
   let _style = {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const response = (await instance.post("user/login", { username, password }))
-    //   .data;
-    const actionResult = await dispatch(loginR({ username, password }));
-    console.log("actionResult", actionResult);
+    const payload = { ...inputs };
+    const actionResult = await dispatch(loginR(payload));
+    // console.log("actionResult", actionResult);
     _style = {
       transform: "rotate(720deg)",
       transition: "transform 3s ease",
@@ -86,20 +99,28 @@ const Login = () => {
             <div className="login-wrap-content-input">
               <img src={email} alt="user name" className="img-login" />
               <input
+                ref={refUsername}
+                name="username"
                 type="text"
                 placeholder="Tên đăng nhập"
                 className="username-input"
-                onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={handleKeyDownUsername}
+                onChange={handleInputChange}
+                value={inputs.name}
+                autoFocus
               />
             </div>
             <div className="login-wrap-content-input">
               <img src={pass} alt="password" className="img-login" />
               <input
+                ref={refPassword}
+                name="password"
                 type="password"
                 placeholder="Mật khẩu"
                 className="password-input"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                value={inputs.name}
               />
             </div>
             <div className="login-wrap-content-button">

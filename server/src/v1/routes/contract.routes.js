@@ -33,6 +33,8 @@ router.patch('/find', verifyAccessToken, authPage(['VT', 'role1']), contractCont
 router.get('/group-sort', verifyAccessToken, authPage(['VT', 'role1']), contractController.getContractsSort)
 
 router.get('/today', verifyAccessToken, authPage(['VT', 'role1']), contractController.getContractsToday)
+router.get('/last-contract', verifyAccessToken, authPage(['VT', 'role1']), contractController.getLastContract)
+
 
 
 module.exports = router

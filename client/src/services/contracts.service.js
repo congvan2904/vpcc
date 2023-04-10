@@ -20,6 +20,9 @@ const contractsService = {
     },
     get_contracts_today: async () => {
         return (await api.get('contract/today')).data
+    },
+    get_last_contract: async () => {
+        return (await api.get('contract/last-contract')).data
     }
 }
 

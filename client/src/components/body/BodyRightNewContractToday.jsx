@@ -1,5 +1,5 @@
 import "./body-right-new-contract-today.scss";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import formatPhoneNumber from "../../helpers/formatPhoneNumber";
 import Contract from "../contract/Contract";
@@ -8,11 +8,25 @@ import {
   createContractToday,
   deleteContracts,
   getContractGroupSort,
+  getLastContract,
 } from "../../redux/features/contractsSlice";
 import ContractCompact from "../contract/ContractCompact";
 import ContractFull from "../contract/ContractFull";
 
 const BodyRightNewContractToday = () => {
+  const [idContract, setIdContract] = useState(null);
+  const dispatch = useDispatch();
+  const refId = useRef(null);
+
+  useEffect(() => {
+    async function getIdContract() {
+      const result = await dispatch(getLastContract());
+      // console.log(result.payload.id_contract);
+      setIdContract(result.payload.id_contract + 1);
+      refId.current.value = +result.payload.id_contract + 1;
+    }
+    getIdContract();
+  }, []);
   const [dataContract, setDataContract] = useState([]);
   const { data, number } = useSelector((state) => state.contracts);
   const refDate = useRef(null);
@@ -21,7 +35,7 @@ const BodyRightNewContractToday = () => {
   const refNameContract = useRef(null);
   const refNotary = useRef(null);
   const refSecretary = useRef(null);
-  // console.log({ data });
+  // console.log({ lastContract });
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   const getCurrentDateInput = () => {
     const dateObj = new Date();
@@ -44,22 +58,26 @@ const BodyRightNewContractToday = () => {
         ...inputs,
         [e.target.name]: formattedPhoneNumber,
         dateAuto: refDate.current.value,
+        idAuto: refId.current.value,
       });
     } else
       setInputs({
         ...inputs,
         [e.target.name]: e.target.value,
         dateAuto: refDate.current.value,
+        idAuto: refId.current.value,
       });
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const payload = {
       ...inputs,
     };
-    // console.log("payload--->", payload);
-    dispatch(createContractToday(payload));
+    console.log("payload--->", payload);
+    // dispatch(createContractToday(payload));
+    refId.current.value = +refId.current.value + 1;
+    refId.current.focus();
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -67,8 +85,10 @@ const BodyRightNewContractToday = () => {
       const payload = {
         ...inputs,
       };
-      // console.log("payload--->", payload);
-      dispatch(createContractToday(payload));
+      console.log("payload--->", payload);
+      // dispatch(createContractToday(payload));
+      refId.current.value = +refId.current.value + 1;
+      refId.current.focus();
     }
   };
   const handleChangerFocusPhone = (e) => {
@@ -118,13 +138,16 @@ const BodyRightNewContractToday = () => {
               <label htmlFor="">Số công chứng </label>
               <div className="tooltip">
                 <input
+                  ref={refId}
                   id="number_contract"
                   type="text"
                   placeholder="SCC"
                   name="idAuto"
-                  value={inputs.name}
+                  // defaultValue={idContract}
+                  // value={idContract || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
+                  autoFocus
                 />
                 <span className="tooltip-text">
                   Số công chứng.Nếu chưa có số công chứng thì điền số vào.Nếu có

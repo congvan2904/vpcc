@@ -436,4 +436,17 @@ module.exports = {
             next(error)
         }
     },
+    getLastContract: async (req, res, next) => {
+
+        try {
+            const dataFillter = await contract.findOne({}, {}, { sort: { 'createdAt': -1 } })
+            // console.log({ dataFillter })
+            return res.status(200).json({
+                data: dataFillter,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

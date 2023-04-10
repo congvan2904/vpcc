@@ -229,9 +229,9 @@ const Landing = () => {
                   <FaPhone />
                 </div>
                 <div className="item-content">
-                  <span class="title-word title-word-1">091 </span>
-                  <span class="title-word title-word-2">181 </span>
-                  <span class="title-word title-word-3">4004</span>
+                  <span className="title-word title-word-1">091 </span>
+                  <span className="title-word title-word-2">181 </span>
+                  <span className="title-word title-word-3">4004</span>
                 </div>
               </div>
               <div className="landing-main-info-main-item">
