@@ -16,7 +16,11 @@ const BodyRightNewContractToday = () => {
   const [dataContract, setDataContract] = useState([]);
   const { data, number } = useSelector((state) => state.contracts);
   const refDate = useRef(null);
+  const refPhoneCustomer = useRef(null);
   const refNameCustomer = useRef(null);
+  const refNameContract = useRef(null);
+  const refNotary = useRef(null);
+  const refSecretary = useRef(null);
   // console.log({ data });
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   const getCurrentDateInput = () => {
@@ -67,10 +71,34 @@ const BodyRightNewContractToday = () => {
       dispatch(createContractToday(payload));
     }
   };
-  const handleChangerFocus = (e) => {
+  const handleChangerFocusPhone = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      refPhoneCustomer.current.focus();
+    }
+  };
+  const handleChangerFocusNameCustomer = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       refNameCustomer.current.focus();
+    }
+  };
+  const handleChangerFocusNameContract = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      refNameContract.current.focus();
+    }
+  };
+  const handleChangerFocusNotary = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      refNotary.current.focus();
+    }
+  };
+  const handleChangerFocusSecretary = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      refSecretary.current.focus();
     }
   };
   const handleDeleteContracts = (e) => {
@@ -96,6 +124,7 @@ const BodyRightNewContractToday = () => {
                   name="idAuto"
                   value={inputs.name}
                   onChange={handleInputChange}
+                  onKeyDown={handleChangerFocusSecretary}
                 />
                 <span className="tooltip-text">
                   Số công chứng.Nếu chưa có số công chứng thì điền số vào.Nếu có
@@ -124,9 +153,11 @@ const BodyRightNewContractToday = () => {
             <div className="new-contract-group">
               <label htmlFor="">Tên thư ký</label>
               <select
+                ref={refSecretary}
                 name="dropdownSecretary"
                 value={inputs.name}
                 onChange={handleInputChange}
+                onKeyDown={handleChangerFocusNotary}
               >
                 <option defaultValue="default">Chọn thư ký</option>
                 {dataUsers.map((e) => {
@@ -139,9 +170,11 @@ const BodyRightNewContractToday = () => {
               </select>
               <label htmlFor="">Tên công chứng viên</label>
               <select
+                ref={refNotary}
                 name="dropdownNotary"
                 value={inputs.name}
                 onChange={handleInputChange}
+                onKeyDown={handleChangerFocusNameContract}
               >
                 <option defaultValue="default">Chọn công chứng viên</option>
                 {dataUsers.map((e) => {
@@ -156,29 +189,32 @@ const BodyRightNewContractToday = () => {
             <div className="new-contract-group">
               <label htmlFor="">Tên hồ sơ</label>
               <input
+                ref={refNameContract}
                 id="name_contract"
                 type="text"
                 placeholder="Tên hồ sơ"
                 name="nameContract"
                 value={inputs.name}
                 onChange={handleInputChange}
+                onKeyDown={handleChangerFocusNameCustomer}
               />
             </div>
 
             <div className="new-contract-group">
               <label htmlFor="">Tên khách hàng</label>
               <input
+                ref={refNameCustomer}
                 id="name_customer"
                 type="text"
                 placeholder="Tên Khách Hàng"
                 name="nameCustomer"
                 value={inputs.name}
                 onChange={handleInputChange}
-                onKeyDown={handleChangerFocus}
+                onKeyDown={handleChangerFocusPhone}
               />
               <label htmlFor="">Số điện thoại</label>
               <input
-                ref={refNameCustomer}
+                ref={refPhoneCustomer}
                 id="phone_number"
                 type="text"
                 placeholder="Số điện thoại"
