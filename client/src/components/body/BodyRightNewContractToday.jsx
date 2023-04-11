@@ -24,6 +24,7 @@ const BodyRightNewContractToday = () => {
       // console.log(result.payload.id_contract);
       setIdContract(result.payload.id_contract + 1);
       refId.current.value = +result.payload.id_contract + 1;
+      // console.log(refNotary.current.value);
     }
     getIdContract();
   }, []);
@@ -73,22 +74,38 @@ const BodyRightNewContractToday = () => {
     e.preventDefault();
     const payload = {
       ...inputs,
+      idAuto: refId.current.value,
     };
-    console.log("payload--->", payload);
-    // dispatch(createContractToday(payload));
+    // console.log("payload--->", payload);
+    dispatch(createContractToday(payload));
     refId.current.value = +refId.current.value + 1;
     refId.current.focus();
+    // console.log("---", refId.current.value);
+    refNameContract.current.value = "";
+    refNameCustomer.current.value = "";
+    refPhoneCustomer.current.value = null;
+    refNotary.current.value = "Chọn công chứng viên";
+    refSecretary.current.value = "Chọn thư ký";
+    setInputs({ ...inputs, phone: null });
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const payload = {
         ...inputs,
+        idAuto: refId.current.value,
       };
-      console.log("payload--->", payload);
-      // dispatch(createContractToday(payload));
+      // console.log("payload--->", payload);
+      dispatch(createContractToday(payload));
       refId.current.value = +refId.current.value + 1;
       refId.current.focus();
+      // console.log("---", refId.current.value);
+      refNameContract.current.value = "";
+      refNameCustomer.current.value = "";
+      // refPhoneCustomer.current.value = null;
+      refNotary.current.value = "Chọn công chứng viên";
+      refSecretary.current.value = "Chọn thư ký";
+      setInputs({ ...inputs, phone: null });
     }
   };
   const handleChangerFocusPhone = (e) => {

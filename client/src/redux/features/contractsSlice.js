@@ -19,7 +19,7 @@ export const createContract = createAsyncThunk('contract/create_contract', async
 })
 export const createContractToday = createAsyncThunk('contract/create_contract_today', async (payload) => {
     const response = await contractsService.create_contract_today(payload)
-    console.log('---createContract---=>', response.data)
+    // console.log('---createContract---=>', response.data)
     return response.data
 })
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
