@@ -193,6 +193,10 @@ const BodyRightNewContractToday = () => {
     e.preventDefault();
     dispatch(getContractGroupSort());
   };
+  const sortSecretary = () => {
+    console.log("sort");
+  };
+
   return (
     <>
       <div className="manage-body-right-header">
@@ -328,7 +332,12 @@ const BodyRightNewContractToday = () => {
               <thead>
                 <tr>
                   <th className="header-contract">So Cong Chung</th>
-                  <th className="header-header-secretary">Thu ky</th>
+                  <th
+                    className="header-header-secretary"
+                    onClick={sortSecretary}
+                  >
+                    Thu ky
+                  </th>
                   <th className="header-notary">Cong chung vien</th>
                   <th className="header-name">Hop dong</th>
                   <th className="header-customer">Khach hang</th>
