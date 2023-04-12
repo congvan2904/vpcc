@@ -2,6 +2,7 @@ import "./body-right-new-contract-today.scss";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import formatPhoneNumber from "../../helpers/formatPhoneNumber";
+import formatContractId from "../../helpers/formatContractId";
 import Contract from "../contract/Contract";
 import {
   createContract,
@@ -22,8 +23,9 @@ const BodyRightNewContractToday = () => {
     async function getIdContract() {
       const result = await dispatch(getLastContract());
       // console.log(result.payload.id_contract);
-      setIdContract(+result.payload.id_contract + 1);
-      // refId.current.value = +result.payload.id_contract + 1;
+      setIdContract(result.payload.id_contract + 1);
+      refId.current.value = +result.payload.id_contract + 1;
+      // console.log(refNotary.current.value);
     }
     getIdContract();
   }, []);
@@ -52,6 +54,13 @@ const BodyRightNewContractToday = () => {
 
   const [inputs, setInputs] = useState({});
   const handleInputChange = (e) => {
+    if (e.target.name === "idAuto") {
+      const formattedPhoneNumber = formatContractId(e.target.value);
+      setInputs({
+        ...inputs,
+        [e.target.name]: formattedPhoneNumber,
+      });
+    }
     if (e.target.name === "phone") {
       const formattedPhoneNumber = formatPhoneNumber(e.target.value);
       setInputs({
@@ -60,38 +69,53 @@ const BodyRightNewContractToday = () => {
         dateAuto: refDate.current.value,
         idAuto: refId.current.value,
       });
-    } else
+    }
+    if (e.target.name !== "phone" && e.target.name !== "idAuto") {
       setInputs({
         ...inputs,
         [e.target.name]: e.target.value,
         dateAuto: refDate.current.value,
         idAuto: refId.current.value,
       });
+    }
   };
   // const dispatch = useDispatch();
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const payload = {
       ...inputs,
+      idAuto: refId.current.value,
     };
     console.log("payload--->", payload);
     // dispatch(createContractToday(payload));
-    // refId.current.value = +refId.current.value + 1;
-    setIdContract((pre) => pre + 1);
+    refId.current.value = +refId.current.value + 1;
     refId.current.focus();
+    // console.log("---", refId.current.value);
+    refNameContract.current.value = "";
+    refNameCustomer.current.value = "";
+    refPhoneCustomer.current.value = null;
+    refNotary.current.value = "Chọn công chứng viên";
+    refSecretary.current.value = "Chọn thư ký";
+    setInputs({ ...inputs, phone: null });
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const payload = {
         ...inputs,
+        idAuto: refId.current.value,
       };
       console.log("payload--->", payload);
       // dispatch(createContractToday(payload));
-      // refId.current.value = +refId.current.value + 1;
-      setIdContract((pre) => pre + 1);
-
+      refId.current.value = +refId.current.value + 1;
       refId.current.focus();
+      // console.log("---", refId.current.value);
+      refNameContract.current.value = "";
+      refNameCustomer.current.value = "";
+      // refPhoneCustomer.current.value = null;
+      refNotary.current.value = "Chọn công chứng viên";
+      refSecretary.current.value = "Chọn thư ký";
+      setInputs({ ...inputs, phone: null });
     }
   };
   const handleChangerFocusPhone = (e) => {
@@ -146,8 +170,9 @@ const BodyRightNewContractToday = () => {
                   type="text"
                   placeholder="SCC"
                   name="idAuto"
-                  defaultValue={idContract}
+                  // defaultValue={idContract}
                   // value={idContract || ""}
+                  // value={inputs["idAuto"] || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
                   autoFocus

@@ -68,7 +68,7 @@ module.exports = {
             const newContract = new contract(dataIn)
             const response = await newContract.save()
             const dataFillter = await contract.findById(response._id).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
-            console.log({ dataFillter })
+            // console.log({ dataFillter })
             return res.status(200).json({
                 data: dataFillter,
                 message: 'success'
