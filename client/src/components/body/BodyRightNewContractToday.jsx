@@ -22,8 +22,8 @@ const BodyRightNewContractToday = () => {
     async function getIdContract() {
       const result = await dispatch(getLastContract());
       // console.log(result.payload.id_contract);
-      setIdContract(result.payload.id_contract + 1);
-      refId.current.value = +result.payload.id_contract + 1;
+      setIdContract(+result.payload.id_contract + 1);
+      // refId.current.value = +result.payload.id_contract + 1;
     }
     getIdContract();
   }, []);
@@ -76,7 +76,8 @@ const BodyRightNewContractToday = () => {
     };
     console.log("payload--->", payload);
     // dispatch(createContractToday(payload));
-    refId.current.value = +refId.current.value + 1;
+    // refId.current.value = +refId.current.value + 1;
+    setIdContract((pre) => pre + 1);
     refId.current.focus();
   };
   const handleKeyDown = (e) => {
@@ -87,7 +88,9 @@ const BodyRightNewContractToday = () => {
       };
       console.log("payload--->", payload);
       // dispatch(createContractToday(payload));
-      refId.current.value = +refId.current.value + 1;
+      // refId.current.value = +refId.current.value + 1;
+      setIdContract((pre) => pre + 1);
+
       refId.current.focus();
     }
   };
@@ -143,7 +146,7 @@ const BodyRightNewContractToday = () => {
                   type="text"
                   placeholder="SCC"
                   name="idAuto"
-                  // defaultValue={idContract}
+                  defaultValue={idContract}
                   // value={idContract || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
