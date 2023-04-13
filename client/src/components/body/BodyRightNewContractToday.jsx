@@ -10,9 +10,13 @@ import {
   deleteContracts,
   getContractGroupSort,
   getLastContract,
+  sort_key,
+  sort_secretary,
 } from "../../redux/features/contractsSlice";
 import ContractCompact from "../contract/ContractCompact";
 import ContractFull from "../contract/ContractFull";
+import removeDotNumber from "../../helpers/removeDotNumber";
+import addDotNumber from "../../helpers/addDotNumber";
 
 const BodyRightNewContractToday = () => {
   const [idContract, setIdContract] = useState(null);
@@ -22,10 +26,15 @@ const BodyRightNewContractToday = () => {
   useEffect(() => {
     async function getIdContract() {
       const result = await dispatch(getLastContract());
-      // console.log(result.payload.id_contract);
-      setIdContract(result.payload.id_contract + 1);
-      refId.current.value = +result.payload.id_contract + 1;
-      // console.log(refNotary.current.value);
+      // console.log(result.payload);
+      if (result.payload === null) {
+        refId.current.value = 1;
+      } else {
+        setIdContract(result.payload.id_contract + 1);
+        const valueId = +removeDotNumber(result.payload.id_contract) + 1;
+        refId.current.value = addDotNumber(valueId);
+        // console.log(refNotary.current.value);
+      }
     }
     getIdContract();
   }, []);
@@ -56,10 +65,11 @@ const BodyRightNewContractToday = () => {
   const handleInputChange = (e) => {
     if (e.target.name === "idAuto") {
       const formattedPhoneNumber = formatContractId(e.target.value);
-      setInputs({
-        ...inputs,
-        [e.target.name]: formattedPhoneNumber,
-      });
+      // setInputs({
+      //   ...inputs,
+      //   [e.target.name]: formattedPhoneNumber,
+      // });
+      refId.current.value = formattedPhoneNumber;
     }
     if (e.target.name === "phone") {
       const formattedPhoneNumber = formatPhoneNumber(e.target.value);
@@ -84,12 +94,12 @@ const BodyRightNewContractToday = () => {
     e.preventDefault();
     const payload = {
       ...inputs,
-      idAuto: refId.current.value,
+      idAuto: removeDotNumber(refId.current.value),
     };
     // console.log("payload--->", payload);
-    // dispatch(createContractToday(payload));
-    refId.current.value = +refId.current.value + 1;
-    console.log("---", refId.current.value);
+    dispatch(createContractToday(payload));
+    const result = +removeDotNumber(refId.current.value) + 1;
+    refId.current.value = addDotNumber(result);
     refId.current.focus();
     refNameContract.current.value = "";
     refNameCustomer.current.value = "";
@@ -105,9 +115,10 @@ const BodyRightNewContractToday = () => {
         ...inputs,
         idAuto: refId.current.value,
       };
-      console.log("payload--->", payload);
-      // dispatch(createContractToday(payload));
-      refId.current.value = +refId.current.value + 1;
+      // console.log("payload--->", payload);
+      dispatch(createContractToday(payload));
+      const result = +removeDotNumber(refId.current.value) + 1;
+      refId.current.value = addDotNumber(result);
       refId.current.focus();
       // console.log("---", refId.current.value);
       refNameContract.current.value = "";
@@ -117,11 +128,26 @@ const BodyRightNewContractToday = () => {
       refSecretary.current.value = "Chọn thư ký";
       setInputs({ ...inputs, phone: null });
     }
+    if (e.key === "Escape") {
+      if (refPhoneCustomer.current.value) {
+        refPhoneCustomer.current.value = null;
+        setInputs({ ...inputs, phone: null });
+      } else {
+        refNameCustomer.current.focus();
+      }
+    }
   };
   const handleChangerFocusPhone = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       refPhoneCustomer.current.focus();
+    }
+    if (e.key === "Escape") {
+      if (refNameCustomer.current.value) {
+        refNameCustomer.current.value = null;
+      } else {
+        refNameContract.current.focus();
+      }
     }
   };
   const handleChangerFocusNameCustomer = (e) => {
@@ -129,17 +155,29 @@ const BodyRightNewContractToday = () => {
       e.preventDefault();
       refNameCustomer.current.focus();
     }
+    if (e.key === "Escape") {
+      if (refNameContract.current.value) refNameContract.current.value = null;
+      else refNotary.current.focus();
+    }
   };
   const handleChangerFocusNameContract = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       refNameContract.current.focus();
     }
+    if (e.key === "Escape") {
+      if (refNotary.current.value !== "Chọn công chứng viên")
+        refNotary.current.value = "Chọn công chứng viên";
+      else refSecretary.current.focus();
+    }
   };
   const handleChangerFocusNotary = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       refNotary.current.focus();
+    }
+    if (e.key === "Escape") {
+      refSecretary.current.value = "Chọn thư ký";
     }
   };
   const handleChangerFocusSecretary = (e) => {
@@ -156,6 +194,13 @@ const BodyRightNewContractToday = () => {
     e.preventDefault();
     dispatch(getContractGroupSort());
   };
+  const sortSecretary = () => {
+    dispatch(sort_secretary());
+  };
+  const sortKey = (key) => {
+    dispatch(sort_key(key));
+  };
+  const arrSort = [{ key: "id_contract" }, { key: "id_user_notary.username" }];
   return (
     <>
       <div className="manage-body-right-header">
@@ -172,7 +217,7 @@ const BodyRightNewContractToday = () => {
                   name="idAuto"
                   // defaultValue={idContract}
                   // value={idContract || ""}
-                  value={inputs["idAuto"] || ""}
+                  // value={inputs["idAuto"] || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
                   autoFocus
@@ -290,8 +335,18 @@ const BodyRightNewContractToday = () => {
             <table>
               <thead>
                 <tr>
-                  <th className="header-contract">So Cong Chung</th>
-                  <th className="header-header-secretary">Thu ky</th>
+                  <th
+                    className="header-contract"
+                    onClick={() => sortKey("key")}
+                  >
+                    So Cong Chung
+                  </th>
+                  <th
+                    className="header-header-secretary"
+                    onClick={sortSecretary}
+                  >
+                    Thu ky
+                  </th>
                   <th className="header-notary">Cong chung vien</th>
                   <th className="header-name">Hop dong</th>
                   <th className="header-customer">Khach hang</th>

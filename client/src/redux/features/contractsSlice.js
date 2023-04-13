@@ -57,7 +57,22 @@ const contractsSlice = createSlice({
         number: 0,
         lastContract: {},
     },
-    reducers: {},
+    reducers: {
+        sort_secretary: (state) => {
+            console.log(current(state.data))
+            // const getData = [...current(state.data)]
+            state.data.sort((a, b) => a["id_user_secretary"].username.toLowerCase().localeCompare(b["id_user_notary"].username.toLowerCase()))
+            // console.log(getData)
+            return state
+        },
+        sort_key: (state, action) => {
+            const get_key = action.payload
+            console.log({ get_key })
+            state.data.sort((a, b) => a["id_user_secretary"].username.toLowerCase().localeCompare(b["id_user_notary"].username.toLowerCase()))
+            return state
+
+        }
+    },
     extraReducers: {
         [contracts.pending]: (state, action) => {
             state.loading = true;
@@ -152,4 +167,6 @@ const contractsSlice = createSlice({
     }
 })
 const { reducer: contractsReducer } = contractsSlice
+export const { sort_secretary, sort_key } = contractsSlice.actions
+
 export default contractsReducer

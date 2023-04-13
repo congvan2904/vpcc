@@ -3,6 +3,7 @@ import "./contract-full.scss";
 import { update_status as updateContract } from "../../redux/features/contractsSlice";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import addDotNumber from "../../helpers/addDotNumber";
 const ContractFull = (props) => {
   // const [refContract, setRefContract] = useState(true);
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ContractFull = (props) => {
     //   <div className="item-phone">{phone}</div>
     // </div>
     <tr>
-      <td>{number_contract}</td>
+      <td>{addDotNumber(number_contract)}</td>
       <td>{secretary}</td>
       <td>{notary}</td>
       <td>{nameContract}</td>
