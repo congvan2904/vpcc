@@ -337,7 +337,7 @@ const BodyRightNewContractToday = () => {
                 <tr>
                   <th
                     className="header-contract"
-                    onClick={() => sortKey("key")}
+                    onClick={() => sortKey("id_contract")}
                   >
                     So Cong Chung
                   </th>
@@ -347,8 +347,15 @@ const BodyRightNewContractToday = () => {
                   >
                     Thu ky
                   </th>
-                  <th className="header-notary">Cong chung vien</th>
-                  <th className="header-name">Hop dong</th>
+                  <th
+                    className="header-notary"
+                    onClick={() => sortKey("id_user_notary")}
+                  >
+                    Cong chung vien
+                  </th>
+                  <th className="header-name" onClick={() => sortKey("name")}>
+                    Hop dong
+                  </th>
                   <th className="header-customer">Khach hang</th>
                   <th className="header-phone">Dien thoai</th>
                 </tr>
