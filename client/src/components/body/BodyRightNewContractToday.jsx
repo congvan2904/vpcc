@@ -86,11 +86,11 @@ const BodyRightNewContractToday = () => {
       ...inputs,
       idAuto: refId.current.value,
     };
-    console.log("payload--->", payload);
+    // console.log("payload--->", payload);
     // dispatch(createContractToday(payload));
     refId.current.value = +refId.current.value + 1;
+    console.log("---", refId.current.value);
     refId.current.focus();
-    // console.log("---", refId.current.value);
     refNameContract.current.value = "";
     refNameCustomer.current.value = "";
     refPhoneCustomer.current.value = null;
@@ -172,7 +172,7 @@ const BodyRightNewContractToday = () => {
                   name="idAuto"
                   // defaultValue={idContract}
                   // value={idContract || ""}
-                  // value={inputs["idAuto"] || ""}
+                  value={inputs["idAuto"] || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
                   autoFocus
