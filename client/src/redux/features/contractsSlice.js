@@ -59,7 +59,7 @@ const contractsSlice = createSlice({
     },
     reducers: {
         sort_secretary: (state) => {
-            // console.log(current(state.data))
+            console.log(current(state.data))
             // const getData = [...current(state.data)]
             state.data.sort((a, b) => a["id_user_secretary"].username.toLowerCase().localeCompare(b["id_user_secretary"].username.toLowerCase()))
             // console.log(getData)
@@ -69,9 +69,22 @@ const contractsSlice = createSlice({
             const get_key = action.payload
             // console.log({ get_key })
             state.data.sort((a, b) => {
-                if (a[get_key].username)
-                    return a[get_key].username.toLowerCase().localeCompare(b[get_key].username.toLowerCase())
-                return a[get_key] - b[get_key]
+                if (a[get_key].username) {
+                    const getLastNameA = a[get_key].username.split(' ').pop()
+                    const getLastNameB = b[get_key].username.split(' ').pop()
+                    return getLastNameA.toLowerCase().localeCompare(getLastNameB.toLowerCase())
+                } else {
+                    try {
+
+                        const getLastNameA = a[get_key].split(' ').pop()
+                        const getLastNameB = b[get_key].split(' ').pop()
+                        return getLastNameA.toLowerCase().localeCompare(getLastNameB.toLowerCase())
+                    }
+                    catch {
+
+                        return a[get_key] - b[get_key]
+                    }
+                }
 
             }
             )
