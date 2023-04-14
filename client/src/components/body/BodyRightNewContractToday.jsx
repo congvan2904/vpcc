@@ -93,8 +93,13 @@ const BodyRightNewContractToday = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const payload = {
-      ...inputs,
       idAuto: removeDotNumber(refId.current.value),
+      dateAuto: refDate.current.value,
+      dropdownSecretary: refSecretary.current.value,
+      dropdownNotary: refNotary.current.value,
+      nameContract: refNameContract.current.value,
+      nameCustomer: refNameCustomer.current.value,
+      phone: refPhoneCustomer.current.value,
     };
     // console.log("payload--->", payload);
     dispatch(createContractToday(payload));
@@ -112,8 +117,13 @@ const BodyRightNewContractToday = () => {
     if (e.key === "Enter") {
       e.preventDefault();
       const payload = {
-        ...inputs,
-        idAuto: refId.current.value,
+        idAuto: removeDotNumber(refId.current.value),
+        dateAuto: refDate.current.value,
+        dropdownSecretary: refSecretary.current.value,
+        dropdownNotary: refNotary.current.value,
+        nameContract: refNameContract.current.value,
+        nameCustomer: refNameCustomer.current.value,
+        phone: refPhoneCustomer.current.value,
       };
       // console.log("payload--->", payload);
       dispatch(createContractToday(payload));
@@ -204,7 +214,7 @@ const BodyRightNewContractToday = () => {
   return (
     <>
       <div className="manage-body-right-header">
-        <form>
+        <form autoComplete="off">
           <div className="new-contract">
             <div className="new-contract-group">
               <label htmlFor="">Số công chứng </label>

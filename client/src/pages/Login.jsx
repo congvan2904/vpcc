@@ -28,6 +28,9 @@ const Login = () => {
   const handleKeyDownUsername = (event) => {
     // event.preventDefault();
     event.key === "Enter" && refPassword.current.focus();
+    if (event.key === "Escape") {
+      if (refUsername.current.value) refUsername.current.value = null;
+    }
   };
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -35,7 +38,10 @@ const Login = () => {
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const payload = { ...inputs };
+      const payload = {
+        username: refUsername.current.value,
+        password: refPassword.current.value,
+      };
       const actionResult = await dispatch(loginR(payload));
       // console.log("actionResult", actionResult);
       _style = {
@@ -53,11 +59,18 @@ const Login = () => {
         }, 3500);
       }
     }
+    if (event.key === "Escape") {
+      if (refPassword.current.value) refPassword.current.value = null;
+      else refUsername.current.focus();
+    }
   };
   let _style = {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { ...inputs };
+    const payload = {
+      username: refUsername.current.value,
+      password: refPassword.current.value,
+    };
     const actionResult = await dispatch(loginR(payload));
     // console.log("actionResult", actionResult);
     _style = {
@@ -108,6 +121,7 @@ const Login = () => {
                 onChange={handleInputChange}
                 value={inputs.name}
                 autoFocus
+                autoComplete="off"
               />
             </div>
             <div className="login-wrap-content-input">
@@ -121,6 +135,7 @@ const Login = () => {
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 value={inputs.name}
+                autoComplete="off"
               />
             </div>
             <div className="login-wrap-content-button">

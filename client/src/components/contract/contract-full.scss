@@ -19,8 +19,17 @@ tbody {
     &:active {
       background-color: green;
     }
+    &.active-tr {
+      background-color: red;
+      color: yellow;
+      outline: 1px blue solid;
+    }
   }
 }
 td {
   text-align: center;
+}
+.contract-detail {
+  display: none;
+  position: fixed;
 }

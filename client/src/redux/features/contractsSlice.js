@@ -59,7 +59,7 @@ const contractsSlice = createSlice({
     },
     reducers: {
         sort_secretary: (state) => {
-            console.log(current(state.data))
+            // console.log(current(state.data))
             // const getData = [...current(state.data)]
             state.data.sort((a, b) => a["id_user_secretary"].username.toLowerCase().localeCompare(b["id_user_secretary"].username.toLowerCase()))
             // console.log(getData)
