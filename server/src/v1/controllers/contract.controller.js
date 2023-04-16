@@ -449,4 +449,28 @@ module.exports = {
             next(error)
         }
     },
+    updateContractToday: async (req, res, next) => {
+        try {
+            const { id, idAuto, dropdownSecretary, dropdownNotary, nameContract, phone, dateAuto, nameCustomer } = req.body
+
+
+            const dataIn = {
+                id_contract: +idAuto,
+                id_user_secretary: dropdownSecretary,
+                id_user_notary: dropdownNotary,
+                name: nameContract,
+                phone: phone,
+                date_create: dateAuto,
+                note: nameCustomer,
+            };
+            const updated = await contract.findByIdAndUpdate({ _id: id }, dataIn)
+            const dataFillter = await contract.findById(updated._id).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+            return res.status(200).json({
+                data: dataFillter,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

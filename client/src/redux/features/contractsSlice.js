@@ -22,6 +22,12 @@ export const createContractToday = createAsyncThunk('contract/create_contract_to
     // console.log('---createContract---=>', response.data)
     return response.data
 })
+export const updateContractToday = createAsyncThunk('contract/update_contract_today', async (payload) => {
+    const response = await contractsService.update_contract_today(payload)
+    console.log('---UpdateContract---=>', response.data)
+    return response.data
+})
+
 export const getContractGroupSort = createAsyncThunk('contract/group_sort', async () => {
     const response = await contractsService.get_contract_group_sort()
     // const groupByDate = groupBy(response.data, 'date_create').reverse()
@@ -178,6 +184,24 @@ const contractsSlice = createSlice({
         [createContractToday.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = [...state.data, action.payload];
+        },
+        [updateContractToday.fulfilled]: (state, action) => {
+            state.loading = false;
+            const getId = action.payload._id
+            const index = state.data.findIndex(item => item._id === getId)
+            // console.log({ index })
+            if (index === 0) {
+                state.data = [action.payload, ...state.data.slice(index + 1)]
+                return state
+            }
+            if (index === state.data.length - 1) {
+                state.data = [...state.data.slice(0, index), action.payload]
+                return state
+            }
+            state.data = [...state.data.slice(0, index), action.payload, ...state.data.slice(index + 1)]
+            // const filter = state.data.filter(item => item._id !== getId)
+            // state.data = [...filter, action.payload];
+            return state
         },
         [getLastContract.fulfilled]: (state, action) => {
             state.loading = false;

@@ -12,6 +12,9 @@ const contractsService = {
     create_contract_today: async (payload) => {
         return (await api.post('contract/create-contract-today', payload)).data
     },
+    update_contract_today: async (payload) => {
+        return (await api.patch('contract/update-contract-today', payload)).data
+    },
     get_contract_group_sort: async () => {
         return (await api.get('contract/group-sort')).data
     },

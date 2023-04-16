@@ -17,6 +17,7 @@ import ContractCompact from "../contract/ContractCompact";
 import ContractFull from "../contract/ContractFull";
 import removeDotNumber from "../../helpers/removeDotNumber";
 import addDotNumber from "../../helpers/addDotNumber";
+import ModalItemContract from "../contract/ModalItemContract";
 
 const BodyRightNewContractToday = () => {
   const [idContract, setIdContract] = useState(null);
@@ -30,7 +31,7 @@ const BodyRightNewContractToday = () => {
       if (result.payload === null) {
         refId.current.value = 1;
       } else {
-        setIdContract(result.payload.id_contract + 1);
+        setIdContract(result.payload?.id_contract + 1);
         const valueId = +removeDotNumber(result.payload.id_contract) + 1;
         refId.current.value = addDotNumber(valueId);
         // console.log(refNotary.current.value);
@@ -211,6 +212,11 @@ const BodyRightNewContractToday = () => {
     dispatch(sort_key(key));
   };
   const arrSort = [{ key: "id_contract" }, { key: "id_user_notary.username" }];
+
+  const { showModal, dataModal } = useSelector(
+    (state) => state.showModalContractItem
+  );
+  // console.log({ showModalContract });
   return (
     <>
       <div className="manage-body-right-header">
@@ -225,9 +231,6 @@ const BodyRightNewContractToday = () => {
                   type="text"
                   placeholder="SCC"
                   name="idAuto"
-                  // defaultValue={idContract}
-                  // value={idContract || ""}
-                  // value={inputs["idAuto"] || ""}
                   onChange={handleInputChange}
                   onKeyDown={handleChangerFocusSecretary}
                   autoFocus
@@ -383,10 +386,13 @@ const BodyRightNewContractToday = () => {
                     numberContract={item["id_contract"]}
                     name={item["name"]}
                     notary={item["id_user_notary"].username}
+                    notaryId={item["id_user_notary"]._id}
                     secretary={item["id_user_secretary"].username}
+                    secretaryId={item["id_user_secretary"]._id}
                     name_customer={item["note"]}
                     phone={item["phone"]}
                     key={item["_id"]}
+                    dateCreate={item["date_create"]}
                   />
                 ))}
               </tbody>
@@ -395,6 +401,7 @@ const BodyRightNewContractToday = () => {
 
           {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
         </div>
+        {showModal && <ModalItemContract details={dataModal} />}
       </div>
     </>
   );
