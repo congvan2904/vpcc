@@ -24,7 +24,13 @@ export const createContractToday = createAsyncThunk('contract/create_contract_to
 })
 export const updateContractToday = createAsyncThunk('contract/update_contract_today', async (payload) => {
     const response = await contractsService.update_contract_today(payload)
-    console.log('---UpdateContract---=>', response.data)
+    // console.log('---UpdateContract---=>', response.data)
+    return response.data
+})
+export const deleteContractToday = createAsyncThunk('contract/delete_contract_today', async (payload) => {
+    // console.log(payload)
+    const response = await contractsService.delete_contract_today(payload)
+    // console.log('---DeleteContract---=>', response.data)
     return response.data
 })
 
@@ -201,6 +207,12 @@ const contractsSlice = createSlice({
             state.data = [...state.data.slice(0, index), action.payload, ...state.data.slice(index + 1)]
             // const filter = state.data.filter(item => item._id !== getId)
             // state.data = [...filter, action.payload];
+            return state
+        },
+        [deleteContractToday.fulfilled]: (state, action) => {
+            state.loading = false;
+            const getId = action.payload._id
+            state.data = state.data.filter(item => item._id !== getId)
             return state
         },
         [getLastContract.fulfilled]: (state, action) => {

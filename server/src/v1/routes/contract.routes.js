@@ -13,6 +13,8 @@ router.post('/create-contract', verifyAccessToken, authPage(['VT', 'role1']), co
 //create one contract Today
 router.post('/create-contract-today', verifyAccessToken, authPage(['VT', 'role1']), contractController.createContractToday)
 router.patch('/update-contract-today', verifyAccessToken, authPage(['VT', 'role1']), contractController.updateContractToday)
+router.delete('/delete-contract-today/:id', verifyAccessToken, authPage(['VT', 'role1']), contractController.deleteContractToday)
+
 
 
 router.post('/updates', contractController.updateContracts)

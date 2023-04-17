@@ -473,4 +473,21 @@ module.exports = {
             next(error)
         }
     },
+    deleteContractToday: async (req, res, next) => {
+        try {
+            const { id } = req.params
+
+            // console.log(id)
+
+            const deleteId = await contract.findOneAndDelete({ _id: id })
+            // console.log({ deleteId })
+            // const dataFillter = await contract.findById(updated._id).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+            return res.status(200).json({
+                data: deleteId,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

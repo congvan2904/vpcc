@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import "./contract-full.scss";
-import { update_status as updateContract } from "../../redux/features/contractsSlice";
+import {
+  deleteContractToday,
+  update_status as updateContract,
+} from "../../redux/features/contractsSlice";
 import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import addDotNumber from "../../helpers/addDotNumber";
@@ -21,7 +24,7 @@ const ContractFull = (props) => {
     refTr.current.classList.toggle("active-tr");
     // console.log(data);
     setIdDelete({ id: data.idContract, number: data.numberContract });
-    console.log({ idDelete });
+    // console.log({ idDelete });
     if (event.detail === 2) {
       // console.log("double click", data);
       // dispatch(updateContract({ name: id_contract, status: false }));
@@ -30,24 +33,32 @@ const ContractFull = (props) => {
   };
 
   const handleKeyDown = (e) => {
-    // console.log(e);
     e.preventDefault();
+    // console.log(e);
     if (e.key === "Delete") {
-      console.log(id_contract + "--" + number_contract);
+      if (
+        window.confirm(
+          `Ban co muon xoa ho so so ${number_contract} - Ten la ${nameContract}`
+        )
+      ) {
+        const payload = { id: id_contract };
+        dispatch(deleteContractToday(payload));
+      }
     }
   };
 
-  // useEffect(() => {
-  //   const element = refTr.current;
-  //   window.addEventListener("keydown", handleKeyDown);
-  //   return () => window.removeEventListener("keydown", handleKeyDown);
-  // }, []);
+  useEffect(() => {
+    const element = refTr.current;
+    element.addEventListener("keydown", handleKeyDown);
+    return () => element.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
       <tr
         onClick={(e) => handleClick(e, props)}
         ref={refTr}
+        tabIndex={0}
         // onKeyDown={handleKeyDown}
       >
         <td>{addDotNumber(number_contract)}</td>

@@ -15,6 +15,10 @@ const contractsService = {
     update_contract_today: async (payload) => {
         return (await api.patch('contract/update-contract-today', payload)).data
     },
+    delete_contract_today: async (payload) => {
+        const { id } = payload
+        return (await api.delete(`contract/delete-contract-today/${id}`)).data
+    },
     get_contract_group_sort: async () => {
         return (await api.get('contract/group-sort')).data
     },

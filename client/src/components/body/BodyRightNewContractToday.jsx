@@ -216,6 +216,10 @@ const BodyRightNewContractToday = () => {
   const { showModal, dataModal } = useSelector(
     (state) => state.showModalContractItem
   );
+
+  // useEffect(() => {
+  //   refTable.current.addEventListener("keydown", handleKeyDownDelete);
+  // }, []);
   // console.log({ showModalContract });
   return (
     <>
