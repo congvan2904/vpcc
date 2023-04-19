@@ -11,6 +11,7 @@ import BodyRightUsersSearch from "./BodyRightUsersSearch";
 import {
   contracts as contractsR,
   getContractsToday,
+  groupDebtContracts,
 } from "../../redux/features/contractsSlice";
 import { users as usersT } from "../../redux/features/usersSlice";
 const BodyRight = () => {
@@ -21,6 +22,7 @@ const BodyRight = () => {
       // dispatch(contractsR());
       dispatch(usersT());
       dispatch(getContractsToday());
+      dispatch(groupDebtContracts());
     }
     fetchData();
   }, []);

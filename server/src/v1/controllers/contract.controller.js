@@ -490,4 +490,32 @@ module.exports = {
             next(error)
         }
     },
+    getGroupDebtContract: async (req, res, next) => {
+        try {
+
+            const data = await contract.aggregate([
+                {
+                    $group: {
+                        _id: { cv: "$id_user_secretary", ngay: "$date_create" },
+                        count: { $sum: 1 }
+                    }
+                },
+                // {
+                //     $group: {
+                //         _id: "$_id.id_user_secretary",
+                //         ngays: { $push: { ngay: "$_id.date_create", count: "$count" } }
+                //     }
+                // }
+
+            ])
+
+
+            return res.status(200).json({
+                data,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 }

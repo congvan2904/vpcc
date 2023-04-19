@@ -7,6 +7,11 @@ export const contracts = createAsyncThunk('contract/debt', async () => {
     // console.log('--contracts----=>', response.data)
     return response.data
 })
+export const groupDebtContracts = createAsyncThunk('contract/group_debt', async () => {
+    const response = await contractsService.group_debt_contracts()
+    // console.log('--contracts----=>', response.data)
+    return response.data
+})
 export const update_status = createAsyncThunk('contract/update_status', async ({ name, status }) => {
     const response = await contractsService.status_contract({ name, status })
     // console.log('--update_status----=>', response.data)
@@ -68,6 +73,7 @@ const contractsSlice = createSlice({
         data: [],
         number: 0,
         lastContract: {},
+        groupData: [],
     },
     reducers: {
         sort_secretary: (state) => {
@@ -117,6 +123,10 @@ const contractsSlice = createSlice({
             state.number = 0;
             state.data = action.payload;
             // console.log('redux', state.data)
+        },
+        [groupDebtContracts.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.groupData = action.payload;
         },
         [getContractGroupSort.fulfilled]: (state, action) => {
             state.loading = false;

@@ -26,6 +26,8 @@ router.get('/', verifyAccessToken, authPage(['VT', 'role1']), contractController
 
 // get all Debt Contract
 router.get('/debt', verifyAccessToken, authPage(['VT', 'role1']), contractController.getDebtContract)
+router.get('/group-debt', verifyAccessToken, authPage(['VT', 'role1']), contractController.getGroupDebtContract)
+
 
 // TEST POPULATE
 router.get('/populate', verifyAccessToken, authPage(['VT', 'role1']), contractController.populateContract)

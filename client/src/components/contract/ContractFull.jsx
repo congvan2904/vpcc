@@ -36,11 +36,8 @@ const ContractFull = (props) => {
     e.preventDefault();
     // console.log(e);
     if (e.key === "Delete") {
-      if (
-        window.confirm(
-          `Ban co muon xoa ho so so ${number_contract} - Ten la ${nameContract}`
-        )
-      ) {
+      let confirm = window.prompt(`Hay nhap ma ho so can xoa`);
+      if (+confirm === number_contract) {
         const payload = { id: id_contract };
         dispatch(deleteContractToday(payload));
       }
