@@ -27,6 +27,7 @@ router.get('/', verifyAccessToken, authPage(['VT', 'role1']), contractController
 // get all Debt Contract
 router.get('/debt', verifyAccessToken, authPage(['VT', 'role1']), contractController.getDebtContract)
 router.get('/group-debt', verifyAccessToken, authPage(['VT', 'role1']), contractController.getGroupDebtContract)
+router.patch('/update-status-debt', verifyAccessToken, authPage(['VT', 'role1']), contractController.updateStatusDebtContract)
 
 
 // TEST POPULATE

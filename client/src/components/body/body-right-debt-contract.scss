@@ -1,0 +1,52 @@
+.body-right-debt-contract {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  .debt {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid saddlebrown;
+
+    &-days {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    &-day {
+      display: flex;
+      border: 1px solid purple;
+      align-items: center;
+      gap: 10px;
+    }
+    &-contracts {
+      display: flex;
+      flex-direction: column;
+      //   border: 1px solid red;
+    }
+    &-contract {
+      display: flex;
+      //   background: blue;
+      gap: 10px;
+      border: 1px solid brown;
+      .contract-number {
+        width: 60px;
+      }
+      .contract-name {
+        // border: 1px solid lightseagreen;
+        min-width: 250px;
+      }
+      &:hover {
+        background-color: rgba(224, 204, 204, 0.6);
+      }
+    }
+  }
+  .debt:empty {
+    border: none;
+  }
+}

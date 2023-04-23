@@ -495,23 +495,81 @@ module.exports = {
 
             const data = await contract.aggregate([
                 {
+                    $match: { status: true }
+                },
+
+                {
                     $group: {
-                        _id: { cv: "$id_user_secretary", ngay: "$date_create" },
-                        count: { $sum: 1 }
+                        _id: { id_user_secretary: "$id_user_secretary", date_create: "$date_create" },
+                        count: { $sum: 1 },
+                        list_contract: { $push: { id_contract: "$_id", number_contract: "$id_contract", name_contract: "$name" } }
                     }
                 },
-                // {
-                //     $group: {
-                //         _id: "$_id.id_user_secretary",
-                //         ngays: { $push: { ngay: "$_id.date_create", count: "$count" } }
-                //     }
-                // }
+                {
+                    $group: {
+                        _id: "$_id.id_user_secretary",
+                        list_day: {
+                            $push: {
+                                date_create: "$_id.date_create",
+                                count: "$count",
+                                list_contract: "$list_contract"
+                            }
+                        }
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: 'users',
+                        localField: '_id',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+                },
+                {
+                    $unwind: '$user'
+                },
+                {
+                    $project: {
+                        username: '$user.username',
+                        list_day: {
+                            $sortArray:
+                            {
+                                input: "$list_day",
+                                sortBy: { date_create: -1 },
+
+                            },
+
+                        },
+
+                    }
+                }, {
+                    $sort: { username: 1 }
+                },
 
             ])
 
 
             return res.status(200).json({
                 data,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    //update status contract
+    updateStatusDebtContract: async (req, res, next) => {
+        try {
+            const filter = req.body.id
+            const update = req.body.status === 'true' ? true : false
+            const date = new Date()
+            const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+            // console.log(`${filter} -- ${update}`)
+            const response = await contract.findOneAndUpdate({ _id: filter }, { status: update, day_finish: new Date(today) })
+            return res.status(200).json({
+                data: response,
                 message: 'success'
             })
         } catch (error) {
