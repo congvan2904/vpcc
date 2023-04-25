@@ -6,7 +6,6 @@
     font-size: 15px;
     margin-top: 10px;
     margin-left: 10px;
-    max-width: 500px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -45,6 +44,9 @@
         background-color: rgba(224, 204, 204, 0.6);
       }
     }
+  }
+  .container-debt:empty {
+    display: none;
   }
   .debt:empty {
     border: none;

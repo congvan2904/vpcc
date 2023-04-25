@@ -24,7 +24,7 @@ const BodyRightDebtContracts = () => {
   return (
     <div className="body-right-debt-contract">
       {groupData.map((data) => (
-        <div key={data._id}>
+        <div key={data._id} className="container-debt">
           {data.list_day.length > 0 && (
             <div className="debt" key={data._id}>
               <div className="debt-name">{data.username}</div>
