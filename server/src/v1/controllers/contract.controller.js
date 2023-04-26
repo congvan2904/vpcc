@@ -497,15 +497,17 @@ module.exports = {
                 {
                     $group: {
                         _id: { cv: "$id_user_secretary", ngay: "$date_create" },
-                        count: { $sum: 1 }
+                        count: { $sum: 1 },
+                        dsmahs: { $push: { mahs: "$id_contract" } }
                     }
                 },
-                // {
-                //     $group: {
-                //         _id: "$_id.id_user_secretary",
-                //         ngays: { $push: { ngay: "$_id.date_create", count: "$count" } }
-                //     }
-                // }
+                {
+                    $group: {
+                        _id: "$_id.cv",
+                        dsngay: { $push: { ngay: "$_id.ngay", count: "$count", dsmahs: "$dsmahs" } },
+                        // dsmahs: { $first: "$dsmahs" }
+                    }
+                }
 
             ])
 
