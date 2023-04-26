@@ -46,7 +46,7 @@ const BodyRightUsers = () => {
     <div>
       <h1>Users</h1>
       {/* <button onClick={getUsers}>Get users</button> */}
-      <form>
+      <form encType="multipart/form-data">
         <div className="contract">
           <div className="contract-manager">
             <div className="contract-manager-group">
@@ -110,7 +110,7 @@ const BodyRightUsers = () => {
             />
             <label htmlFor="">Hình</label>
             <input
-              type="text"
+              type="file"
               placeholder="Hình"
               name="image"
               value={inputs.name}
