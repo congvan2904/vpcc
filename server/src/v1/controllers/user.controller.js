@@ -19,10 +19,11 @@ module.exports = {
         try {
             const { username, full_name, phone, email, role, position, image, note, ban } = req.body
             const userInfo = { username, password: username, fullname: full_name, phone_number: phone, email, role, position, image_path: image, note, ban }
-            const newUser = new User(userInfo)
-            const response = await newUser.save()
+            console.log({ image })
+            // const newUser = new User(userInfo)
+            // const response = await newUser.save()
             res.status(200).json({
-                data: response,
+                data: 'response',
                 message: 'success'
             })
         } catch (error) {
