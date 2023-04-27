@@ -17,6 +17,11 @@ export const update_status = createAsyncThunk('contract/update_status', async ({
     // console.log('--update_status----=>', response.data)
     return response.data
 })
+export const updateStatusDebtContract = createAsyncThunk('contract/update_status_debt_contract', async ({ id, status }) => {
+    const response = await contractsService.update_status_debt_contract({ id, status })
+    // console.log('--update_status----=>', response.data)
+    return response.data
+})
 export const createContract = createAsyncThunk('contract/create_contract', async (payload) => {
     const response = await contractsService.create_contract(payload)
     // console.log('---createContract---=>', response.data)
@@ -32,6 +37,7 @@ export const updateContractToday = createAsyncThunk('contract/update_contract_to
     // console.log('---UpdateContract---=>', response.data)
     return response.data
 })
+
 export const deleteContractToday = createAsyncThunk('contract/delete_contract_today', async (payload) => {
     // console.log(payload)
     const response = await contractsService.delete_contract_today(payload)
@@ -127,6 +133,54 @@ const contractsSlice = createSlice({
         [groupDebtContracts.fulfilled]: (state, action) => {
             state.loading = false;
             state.groupData = action.payload;
+        },
+        [updateStatusDebtContract.fulfilled]: (state, action) => {
+            state.loading = false;
+            const getId = action.payload?._id
+            // state.groupData = state.groupData.filter(item => {
+            //     const data = item.list_day.filter(day => {
+            //         const filter = day.list_contract.filter(contract => contract.id_contract !== getId)
+            //         return filter
+            //     })
+            //     return data
+            // });
+
+            const filter = (id_contract) =>
+                state.groupData.map((ld) => {
+                    return {
+                        ...ld,
+                        list_day: ld.list_day.map((e) => ({
+                            ...e,
+                            list_contract: e.list_contract.filter(
+                                (l) => l.id_contract !== id_contract
+                            ),
+                        })),
+                    };
+                });
+
+            if (filter(getId).length > 0) {
+                const arrResult = [];
+                filter(getId).forEach((ld) => {
+                    if (ld.list_day.length > 0) {
+                        const addListday = [];
+                        ld.list_day.forEach((item) => {
+                            if (item.list_contract.length > 0) {
+                                addListday.push(item);
+                            }
+                        });
+                        arrResult.push({
+                            _id: ld._id,
+                            username: ld.username,
+                            list_day: addListday,
+                        });
+                    }
+                });
+                state.groupData = arrResult
+                return state
+            }
+            state.groupData = []
+            return state
+
         },
         [getContractGroupSort.fulfilled]: (state, action) => {
             state.loading = false;

@@ -9,6 +9,9 @@ const contractsService = {
     status_contract: async ({ name, status }) => {
         return (await api.patch('contract/find', { name, status })).data
     },
+    update_status_debt_contract: async ({ id, status }) => {
+        return (await api.patch('contract/update-status-debt', { id, status })).data
+    },
     create_contract: async (payload) => {
         return (await api.post('contract/create-contract', payload)).data
     },

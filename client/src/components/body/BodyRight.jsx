@@ -22,7 +22,6 @@ const BodyRight = () => {
       // dispatch(contractsR());
       dispatch(usersT());
       dispatch(getContractsToday());
-      dispatch(groupDebtContracts());
     }
     fetchData();
   }, []);
