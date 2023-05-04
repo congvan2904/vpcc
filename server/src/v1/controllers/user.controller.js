@@ -17,9 +17,10 @@ module.exports = {
     },
     createUser: async (req, res, next) => {
         try {
-            const { username, full_name, phone, email, role, position, image, note, ban } = req.body
-            const userInfo = { username, password: username, fullname: full_name, phone_number: phone, email, role, position, image_path: image, note, ban }
-            console.log({ image })
+            const { username, fullname, phone, email, role, position, note, ban } = req.body
+            const { image } = req.file
+            const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: image, note, ban }
+            console.log({ userInfo })
             // const newUser = new User(userInfo)
             // const response = await newUser.save()
             res.status(200).json({
