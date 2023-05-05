@@ -1,5 +1,5 @@
 ### User
-GET http://localhost:5000/v1/user
+GET http://localhost:5000/v1/user/users
 
 ### User CREATE
 POST  http://localhost:5000/v1/user/create

@@ -4,7 +4,9 @@ const instance = axios.create({
     baseURL: 'http://localhost:5000/v1',
     timeout: 3 * 1000,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json',
+        // 'Content-Type': 'multipart/form-data',
     }
 })
 const getrefreshToken = async (refToken) => {
@@ -18,6 +20,10 @@ instance.interceptors.request.use(async (config) => {
     // Do something before request is sent
     if (config.url.indexOf('user/login') >= 0 || config.url.indexOf('user/refresh-token') >= 0) {
         return config
+    }
+    if (config.url.indexOf('user/create') >= 0) {
+        config.headers["Content-Type"] = "multipart/form-data";
+        // return config
     }
     const accessToken = await instance.getLocalAccessToken()
     config.headers['authorization'] = `Bearer ${accessToken}`

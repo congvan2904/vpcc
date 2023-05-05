@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import {
@@ -7,24 +7,46 @@ import {
 } from "../../redux/features/usersSlice";
 import instance from "../../services/configAxios";
 const BodyRightUsers = () => {
+  const refUserName = useRef();
+  const refFullName = useRef();
+  const refPhone = useRef();
+  const refEmail = useRef();
+  const refRule = useRef();
+  const refPosition = useRef();
+  const refNote = useRef();
+  const refBan = useRef();
+
   const [dataUser, setDataUser] = useState(null);
+  const refImg = useRef(null);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getListUser());
   }, []);
   const { data, loading } = useSelector((state) => state.users);
   const [inputs, setInputs] = useState({});
+  const [file, setFile] = useState(null);
   const handleInputChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    // console.log(refImg.current.files[0]);
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("username", refUserName.current.value);
+    formData.append("fullname", refFullName.current.value);
+    formData.append("phone", refPhone.current.value);
+    formData.append("email", refEmail.current.value);
+    formData.append("role", refRule.current.value);
+    formData.append("position", refPosition.current.value);
+    formData.append("note", refNote.current.value);
+    formData.append("ban", refBan.current.value);
 
     const payload = {
-      ...inputs,
+      ...formData,
     };
     // console.log("payload--->", payload);
-    dispatch(createUser(payload));
+    dispatch(createUser(formData));
   };
   const getUsers = async () => {
     try {
@@ -46,12 +68,13 @@ const BodyRightUsers = () => {
     <div>
       <h1>Users</h1>
       {/* <button onClick={getUsers}>Get users</button> */}
-      <form encType="multipart/form-data">
+      <form onSubmit={handleSubmitForm}>
         <div className="contract">
           <div className="contract-manager">
             <div className="contract-manager-group">
               <label htmlFor="">Tên đăng nhập</label>
               <input
+                ref={refUserName}
                 type="text"
                 placeholder="Tên đăng nhập"
                 name="username"
@@ -60,6 +83,7 @@ const BodyRightUsers = () => {
               />
               <label htmlFor="">Tên đầy đủ</label>
               <input
+                ref={refFullName}
                 type="text"
                 placeholder="Tên đầy đủ"
                 name="fullname"
@@ -72,6 +96,7 @@ const BodyRightUsers = () => {
           <div className="contract-manager-group">
             <label htmlFor="">Số điện thoại</label>
             <input
+              ref={refPhone}
               type="text"
               placeholder="Số điện thoại"
               name="phone"
@@ -80,6 +105,7 @@ const BodyRightUsers = () => {
             />
             <label htmlFor="">Email</label>
             <input
+              ref={refEmail}
               type="text"
               placeholder="Email"
               name="email"
@@ -88,6 +114,7 @@ const BodyRightUsers = () => {
             />
             <label htmlFor="">Quyền</label>
             <select
+              ref={refRule}
               name="rule"
               value={inputs.name}
               onChange={handleInputChange}
@@ -102,6 +129,7 @@ const BodyRightUsers = () => {
           <div className="contract-manager-group">
             <label htmlFor="">Vị trí</label>
             <input
+              ref={refPosition}
               type="text"
               placeholder="Vị trí"
               name="position"
@@ -110,14 +138,17 @@ const BodyRightUsers = () => {
             />
             <label htmlFor="">Hình</label>
             <input
+              // ref={refImg}
               type="file"
               placeholder="Hình"
               name="image"
-              value={inputs.name}
-              onChange={handleInputChange}
+              accept="image/*"
+              filename={file}
+              onChange={(e) => setFile(e.target.files[0])}
             />
             <label htmlFor="">Ghi Chú</label>
             <input
+              ref={refNote}
               type="text"
               placeholder="Ghi Chú"
               name="note"
@@ -125,14 +156,20 @@ const BodyRightUsers = () => {
               onChange={handleInputChange}
             />
             <label htmlFor="">Ban</label>
-            <select name="ban" value={inputs.name} onChange={handleInputChange}>
+            <select
+              ref={refBan}
+              name="ban"
+              value={inputs.name}
+              onChange={handleInputChange}
+            >
               <option defaultValue="default">Chọn </option>
               <option value="false">Không</option>
               <option value="true">Có</option>
             </select>
           </div>
           <div className="contract-manager-group">
-            <button onClick={handleSubmitForm}>Thêm</button>
+            {/* <button onClick={handleSubmitForm}>Thêm</button> */}
+            <button type="submit">Thêm</button>
           </div>
         </div>
       </form>
