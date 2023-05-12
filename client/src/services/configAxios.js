@@ -21,7 +21,7 @@ instance.interceptors.request.use(async (config) => {
     if (config.url.indexOf('user/login') >= 0 || config.url.indexOf('user/refresh-token') >= 0) {
         return config
     }
-    if (config.url.indexOf('user/create') >= 0) {
+    if (config.url.indexOf('user/create') >= 0 || config.url.indexOf('user/update') >= 0) {
         config.headers["Content-Type"] = "multipart/form-data";
         // return config
     }

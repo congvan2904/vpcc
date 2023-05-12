@@ -1,0 +1,68 @@
+.modal-user {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+
+  &-container {
+    padding: 10px 10px 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+    border-radius: 5px;
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .btn-close {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    display: grid;
+    gap: 5px;
+    justify-items: center;
+  }
+}
+.modal-manager-group {
+  display: flex;
+  gap: 5px;
+  label {
+    display: none;
+  }
+  input,
+  select {
+    font-size: 18px;
+    text-align: center;
+  }
+  #username {
+    width: 100px;
+  }
+  .btn-save {
+    cursor: pointer;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    // border-radius: 50%;
+    outline: none;
+    font-size: 25px;
+    border-width: 0;
+  }
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+}

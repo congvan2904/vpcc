@@ -9,6 +9,7 @@ require('./v1/database/init.redis')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/uploads', express.static('uploads'))
 
 app.use('/v1', require('./v1/routes/'))
 
