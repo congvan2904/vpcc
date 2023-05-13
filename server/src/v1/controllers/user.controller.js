@@ -43,9 +43,11 @@ module.exports = {
 
             const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: filePath, note, ban }
             // console.log({ userInfo })
-            const response = await User.findByIdAndUpdate({ _id: id }, userInfo)
+            const updated = await User.findByIdAndUpdate({ _id: id }, userInfo)
+            const dataFillter = await User.findById(updated._id)
+
             res.status(200).json({
-                data: response,
+                data: dataFillter,
                 message: 'success'
             })
         } catch (error) {
