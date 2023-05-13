@@ -6,6 +6,8 @@ import {
   users as getListUser,
 } from "../../redux/features/usersSlice";
 import instance from "../../services/configAxios";
+import ModalUser from "../user/ModalUser";
+import { toggleModalUser } from "../../redux/features/showModalUser";
 const BodyRightUsers = () => {
   const refUserName = useRef();
   const refFullName = useRef();
@@ -23,6 +25,9 @@ const BodyRightUsers = () => {
     dispatch(getListUser());
   }, []);
   const { data, loading } = useSelector((state) => state.users);
+  const { show, data: dataModalUser } = useSelector(
+    (state) => state.showModalUser
+  );
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const handleInputChange = (e) => {
@@ -63,6 +68,9 @@ const BodyRightUsers = () => {
       setDataUser(error.message);
       return error;
     }
+  };
+  const onShowModalUser = (data) => {
+    dispatch(toggleModalUser(data));
   };
   return (
     <div>
@@ -179,11 +187,12 @@ const BodyRightUsers = () => {
         <div>
           {data.map((item, i) => (
             <div key={i}>
-              <h2>
+              <h2 onClick={() => onShowModalUser(item)}>
                 {item._id} -- {item.username} -- {item.position} -- {item.email}
               </h2>
             </div>
           ))}
+          {show && <ModalUser data={dataModalUser} />}
         </div>
       )}
     </div>

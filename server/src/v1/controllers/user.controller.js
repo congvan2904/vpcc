@@ -17,14 +17,35 @@ module.exports = {
     },
     createUser: async (req, res, next) => {
         try {
+            const host = req.headers.host
+            const filePath = req.protocol + '://' + host + '/' + req.file.path
             const { username, fullname, phone, email, role, position, note, ban } = req.body
-            const { image } = req.file
-            const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: image, note, ban }
-            console.log({ userInfo })
-            // const newUser = new User(userInfo)
-            // const response = await newUser.save()
+            const file = req.file
+            const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: filePath, note, ban }
+            // console.log({ userInfo })
+            const newUser = new User(userInfo)
+            const response = await newUser.save()
             res.status(200).json({
-                data: 'response',
+                data: response,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    updateUser: async (req, res, next) => {
+        try {
+
+            const host = req.headers.host
+            const filePath = req.protocol + '://' + host + '/' + req.file?.path
+
+            const { id, username, fullname, phone, email, role, position, note, ban } = req.body
+
+            const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: filePath, note, ban }
+            // console.log({ userInfo })
+            const response = await User.findByIdAndUpdate({ _id: id }, userInfo)
+            res.status(200).json({
+                data: response,
                 message: 'success'
             })
         } catch (error) {

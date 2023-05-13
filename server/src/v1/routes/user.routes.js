@@ -12,6 +12,7 @@ router.post('/refresh-token', userController.refreshToken)
 router.get('/getlists', verifyAccessToken, authPage(['VT', 'role1']), userController.getlists)
 router.get('/', authPage(['VT', 'role1']), userController.getUser)
 router.post('/create', verifyAccessToken, authPage(['VT', 'role1']), upload.single('image'), userController.createUser)
+router.patch('/update', verifyAccessToken, authPage(['VT', 'role1']), upload.single('image'), userController.updateUser)
 // router.post('/create', upload.single('image'), userController.createUser)
 // router.get('/users', userController.getUser)
 
