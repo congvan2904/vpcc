@@ -12,6 +12,10 @@ import imgSearchContract from "../../assets/manage/searchcontract.png";
 import { useRef, useState } from "react";
 import ExtendContent from "./ExtendContent";
 import BodyRight from "./BodyRight";
+import UserInfo from "../user/UserInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleBottom } from "../../redux/features/showBottom";
+import Manager from "../manager/Manager";
 export const IconsTop = [
   {
     display: "Hợp đồng mới",
@@ -69,22 +73,31 @@ export const IconsTop = [
     ],
   },
 ];
+
 const IconsBottom = [
   {
     display: "Thông tin tài khoản",
-    path: "./contracts",
+    path: "/user-info",
     icon: imgAccount,
+    show: <UserInfo />,
   },
   {
     display: "Quản lý ",
-    path: "./contracts",
+    path: "/manager",
     icon: imgManage,
+    show: <Manager />,
   },
 ];
 const Body = (props) => {
+  const { show } = useSelector((state) => state.showBottom);
+  const dispatch = useDispatch();
   const refActive = useRef(null);
   const refExtend = useRef(null);
+  const refUserInfo = useRef(null);
+  const refShow = useRef(null);
+
   const [active, setActive] = useState("");
+  const [activeShow, setActiveShow] = useState("");
 
   const [initialPos, setInitialPos] = useState(null);
   const [initialSize, setInitialSize] = useState(null);
@@ -120,6 +133,15 @@ const Body = (props) => {
     }px`;
     refExtend.current.classList.add("resized");
   };
+
+  const handleUserInfo = (data) => {
+    // dispatch(toggleBottom());
+    // e.stopPropagation();
+    // console.log(e);
+    // refShow.current.classList.toggle("active");
+    activeShow === "" ? setActiveShow(data) : setActiveShow("");
+  };
+
   return (
     <div className="manage-body">
       <div className="manage-body-left">
@@ -142,9 +164,21 @@ const Body = (props) => {
           </ul>
           <ul className="icons-bottom">
             {IconsBottom.map((item) => (
-              <li className="icons-bottom-item" key={item.display}>
+              <li
+                className="icons-bottom-item"
+                key={item.display}
+                onClick={() => handleUserInfo(item.display)}
+              >
                 <img src={item.icon} alt={item.display} />
                 <div className="tool-tip">{item.display}</div>
+                <div
+                  className={`show ${
+                    activeShow === item.display ? "active" : ""
+                  }`}
+                  ref={refShow}
+                >
+                  {item.show}
+                </div>
               </li>
             ))}
           </ul>

@@ -15,14 +15,25 @@ export const updateUser = createAsyncThunk('users/update', async (payload) => {
     // console.log('Update USER------=>', response)
     return response.data
 })
+export const getUserLogin = createAsyncThunk('users/user-login', async (payload) => {
+    const response = await usersService.get_user_login(payload)
+    // console.log('Update USER------=>', response)
+    return response.data
+})
 
 const usersSlice = createSlice({
     name: 'users',
     initialState: {
         loading: false,
-        data: []
+        data: [],
+        username: '',
+        userLogin: {},
     },
-    reducers: {},
+    reducers: {
+        getUserName: (state, action) => {
+            state.username = action.payload
+        }
+    },
     extraReducers: {
         [users.pending]: (state, action) => {
             state.loading = true;
@@ -58,8 +69,15 @@ const usersSlice = createSlice({
             // state.data = [...filter, action.payload];
             return state
         },
+        [getUserLogin.fulfilled]: (state, action) => {
+            state.loading = false;
+
+            state.userLogin = action.payload
+        },
 
     }
 })
 const { reducer: usersReducer } = usersSlice
+export const { getUserName } = usersSlice.actions
+
 export default usersReducer

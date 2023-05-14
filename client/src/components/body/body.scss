@@ -52,6 +52,7 @@
           padding: 10px;
           &-item {
             position: relative;
+
             &:hover {
               cursor: pointer;
               outline: 2px dotted #e15606;
@@ -62,8 +63,23 @@
                 opacity: 1;
               }
             }
+            .show {
+              position: absolute;
+              bottom: -3px;
+              left: 100%;
+              margin-left: 13px;
+              display: none;
+            }
+            .active {
+              display: block;
+              background-color: #ddb5b5;
+              width: 200px;
+              height: 40px;
+              padding: 10px;
+            }
           }
         }
+
         .tool-tip {
           visibility: hidden;
           opacity: 0;

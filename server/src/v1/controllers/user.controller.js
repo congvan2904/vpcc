@@ -15,6 +15,19 @@ module.exports = {
             next(error)
         }
     },
+    getUserLogin: async (req, res, next) => {
+        try {
+            const { username } = req.body
+            // console.log({ username })
+            const response = await User.findOne({ username }).select('-password')
+            return res.status(200).json({
+                data: response,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
     createUser: async (req, res, next) => {
         try {
             const host = req.headers.host

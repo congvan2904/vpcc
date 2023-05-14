@@ -81,6 +81,7 @@ const ModalUser = (props) => {
     // console.log(file);
 
     dispatch(updateUser(formData));
+    dispatch(toggleModalUser());
   };
   const getUsers = async () => {
     try {

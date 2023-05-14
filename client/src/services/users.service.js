@@ -3,6 +3,9 @@ const usersService = {
     users: async () => {
         return (await api.get('user/getlists')).data
     },
+    get_user_login: async (payload) => {
+        return (await api.post('user/get-user-login', payload)).data
+    },
     create_user: async (payload) => {
         return (await api.post('user/create', payload)).data
     },

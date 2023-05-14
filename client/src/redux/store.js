@@ -5,6 +5,7 @@ import showDataReducer from './features/showDataSlice'
 import usersReducer from './features/usersSlice'
 import modalItemContractReducer from './features/showModalItemContract'
 import modalUserReducer from './features/showModalUser'
+import showBottomReducer from './features/showBottom'
 
 const rootReducer = {
     auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = {
     showRightBar: showDataReducer,
     showModalContractItem: modalItemContractReducer,
     showModalUser: modalUserReducer,
+    showBottom: showBottomReducer,
 }
 const store = configureStore({
     reducer: rootReducer,

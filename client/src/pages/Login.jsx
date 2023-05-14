@@ -9,6 +9,7 @@ import "./login.scss";
 import Helmet from "../components/Helmet";
 import instance from "../services/configAxios";
 import { login as loginR } from "../redux/features/authSlice";
+import { getUserName } from "../redux/features/usersSlice";
 
 // import axios from 'axios'
 const Login = () => {
@@ -50,6 +51,7 @@ const Login = () => {
       };
       setRotation((state) => state - 720);
       if (actionResult.payload.accessToken) {
+        dispatch(getUserName(refUsername.current.value));
         await instance.setLocalToken(
           actionResult.payload.accessToken,
           actionResult.payload.refreshToken
