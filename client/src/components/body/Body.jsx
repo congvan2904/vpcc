@@ -16,6 +16,7 @@ import UserInfo from "../user/UserInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBottom } from "../../redux/features/showBottom";
 import Manager from "../manager/Manager";
+import { getUserLogin } from "../../redux/features/usersSlice";
 export const IconsTop = [
   {
     display: "Hợp đồng mới",
@@ -82,7 +83,7 @@ const IconsBottom = [
     show: <UserInfo />,
   },
   {
-    display: "Quản lý ",
+    display: "Quản lý",
     path: "/manager",
     icon: imgManage,
     show: <Manager />,
@@ -91,6 +92,7 @@ const IconsBottom = [
 const Body = (props) => {
   const { show } = useSelector((state) => state.showBottom);
   const dispatch = useDispatch();
+  const { username } = useSelector((state) => state.users);
   const refActive = useRef(null);
   const refExtend = useRef(null);
   const refUserInfo = useRef(null);
@@ -139,7 +141,12 @@ const Body = (props) => {
     // e.stopPropagation();
     // console.log(e);
     // refShow.current.classList.toggle("active");
-    activeShow === "" ? setActiveShow(data) : setActiveShow("");
+    dispatch(getUserLogin({ username }));
+    activeShow === ""
+      ? setActiveShow(data) &&
+        data === "Thông tin tài khoản" &&
+        dispatch(getUserLogin({ username }))
+      : setActiveShow("");
   };
 
   return (
@@ -171,14 +178,21 @@ const Body = (props) => {
               >
                 <img src={item.icon} alt={item.display} />
                 <div className="tool-tip">{item.display}</div>
-                <div
+
+                {/* <div
                   className={`show ${
                     activeShow === item.display ? "active" : ""
                   }`}
                   ref={refShow}
                 >
                   {item.show}
-                </div>
+                </div> */}
+                {activeShow &&
+                  activeShow === "Thông tin tài khoản" &&
+                  activeShow === item.display && <UserInfo />}
+                {activeShow &&
+                  activeShow === "Quản lý" &&
+                  activeShow === item.display && <Manager />}
               </li>
             ))}
           </ul>

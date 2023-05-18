@@ -1,7 +1,6 @@
-import { useSelector } from "react-redux";
-
+import "./manager.scss";
 const Manager = () => {
-  return <div>Manager</div>;
+  return <div className="manager-bottom">Manager</div>;
 };
 
 export default Manager;
