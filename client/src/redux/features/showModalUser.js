@@ -4,7 +4,7 @@ const showModalSlice = createSlice({
     name: 'show_modal_user',
     initialState: {
         show: false,
-        data: {}
+        data: ''
     },
     reducers: {
         toggleModalUser: (state, action) => {

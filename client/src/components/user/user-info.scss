@@ -6,7 +6,6 @@
   background-color: #f1e5e5;
   min-width: 250px;
   //   height: 40px;
-  padding: 10px;
   color: black;
   font-weight: 600;
   :not(:last-child) {
@@ -16,4 +15,16 @@
     outline: 1px solid red;
   }
   cursor: default;
+  &-username {
+    position: relative;
+    .sign-out {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background: wheat;
+      width: 80px;
+      cursor: pointer;
+      padding: 10px;
+    }
+  }
 }

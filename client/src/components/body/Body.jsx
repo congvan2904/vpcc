@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleBottom } from "../../redux/features/showBottom";
 import Manager from "../manager/Manager";
 import { getUserLogin } from "../../redux/features/usersSlice";
+import { toggleModalUser } from "../../redux/features/showModalUser";
 export const IconsTop = [
   {
     display: "Hợp đồng mới",
@@ -91,6 +92,10 @@ const IconsBottom = [
 ];
 const Body = (props) => {
   const { show } = useSelector((state) => state.showBottom);
+  const { show: showUser, data: dataShow } = useSelector(
+    (state) => state.showModalUser
+  );
+  // console.log(showUser);
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.users);
   const refActive = useRef(null);
@@ -136,17 +141,17 @@ const Body = (props) => {
     refExtend.current.classList.add("resized");
   };
 
-  const handleUserInfo = (data) => {
-    // dispatch(toggleBottom());
-    // e.stopPropagation();
-    // console.log(e);
-    // refShow.current.classList.toggle("active");
+  const handleUserInfo = (e, data) => {
+    e.stopPropagation();
     dispatch(getUserLogin({ username }));
-    activeShow === ""
-      ? setActiveShow(data) &&
-        data === "Thông tin tài khoản" &&
-        dispatch(getUserLogin({ username }))
-      : setActiveShow("");
+
+    // activeShow === ""
+    //   ? setActiveShow(data) &&
+    //     data === "Thông tin tài khoản" &&
+    //     dispatch(getUserLogin({ username }))
+    //   : setActiveShow("");
+
+    dispatch(toggleModalUser(data));
   };
 
   return (
@@ -171,14 +176,13 @@ const Body = (props) => {
           </ul>
           <ul className="icons-bottom">
             {IconsBottom.map((item) => (
-              <li
-                className="icons-bottom-item"
-                key={item.display}
-                onClick={() => handleUserInfo(item.display)}
-              >
-                <img src={item.icon} alt={item.display} />
+              <li className="icons-bottom-item" key={item.display}>
+                <img
+                  src={item.icon}
+                  alt={item.display}
+                  onClick={(e) => handleUserInfo(e, item.display)}
+                />
                 <div className="tool-tip">{item.display}</div>
-
                 {/* <div
                   className={`show ${
                     activeShow === item.display ? "active" : ""
@@ -187,12 +191,20 @@ const Body = (props) => {
                 >
                   {item.show}
                 </div> */}
-                {activeShow &&
+
+                {/* {activeShow &&
                   activeShow === "Thông tin tài khoản" &&
                   activeShow === item.display && <UserInfo />}
                 {activeShow &&
                   activeShow === "Quản lý" &&
-                  activeShow === item.display && <Manager />}
+                  activeShow === item.display && <Manager />} */}
+
+                {showUser &&
+                  dataShow === "Thông tin tài khoản" &&
+                  dataShow === item.display && <UserInfo />}
+                {showUser &&
+                  dataShow === "Quản lý" &&
+                  dataShow === item.display && <Manager />}
               </li>
             ))}
           </ul>

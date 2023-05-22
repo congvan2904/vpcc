@@ -7,7 +7,7 @@ const upload = require('../models/multer.model')
 
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.delete('/logout', verifyAccessToken, authPage(['VT', 'role1']), userController.logout)
+router.delete('/logout/:refreshToken', verifyAccessToken, authPage(['VT', 'role1']), userController.logout)
 router.post('/refresh-token', userController.refreshToken)
 router.get('/getlists', verifyAccessToken, authPage(['VT', 'role1']), userController.getlists)
 router.get('/', authPage(['VT', 'role1']), userController.getUser)

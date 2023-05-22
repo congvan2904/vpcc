@@ -55,8 +55,6 @@
 
             &:hover {
               cursor: pointer;
-              outline: 2px dotted #e15606;
-              outline-offset: 4px;
               transform: scale(1);
               .tool-tip {
                 visibility: visible;
@@ -76,6 +74,12 @@
               width: 200px;
               height: 40px;
               padding: 10px;
+            }
+            img {
+              &:hover {
+                outline: 2px dotted #e15606;
+                outline-offset: 4px;
+              }
             }
           }
         }

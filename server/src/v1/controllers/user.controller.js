@@ -118,7 +118,8 @@ module.exports = {
     },
     logout: async (req, res, next) => {
         try {
-            const { refreshToken } = req.body
+            const { refreshToken } = req.params
+            // console.log('tk==>>', refreshToken)
             if (!refreshToken) throw new Error('Bad request')
             const { userId } = await verifyRefreshToken(refreshToken)
             client.del(userId.toString(), (err, reply) => {
