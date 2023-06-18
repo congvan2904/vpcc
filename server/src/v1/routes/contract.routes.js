@@ -35,7 +35,7 @@ router.get('/populate', verifyAccessToken, authPage(['VT', 'role1']), contractCo
 
 router.get('/group', verifyAccessToken, authPage(['VT', 'role1']), contractController.groupContract)
 
-router.patch('/find', verifyAccessToken, authPage(['VT', 'role1']), contractController.findContract)
+router.post('/find', verifyAccessToken, authPage(['VT', 'role1']), contractController.findContract)
 
 router.get('/group-sort', verifyAccessToken, authPage(['VT', 'role1']), contractController.getContractsSort)
 

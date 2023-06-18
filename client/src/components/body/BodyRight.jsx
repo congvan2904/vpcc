@@ -10,6 +10,7 @@ import BodyRightUsers from "./BodyRightUsers";
 import BodyRightUsersSearch from "./BodyRightUsersSearch";
 import {
   contracts as contractsR,
+  getAllContract,
   getContractsToday,
   groupDebtContracts,
 } from "../../redux/features/contractsSlice";
@@ -22,6 +23,7 @@ const BodyRight = () => {
       // dispatch(contractsR());
       dispatch(usersT());
       dispatch(getContractsToday());
+      dispatch(getAllContract({ page: 1, page_size: 50 }));
     }
     fetchData();
   }, []);

@@ -102,6 +102,46 @@ module.exports = {
     },
     getPageContract: async (req, res, next) => {
         try {
+            const PAGE_SIZE = +req.query.page_size || 50
+            const page = +req.query.page
+
+
+            if (page) {
+
+                const skip = (+page - 1) * PAGE_SIZE
+                const newContract = await contract.find({})
+                    .populate("id_user_secretary", "username -_id")
+                    .populate("id_user_notary", "username -_id")
+                    .sort({ 'id_contract': 1 }).skip(skip).limit(PAGE_SIZE)
+
+                const newarr = newContract.map((item) => ({
+                    item,
+                    sohop: Math.ceil(item.id_contract / 50)
+                }))
+
+                return res.status(200).json({
+                    data: newarr,
+                    message: 'success'
+                })
+            }
+            const newContract = await contract.find({})
+                .populate("id_user_secretary", "username -_id")
+                .populate("id_user_notary", "username -_id")
+                .sort({ 'id_contract': 1 })
+            const newarr = newContract.map(item => ({
+                item,
+                sohop: Math.ceil(item.id_contract / 50)
+            }))
+            return res.status(200).json({
+                data: newarr,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+    getPageDebtContract: async (req, res, next) => {
+        try {
             const PAGE_SIZE = 50
             const page = req.query.page
             // console.log(a)
@@ -117,7 +157,7 @@ module.exports = {
                     sohop: Math.ceil(item.id_contract / 50)
                 }))
                 return res.status(200).json({
-                    data: { newarr },
+                    data: newarr,
                     message: 'success'
                 })
             }
@@ -127,7 +167,7 @@ module.exports = {
                 sohop: Math.ceil(item.id_contract / 50)
             }))
             return res.status(200).json({
-                data: { newarr },
+                data: newarr,
                 message: 'success'
             })
         } catch (error) {
@@ -325,14 +365,135 @@ module.exports = {
     //update status contract
     findContract: async (req, res, next) => {
         try {
-            const filter = req.body.name
-            const update = req.body.status === 'true' ? true : false
+            const filter = req.body;
+            // const update = req.body.status === 'true' ? true : false
             // console.log(`${filter} -- ${update}`)
-            const response = await contract.findOneAndUpdate({ _id: filter }, { status: update })
-            return res.status(200).json({
-                data: response,
-                message: 'success'
-            })
+            const { id_contract, name, note, phone, dateFrom: startDate, dateTo: endDate, id_user_notary, id_user_secretary } = { ...filter }
+            if (startDate && endDate) {
+                if (id_contract) {
+                    const response = await contract.find({ id_contract: +id_contract, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                if (id_user_notary) {
+                    const response = await contract.find({ id_user_notary: id_user_notary, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                if (id_user_secretary) {
+                    const response = await contract.find({ id_user_secretary: id_user_secretary, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                if (name) {
+                    const response = await contract.find({ $text: { $search: name }, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                if (note) {
+                    const response = await contract.find({ 'note': { $regex: note }, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao noteeee', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                if (phone) {
+                    // console.log({ phone })
+                    const response = await contract.find({ 'phone': { $regex: phone }, "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    // console.log('vao phone', response)
+
+                    return res.status(200).json({
+                        data: response,
+                        message: 'success'
+                    })
+                }
+                const response = await contract.find({ "date_create": { "$gte": (new Date(startDate)).setHours(0, 0, 0, 0), "$lt": (new Date(endDate).setHours(23, 59, 59, 999)) } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (id_contract) {
+                const response = await contract.find({ id_contract: +id_contract }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (id_user_notary) {
+                const response = await contract.find({ id_user_notary: id_user_notary }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (id_user_secretary) {
+                const response = await contract.find({ id_user_secretary: id_user_secretary }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (name) {
+                const response = await contract.find({ $text: { $search: name } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (note) {
+                const response = await contract.find({ 'note': { $regex: note } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                // console.log('vao noteeee', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            if (phone) {
+                console.log({ phone })
+                const response = await contract.find({ 'phone': { $regex: phone } }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                console.log('vao phone', response)
+
+                return res.status(200).json({
+                    data: response,
+                    message: 'success'
+                })
+            }
+            // console.log('0000000000000 vao')
+            // const response = await contract.find(filter)
+            // return res.status(200).json({
+            //     data: response,
+            //     message: 'success'
+            // })
         } catch (error) {
             next(error)
         }

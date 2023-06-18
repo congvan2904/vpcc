@@ -9,6 +9,12 @@ import imgToday from "../../assets/manage/today.png";
 import imgTomorrow from "../../assets/manage/tomorrow.png";
 import imgSearchContract from "../../assets/manage/searchcontract.png";
 
+import imgDebtContract from "../../assets/manage/debt-contract.png";
+import imgSearchDebtContract from "../../assets/manage/search-debt-contract.png";
+
+import imgListUser from "../../assets/manage/list-user.png";
+import imgSearchUser from "../../assets/manage/search-user.png";
+
 import { useRef, useState } from "react";
 import ExtendContent from "./ExtendContent";
 import BodyRight from "./BodyRight";
@@ -47,12 +53,12 @@ export const IconsTop = [
     extend: [
       {
         display: "Hợp đồng nợ",
-        icon: "",
+        icon: imgDebtContract,
         path: "/debt-contracts",
       },
       {
         display: "Tìm kiếm hợp đồng nợ",
-        icon: "",
+        icon: imgSearchDebtContract,
         path: "/debt-contracts-search",
       },
     ],
@@ -64,12 +70,12 @@ export const IconsTop = [
     extend: [
       {
         display: "Danh sách",
-        icon: "",
+        icon: imgListUser,
         path: "/users",
       },
       {
         display: "Tìm kiếm ",
-        icon: "",
+        icon: imgSearchUser,
         path: "/users-search",
       },
     ],

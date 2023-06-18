@@ -37,5 +37,6 @@ const contractSchema = new Schema({
     }
 },
     { timestamps: true })
+contractSchema.index({ '$**': 'text' });
 module.exports = mongoose.model('contract', contractSchema)
 

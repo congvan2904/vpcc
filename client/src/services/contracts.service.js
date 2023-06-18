@@ -3,6 +3,9 @@ const contractsService = {
     contracts: async () => {
         return (await api.get('contract/debt')).data
     },
+    get_all_contract: async ({ page, page_size }) => {
+        return (await api.get(`contract/?page=${page}&page_size=${page_size}`)).data
+    },
     group_debt_contracts: async () => {
         return (await api.get('contract/group-debt')).data
     },
@@ -36,6 +39,9 @@ const contractsService = {
     },
     get_last_contract: async () => {
         return (await api.get('contract/last-contract')).data
+    },
+    find_contract: async (payload) => {
+        return (await api.post('contract/find', payload)).data
     }
 }
 

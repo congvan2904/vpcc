@@ -72,6 +72,18 @@ export const deleteContracts = createAsyncThunk('contract/deletes', async () => 
     return response.data.deletedCount
 })
 
+export const getAllContract = createAsyncThunk('contract/getall', async ({ page, page_size }) => {
+    const response = await contractsService.get_all_contract({ page, page_size })
+    // console.log('---createContract---=>', response)
+    return response.data
+})
+
+export const findContract = createAsyncThunk('contract/find', async (payload) => {
+    const response = await contractsService.find_contract(payload)
+    // console.log('---createContract---=>', response)
+    return response.data
+})
+
 const contractsSlice = createSlice({
     name: 'contracts',
     initialState: {
@@ -80,6 +92,8 @@ const contractsSlice = createSlice({
         number: 0,
         lastContract: {},
         groupData: [],
+        allContract: [],
+        findData: []
     },
     reducers: {
         sort_secretary: (state) => {
@@ -128,6 +142,12 @@ const contractsSlice = createSlice({
             state.loading = false;
             state.number = 0;
             state.data = action.payload;
+            // console.log('redux', state.data)
+        },
+        [getAllContract.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.allContract = [...state.allContract, ...action.payload];
+            // state.allContract = [...data]
             // console.log('redux', state.data)
         },
         [groupDebtContracts.fulfilled]: (state, action) => {
@@ -282,6 +302,10 @@ const contractsSlice = createSlice({
         [getLastContract.fulfilled]: (state, action) => {
             state.loading = false;
             state.lastContract = { ...action.payload };
+        },
+        [findContract.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.findData = [...action.payload];
         },
     }
 })
