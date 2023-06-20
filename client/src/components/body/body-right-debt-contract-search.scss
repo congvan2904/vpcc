@@ -1,0 +1,48 @@
+.debt-contract-search {
+  display: flex;
+  flex-direction: column;
+  .search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 20px;
+    backdrop-filter: blur(4px) saturate(180%);
+    height: 85px;
+    input {
+      background-color: transparent;
+      width: calc(100% - 40px);
+      border: 0;
+      outline: none;
+      padding: 24px 20px;
+      font-size: 20px;
+      color: #cac7ff;
+    }
+    ::placeholder {
+      color: #cac7ff;
+    }
+    button {
+      position: absolute;
+      left: 100%;
+      transform: translateX(calc(-100% - 10px));
+      border: 0;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background-color: #58629b;
+      cursor: pointer;
+      img {
+        width: 25px;
+      }
+    }
+    .show {
+      display: block;
+    }
+    .hide {
+      display: none;
+    }
+  }
+}
