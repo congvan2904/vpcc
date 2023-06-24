@@ -11,6 +11,7 @@ const BodyRightDebtContractsSearch = () => {
   const refSearch = useRef();
   const refSelect = useRef();
   const refNotary = useRef();
+  const refSecretary = useRef();
   const refFromDate = useRef();
   const refToDate = useRef();
   const dispatch = useDispatch();
@@ -49,14 +50,20 @@ const BodyRightDebtContractsSearch = () => {
   const { data: dataUsers, loading } = useSelector((state) => state.users);
 
   console.log({ findData });
-  const handleChange = () => {
-    if (refSelect.current.value === "id_user_notary") {
-      setShowCombobox(true);
-    } else setShowCombobox(false);
+  // const handleChange = () => {
+  //   if (refSelect.current.value === "id_user_notary") {
+  //     setShowCombobox(true);
+  //   } else setShowCombobox(false);
+  // };
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      console.log({ value });
+    }
   };
   return (
     <div className="debt-contract-search">
-      <select ref={refSelect} onChange={handleChange}>
+      {/* <select ref={refSelect} onChange={handleChange}>
         <option value="id_contract">So ho so</option>
 
         <option value={"id_user_notary"}>cong chung vien</option>
@@ -119,6 +126,128 @@ const BodyRightDebtContractsSearch = () => {
         </button>
       </div>
       <div className="contract-table">
+        {findData && (
+          <table>
+            <thead>
+              <tr>
+                <td>So hop</td>
+                <td>So ho so</td>
+                <td>Thu ky</td>
+                <td>Cong chung vien</td>
+                <td>Ten Ho so</td>
+                <td>Ten khach hang</td>
+                <td>So dien thoai</td>
+                <td>Ngay tao</td>
+              </tr>
+            </thead>
+            <tbody>
+              {findData.map((item, index) => (
+                <tr key={index}>
+                  <td>{Math.ceil(item.id_contract / 50)}</td>
+                  <td>{item.id_contract}</td>
+                  <td>{item.id_user_secretary.username}</td>
+                  <td>{item.id_user_notary.username}</td>
+                  <td>{item.name}</td>
+                  <td>{item.note}</td>
+                  <td>{item.phone}</td>
+                  <td>{formatDate(item.date_create)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div> */}
+      <div className="search-title">
+        <div className="search-title-contractid">
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            value={"selectId"}
+            onChange={handleChange}
+          />
+          <label htmlFor="">Ma ho so</label>
+          <input type="text" className="idContract" />
+        </div>
+        <div className="search-title-persion">
+          <div className="search-title-persion-secretary">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              value={"secretary"}
+              onChange={handleChange}
+            />
+            <label htmlFor="">Thu ky</label>
+            <select
+              ref={refSecretary}
+              name="dropdownSecretary"
+              // value={inputs.name}
+              // onChange={handleInputChange}
+              // onKeyDown={handleChangerFocusNameContract}
+              // className={showCombobox ? "show" : "hide"}
+            >
+              {dataUsers.map((e) => {
+                return (
+                  <option value={e._id} key={e._id}>
+                    {e.username}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="search-title-persion-notary">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              value={"notary"}
+              onChange={handleChange}
+            />
+            <label htmlFor="">Cong chung vien</label>
+            <select
+              ref={refNotary}
+              name="dropdownNotary"
+              // value={inputs.name}
+              // onChange={handleInputChange}
+              // onKeyDown={handleChangerFocusNameContract}
+              // className={showCombobox ? "show" : "hide"}
+            >
+              {dataUsers.map((e) => {
+                return (
+                  <option value={e._id} key={e._id}>
+                    {e.username}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="search-title-date">
+          <div className="search-title-date-select">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              value={"selectDay"}
+              onChange={handleChange}
+            />
+            <label htmlFor="">Chon ngay</label>
+          </div>
+          <div className="search-title-date-from">
+            <label htmlFor="">Tu ngay</label>
+            <input type="date" name="" id="" />
+          </div>
+          <div className="search-title-date-to">
+            <label htmlFor="">Den ngay</label>
+            <input type="date" name="" id="" />
+          </div>
+        </div>
+        <button type="submit" className="searchButton" onClick={handleSubmit}>
+          <img src={imgSearch} alt="" />
+        </button>
+      </div>
+      <div className="search-content">
         {findData && (
           <table>
             <thead>
