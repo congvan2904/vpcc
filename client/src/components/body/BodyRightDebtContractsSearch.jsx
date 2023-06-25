@@ -14,36 +14,75 @@ const BodyRightDebtContractsSearch = () => {
   const refSecretary = useRef();
   const refFromDate = useRef();
   const refToDate = useRef();
+  const refIdContract = useRef();
+  const refId = useRef();
+  const refPersion = useRef();
+  const refCheckBoxSelectId = useRef();
+  const refCheckBoxSecretary = useRef();
+  const refCheckBoxNotary = useRef();
+  const refCheckBoxDate = useRef();
+  const refStartDate = useRef();
+  const refEndDate = useRef();
+
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    let value = refSearch.current.value;
-    let dateFrom = refFromDate.current.value;
-    let dateTo = refToDate.current.value;
+    // let value = refSearch.current.value;
+    // let dateFrom = refFromDate.current.value;
+    // let dateTo = refToDate.current.value;
 
-    if (refSelect.current.value === "id_user_notary") {
-      value = refNotary.current.value;
+    // if (refSelect.current.value === "id_user_notary") {
+    //   value = refNotary.current.value;
+    // }
+    // if (refSelect.current.value === "id_user_secretary") {
+    //   value = refNotary.current.value;
+    // }
+    // let payload = {
+    //   [refSelect.current.value]: value,
+    // };
+    // if (dateFrom && dateTo) {
+    //   payload = {
+    //     [refSelect.current.value]: value,
+    //     dateFrom,
+    //     dateTo,
+    //   };
+    // }
+
+    let payload = {};
+    if (refCheckBoxSelectId.current.checked) {
+      if (refIdContract.current.value) {
+        payload = {
+          [refIdContract.current.name]: refIdContract.current.value,
+          ...payload,
+        };
+      }
     }
-    if (refSelect.current.value === "id_user_secretary") {
-      value = refNotary.current.value;
+    if (refCheckBoxDate.current.checked) {
+      if (refStartDate.current.value && refEndDate.current.value) {
+        payload = {
+          [refStartDate.current.name]: refStartDate.current.value,
+          [refEndDate.current.name]: refEndDate.current.value,
+          ...payload,
+        };
+      }
     }
-    let payload = {
-      [refSelect.current.value]: value,
-    };
-    if (dateFrom && dateTo) {
+    if (refCheckBoxSecretary.current.checked) {
       payload = {
-        [refSelect.current.value]: value,
-        dateFrom,
-        dateTo,
+        [refSecretary.current.name]: refSecretary.current.value,
+        ...payload,
       };
     }
-
+    if (refCheckBoxNotary.current.checked) {
+      payload = {
+        [refNotary.current.name]: refNotary.current.value,
+        ...payload,
+      };
+    }
     console.log(payload);
-    // console.log({ dateCreate });
 
-    dispatch(findContract(payload));
-    refFromDate.current.value = null;
-    refToDate.current.value = null;
+    // dispatch(findContract(payload));
+    // refFromDate.current.value = null;
+    // refToDate.current.value = null;
     // console.log(result.payload);
   };
   const { findData } = useSelector((state) => state.contracts);
@@ -55,10 +94,46 @@ const BodyRightDebtContractsSearch = () => {
   //     setShowCombobox(true);
   //   } else setShowCombobox(false);
   // };
+  const listCheck = ["selectId", "secretary", "notary", "selectDay"];
   const handleChange = (e) => {
     const { value, checked } = e.target;
+    // console.log();
     if (checked) {
-      console.log({ value });
+      if (value === listCheck[0]) {
+        refIdContract.current.classList.toggle("show");
+        refPersion.current.classList.toggle("hide");
+      }
+      if (value === listCheck[1]) {
+        refSecretary.current.classList.toggle("show");
+        refId.current.classList.add("hide");
+      }
+      if (value === listCheck[2]) {
+        refNotary.current.classList.toggle("show");
+        refId.current.classList.add("hide");
+      }
+      if (value === listCheck[3]) {
+        refFromDate.current.classList.toggle("show");
+        refToDate.current.classList.toggle("show");
+      }
+    } else {
+      if (value === listCheck[0]) {
+        refIdContract.current.classList.toggle("show");
+        refPersion.current.classList.toggle("hide");
+      }
+      if (value === listCheck[1]) {
+        refSecretary.current.classList.toggle("show");
+        refCheckBoxNotary.current.checked === false &&
+          refId.current.classList.remove("hide");
+      }
+      if (value === listCheck[2]) {
+        refNotary.current.classList.toggle("show");
+        refCheckBoxSecretary.current.checked === false &&
+          refId.current.classList.remove("hide");
+      }
+      if (value === listCheck[3]) {
+        refFromDate.current.classList.toggle("show");
+        refToDate.current.classList.toggle("show");
+      }
     }
   };
   return (
@@ -158,30 +233,37 @@ const BodyRightDebtContractsSearch = () => {
         )}
       </div> */}
       <div className="search-title">
-        <div className="search-title-contractid">
+        <div className="search-title-contractid" ref={refId}>
           <input
             type="checkbox"
-            name=""
             id=""
             value={"selectId"}
+            ref={refCheckBoxSelectId}
             onChange={handleChange}
           />
           <label htmlFor="">Ma ho so</label>
-          <input type="text" className="idContract" />
+          <input
+            type="text"
+            className="idContract"
+            name="id_contract"
+            ref={refIdContract}
+          />
         </div>
-        <div className="search-title-persion">
+        <div className="search-title-persion" ref={refPersion}>
           <div className="search-title-persion-secretary">
             <input
               type="checkbox"
               name=""
               id=""
               value={"secretary"}
+              ref={refCheckBoxSecretary}
               onChange={handleChange}
             />
             <label htmlFor="">Thu ky</label>
             <select
               ref={refSecretary}
-              name="dropdownSecretary"
+              name="id_user_secretary"
+              className="secretary"
               // value={inputs.name}
               // onChange={handleInputChange}
               // onKeyDown={handleChangerFocusNameContract}
@@ -201,13 +283,15 @@ const BodyRightDebtContractsSearch = () => {
               type="checkbox"
               name=""
               id=""
+              ref={refCheckBoxNotary}
               value={"notary"}
               onChange={handleChange}
             />
             <label htmlFor="">Cong chung vien</label>
             <select
               ref={refNotary}
-              name="dropdownNotary"
+              name="id_user_notary"
+              className="notary"
               // value={inputs.name}
               // onChange={handleInputChange}
               // onKeyDown={handleChangerFocusNameContract}
@@ -230,17 +314,18 @@ const BodyRightDebtContractsSearch = () => {
               name=""
               id=""
               value={"selectDay"}
+              ref={refCheckBoxDate}
               onChange={handleChange}
             />
             <label htmlFor="">Chon ngay</label>
           </div>
-          <div className="search-title-date-from">
+          <div className="search-title-date-from" ref={refFromDate}>
             <label htmlFor="">Tu ngay</label>
-            <input type="date" name="" id="" />
+            <input type="date" name="start" id="" ref={refStartDate} />
           </div>
-          <div className="search-title-date-to">
+          <div className="search-title-date-to" ref={refToDate}>
             <label htmlFor="">Den ngay</label>
-            <input type="date" name="" id="" />
+            <input type="date" name="end" id="" ref={refEndDate} />
           </div>
         </div>
         <button type="submit" className="searchButton" onClick={handleSubmit}>

@@ -45,10 +45,23 @@
   //     display: none;
   //   }
   // }
-  input:checked ~ * {
+  // input:checked ~ * {
+  //   display: inline-block;
+  // }
+  // input[type="checkbox"]:not(:checked) ~ *:not(label) {
+  //   display: none;
+  // }
+  .idContract,
+  .secretary,
+  .notary,
+  .search-title-date-from,
+  .search-title-date-to {
+    display: none;
+  }
+  .show {
     display: inline-block;
   }
-  input[type="checkbox"]:not(:checked) ~ *:not(label) {
+  .hide {
     display: none;
   }
 }
