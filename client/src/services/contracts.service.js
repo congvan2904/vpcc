@@ -42,6 +42,9 @@ const contractsService = {
     },
     find_contract: async (payload) => {
         return (await api.post('contract/find', payload)).data
+    },
+    find_contract_debt: async (payload) => {
+        return (await api.post('contract/find-debt', payload)).data
     }
 }
 

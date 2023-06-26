@@ -84,6 +84,12 @@ export const findContract = createAsyncThunk('contract/find', async (payload) =>
     return response.data
 })
 
+export const findContractDebt = createAsyncThunk('contract/find_debt', async (payload) => {
+    const response = await contractsService.find_contract_debt(payload)
+    // console.log('---createContract---=>', response)
+    return response.data
+})
+
 const contractsSlice = createSlice({
     name: 'contracts',
     initialState: {
@@ -93,7 +99,8 @@ const contractsSlice = createSlice({
         lastContract: {},
         groupData: [],
         allContract: [],
-        findData: []
+        findData: [],
+        findDebt: []
     },
     reducers: {
         sort_secretary: (state) => {
@@ -306,6 +313,10 @@ const contractsSlice = createSlice({
         [findContract.fulfilled]: (state, action) => {
             state.loading = false;
             state.findData = [...action.payload];
+        },
+        [findContractDebt.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.findDebt = [...action.payload];
         },
     }
 })

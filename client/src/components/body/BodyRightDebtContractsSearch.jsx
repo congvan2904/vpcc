@@ -2,7 +2,7 @@ import "./body-right-debt-contract-search.scss";
 import imgSearch from "../../assets/manage/search.png";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findContract } from "../../redux/features/contractsSlice";
+import { findContractDebt } from "../../redux/features/contractsSlice";
 import ContractFull from "../contract/ContractFull";
 import formatDate from "../../helpers/formatDate";
 
@@ -78,17 +78,17 @@ const BodyRightDebtContractsSearch = () => {
         ...payload,
       };
     }
-    console.log(payload);
+    // console.log(payload);
 
-    // dispatch(findContract(payload));
+    dispatch(findContractDebt(payload));
     // refFromDate.current.value = null;
     // refToDate.current.value = null;
     // console.log(result.payload);
   };
-  const { findData } = useSelector((state) => state.contracts);
+  const { findDebt } = useSelector((state) => state.contracts);
   const { data: dataUsers, loading } = useSelector((state) => state.users);
 
-  console.log({ findData });
+  console.log({ findDebt });
   // const handleChange = () => {
   //   if (refSelect.current.value === "id_user_notary") {
   //     setShowCombobox(true);
@@ -333,7 +333,7 @@ const BodyRightDebtContractsSearch = () => {
         </button>
       </div>
       <div className="search-content">
-        {findData && (
+        {findDebt && (
           <table>
             <thead>
               <tr>
@@ -348,7 +348,7 @@ const BodyRightDebtContractsSearch = () => {
               </tr>
             </thead>
             <tbody>
-              {findData.map((item, index) => (
+              {findDebt.map((item, index) => (
                 <tr key={index}>
                   <td>{Math.ceil(item.id_contract / 50)}</td>
                   <td>{item.id_contract}</td>
