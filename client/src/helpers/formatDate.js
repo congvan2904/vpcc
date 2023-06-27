@@ -1,4 +1,5 @@
 const formatDate = (date) => {
+    // if (!date) return
     const dateObj = new Date(date);
 
     // get the month in this format of 04, the same for months

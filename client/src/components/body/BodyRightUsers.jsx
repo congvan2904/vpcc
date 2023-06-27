@@ -8,6 +8,7 @@ import {
 import instance from "../../services/configAxios";
 import ModalUser from "../user/ModalUser";
 import { toggleModalUser } from "../../redux/features/showModalUser";
+import formatDate from "../../helpers/formatDate";
 const BodyRightUsers = () => {
   const refUserName = useRef();
   const refFullName = useRef();
@@ -185,13 +186,48 @@ const BodyRightUsers = () => {
         <h2>.......Loading...</h2>
       ) : (
         <div>
-          {data.map((item, i) => (
+          {data && (
+            <table>
+              <thead>
+                <tr>
+                  <td>Tên đăng nhập</td>
+                  <td>Tên đầy đủ</td>
+                  <td>Số điện thoại</td>
+                  <td>Email</td>
+                  <td>Vị trí</td>
+                  <td>Quyền</td>
+                  <td>Ngay tao</td>
+                  <td>Ngày cập nhật</td>
+                  <td>Lệnh cấm</td>
+                  <td>Ghi chú</td>
+                </tr>
+              </thead>
+              <tbody>
+                {console.log({ data })}
+                {data.map((item, index) => (
+                  <tr key={index} onClick={() => onShowModalUser(item)}>
+                    <td>{item.username}</td>
+                    <td>{item.full_name}</td>
+                    <td>{item.phone_number}</td>
+                    <td>{item.email}</td>
+                    <td>{item.position}</td>
+                    <td>{item.role}</td>
+                    <td>{formatDate(item.createdAt)}</td>
+                    <td>{formatDate(item.updatedAt)}</td>
+                    <td>{`${item.ban}`}</td>
+                    <td>{item.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          {/* {data.map((item, i) => (
             <div key={i}>
               <h2 onClick={() => onShowModalUser(item)}>
                 {item._id} -- {item.username} -- {item.position} -- {item.email}
               </h2>
             </div>
-          ))}
+          ))} */}
           {show && <ModalUser data={dataModalUser} />}
         </div>
       )}
