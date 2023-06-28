@@ -88,7 +88,7 @@ const BodyRightDebtContractsSearch = () => {
   const { findDebt } = useSelector((state) => state.contracts);
   const { data: dataUsers, loading } = useSelector((state) => state.users);
 
-  console.log({ findDebt });
+  // console.log({ findDebt });
   // const handleChange = () => {
   //   if (refSelect.current.value === "id_user_notary") {
   //     setShowCombobox(true);

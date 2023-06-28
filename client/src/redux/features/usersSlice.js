@@ -15,6 +15,11 @@ export const updateUser = createAsyncThunk('users/update', async (payload) => {
     // console.log('Update USER------=>', response)
     return response.data
 })
+export const findUser = createAsyncThunk('users/find', async (payload) => {
+    const response = await usersService.find_user(payload)
+    // console.log('Update USER------=>', response)
+    return response.data
+})
 export const getUserLogin = createAsyncThunk('users/user-login', async (payload) => {
     const response = await usersService.get_user_login(payload)
     // console.log('Update USER------=>', response)
@@ -28,6 +33,7 @@ const usersSlice = createSlice({
         data: [],
         username: '',
         userLogin: {},
+        find: []
     },
     reducers: {
         getUserName: (state, action) => {
@@ -73,6 +79,10 @@ const usersSlice = createSlice({
             state.loading = false;
 
             state.userLogin = action.payload
+        },
+        [findUser.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.find = action.payload;
         },
 
     }

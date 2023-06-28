@@ -67,6 +67,27 @@ module.exports = {
             next(error)
         }
     },
+    findUser: async (req, res, next) => {
+        try {
+
+
+
+            // const {  username, fullname,  role, position, ban } = req.body
+            const payload = req.body
+            // console.log(payload)
+            // const userInfo = { username, password: username, full_name: fullname, phone_number: phone, email, role, position, image_path: filePath, note, ban }
+            // console.log({ userInfo })
+            // const updated = await User.findByIdAndUpdate({ _id: id }, userInfo)
+            const dataFillter = await User.find(payload).select('-password -_id')
+
+            res.status(200).json({
+                data: dataFillter,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
     register: async (req, res, next) => {
         try {
             const { username, password } = req.body

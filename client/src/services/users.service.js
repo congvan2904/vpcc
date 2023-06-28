@@ -18,6 +18,9 @@ const usersService = {
     delete_user: async (payload) => {
         return (await api.post('user/create-user', payload)).data
     },
+    find_user: async (payload) => {
+        return (await api.post('user/find', payload)).data
+    },
 }
 
 export default usersService

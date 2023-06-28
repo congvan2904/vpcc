@@ -1,5 +1,18 @@
 .user-search {
   &-title {
+    .username,
+    .fullname,
+    .position,
+    .rule,
+    .ban {
+      display: none;
+    }
+    .show {
+      display: inline-block;
+    }
+    .hide {
+      display: none;
+    }
   }
   &-body {
   }
