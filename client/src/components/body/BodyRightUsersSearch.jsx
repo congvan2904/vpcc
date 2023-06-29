@@ -3,6 +3,7 @@ import imgSearch from "../../assets/manage/search.png";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux/features/usersSlice";
+import formatDate from "../../helpers/formatDate";
 
 const BodyRightUsersSearch = () => {
   const refGroupUserName = useRef();
@@ -149,8 +150,8 @@ const BodyRightUsersSearch = () => {
     // console.log({ payload });
     dispatch(findUser(payload));
   };
-  const { find } = useSelector((state) => state.users);
-  console.log({ find });
+  const { find: data } = useSelector((state) => state.users);
+  // console.log({ find });
   return (
     <div className="user-search">
       <div className="user-search-title">
@@ -188,7 +189,7 @@ const BodyRightUsersSearch = () => {
             ref={refFullName}
             type="text"
             placeholder="Tên đầy đủ"
-            name="fullname"
+            name="full_name"
             className="fullname"
             // value={inputs.name}
             // onChange={handleInputChange}
@@ -226,7 +227,7 @@ const BodyRightUsersSearch = () => {
           <label htmlFor="">Quyền</label>
           <select
             ref={refRule}
-            name="rule"
+            name="role"
             className="rule"
             // value={inputs.name}
             // onChange={handleInputChange}
@@ -266,7 +267,46 @@ const BodyRightUsersSearch = () => {
           </button>
         </div>
       </div>
-      <div className="user-search-body">data</div>
+      <div className="user-search-body">
+        {data && (
+          <table>
+            <thead>
+              <tr>
+                <td>Tên đăng nhập</td>
+                <td>Tên đầy đủ</td>
+                <td>Số điện thoại</td>
+                <td>Email</td>
+                <td>Vị trí</td>
+                <td>Quyền</td>
+                <td>Ngay tao</td>
+                <td>Ngày cập nhật</td>
+                <td>Lệnh cấm</td>
+                <td>Ghi chú</td>
+              </tr>
+            </thead>
+            <tbody>
+              {console.log({ data })}
+              {data.map((item, index) => (
+                <tr
+                  key={index}
+                  // onClick={() => onShowModalUser(item)}
+                >
+                  <td>{item.username}</td>
+                  <td>{item.full_name}</td>
+                  <td>{item.phone_number}</td>
+                  <td>{item.email}</td>
+                  <td>{item.position}</td>
+                  <td>{item.role}</td>
+                  <td>{formatDate(item.createdAt)}</td>
+                  <td>{formatDate(item.updatedAt)}</td>
+                  <td>{`${item.ban}`}</td>
+                  <td>{item.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };
