@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux/features/usersSlice";
 import formatDate from "../../helpers/formatDate";
+import checkString from "../../helpers/checkString";
+import stringtoLowerCase from "../../helpers/stringtoLowerCase";
 
 const BodyRightUsersSearch = () => {
   const refGroupUserName = useRef();
@@ -109,26 +111,38 @@ const BodyRightUsersSearch = () => {
     e.preventDefault();
     let payload = {};
     if (refCheckboxUserName.current.checked) {
-      if (refUserName.current.value) {
+      if (checkString(refUserName.current.value)) {
         payload = {
-          [refUserName.current.name]: refUserName.current.value,
+          [refUserName.current.name]: stringtoLowerCase(
+            refUserName.current.value
+          ),
         };
+      } else {
+        return alert("usename  khong duoc de trong");
       }
     }
     if (refCheckboxFullName.current.checked) {
-      if (refFullName.current.value) {
+      if (checkString(refFullName.current.value)) {
         payload = {
-          [refFullName.current.name]: refFullName.current.value,
+          [refFullName.current.name]: stringtoLowerCase(
+            refFullName.current.value
+          ),
           ...payload,
         };
+      } else {
+        return alert("fullname  khong duoc de trong");
       }
     }
     if (refCheckboxPosition.current.checked) {
-      if (refPosition.current.value) {
+      if (checkString(refPosition.current.value)) {
         payload = {
-          [refPosition.current.name]: refPosition.current.value,
+          [refPosition.current.name]: stringtoLowerCase(
+            refPosition.current.value
+          ),
           ...payload,
         };
+      } else {
+        return alert("Vi tri khong duoc de trong");
       }
     }
     if (refCheckboxRule.current.checked) {
