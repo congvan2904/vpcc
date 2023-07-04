@@ -1,29 +1,20 @@
-const strategies = {
-    checkString: function (value) {
-        return value.trim() !== '';
-    },
+// validation.js
+export const validateForm = (values, rules) => {
+    let errors = {};
 
-}
-const Validator = function () {
-    this.cache = [];
+    for (let field in rules) {
+        if (rules[field].required && !values[field]) {
+            errors[field] = `${field} is required`;
+        }
 
-    // add su kien
-    this.add = function (value, method) {
-        this.cache.push(function () {
-            return strategies[method](value);
-        });
-    };
-
-    // check
-    this.check = function () {
-        for (let i = 0; i < this.cache.length; i++) {
-            let valiFn = this.cache[i];
-            var data = valiFn(); // check tai day
-            if (!data) {
-                return false;
+        // Add email validation
+        if (field === 'email' && values[field]) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(values[field])) {
+                errors[field] = 'Invalid email format';
             }
         }
-        return true;
-    };
-}
-export default Validator
+    }
+
+    return errors;
+};

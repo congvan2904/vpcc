@@ -1,13 +1,18 @@
 import "./body-right-user-search.scss";
 import imgSearch from "../../assets/manage/search.png";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findUser } from "../../redux/features/usersSlice";
 import formatDate from "../../helpers/formatDate";
 import checkString from "../../helpers/checkString";
 import stringtoLowerCase from "../../helpers/stringtoLowerCase";
+import { validateForm } from "../../helpers/validator";
 
 const BodyRightUsersSearch = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState({});
+
   const refGroupUserName = useRef();
   const refCheckboxUserName = useRef();
   const refUserName = useRef();
@@ -109,6 +114,13 @@ const BodyRightUsersSearch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const errors = validateForm(
+      { name, email },
+      { name: { required: true }, email: { required: true } }
+    );
+    setErrors(errors);
+
     let payload = {};
     if (refCheckboxUserName.current.checked) {
       if (checkString(refUserName.current.value)) {
