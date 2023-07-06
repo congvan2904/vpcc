@@ -115,66 +115,93 @@ const BodyRightUsersSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const errors = validateForm(
-      { name, email },
-      { name: { required: true }, email: { required: true } }
-    );
-    setErrors(errors);
+    // const errors = validateForm(
+    //   { name, email },
+    //   { name: { required: true }, email: { required: true } }
+    // );
+    // setErrors(errors);
 
     let payload = {};
+    let payloadValidated = {};
     if (refCheckboxUserName.current.checked) {
-      if (checkString(refUserName.current.value)) {
-        payload = {
-          [refUserName.current.name]: stringtoLowerCase(
-            refUserName.current.value
-          ),
-        };
-      } else {
-        return alert("usename  khong duoc de trong");
-      }
+      payloadValidated = { [refUserName.current.name]: { required: true } };
+      // if (checkString(refUserName.current.value)) {
+      payload = {
+        [refUserName.current.name]: stringtoLowerCase(
+          refUserName.current.value
+        ),
+      };
+      // } else {
+      //   return alert("usename  khong duoc de trong");
+      // }
     }
     if (refCheckboxFullName.current.checked) {
-      if (checkString(refFullName.current.value)) {
-        payload = {
-          [refFullName.current.name]: stringtoLowerCase(
-            refFullName.current.value
-          ),
-          ...payload,
-        };
-      } else {
-        return alert("fullname  khong duoc de trong");
-      }
+      payloadValidated = {
+        [refFullName.current.name]: { required: true },
+        ...payloadValidated,
+      };
+
+      // if (checkString(refFullName.current.value)) {
+      payload = {
+        [refFullName.current.name]: stringtoLowerCase(
+          refFullName.current.value
+        ),
+        ...payload,
+      };
+      // } else {
+      //   return alert("fullname  khong duoc de trong");
+      // }
     }
     if (refCheckboxPosition.current.checked) {
-      if (checkString(refPosition.current.value)) {
-        payload = {
-          [refPosition.current.name]: stringtoLowerCase(
-            refPosition.current.value
-          ),
-          ...payload,
-        };
-      } else {
-        return alert("Vi tri khong duoc de trong");
-      }
+      payloadValidated = {
+        [refPosition.current.name]: { required: true },
+        ...payloadValidated,
+      };
+
+      // if (checkString(refPosition.current.value)) {
+      payload = {
+        [refPosition.current.name]: stringtoLowerCase(
+          refPosition.current.value
+        ),
+        ...payload,
+      };
+      // } else {
+      //   return alert("Vi tri khong duoc de trong");
+      // }
     }
     if (refCheckboxRule.current.checked) {
-      if (refRule.current.value) {
-        payload = {
-          [refRule.current.name]: refRule.current.value,
-          ...payload,
-        };
-      }
+      payloadValidated = {
+        [refRule.current.name]: { required: true },
+        ...payloadValidated,
+      };
+
+      // if (refRule.current.value) {
+      payload = {
+        [refRule.current.name]: refRule.current.value,
+        ...payload,
+      };
+      // }
     }
     if (refCheckboxBan.current.checked) {
-      if (refBan.current.value) {
-        payload = {
-          [refBan.current.name]: refBan.current.value,
-          ...payload,
-        };
-      }
+      payloadValidated = {
+        [refBan.current.name]: { required: true },
+        ...payloadValidated,
+      };
+
+      // if (refBan.current.value) {
+      payload = {
+        [refBan.current.name]: refBan.current.value,
+        ...payload,
+      };
+      // }
     }
     // console.log({ payload });
-    dispatch(findUser(payload));
+    const errors = validateForm(payload, payloadValidated);
+    if (Object.keys(errors).length === 0) {
+      console.log("0 co loi");
+      dispatch(findUser(payload));
+    }
+    setErrors(errors);
   };
   const { find: data } = useSelector((state) => state.users);
   // console.log({ find });
@@ -201,6 +228,7 @@ const BodyRightUsersSearch = () => {
             // onChange={handleChange}
           />
         </div>
+        {errors.username && <p>{errors.username}</p>}
         <div className="user-search-title-group" ref={refGroupFullName}>
           <input
             type="checkbox"
@@ -221,6 +249,7 @@ const BodyRightUsersSearch = () => {
             // onChange={handleInputChange}
           />
         </div>
+        {errors.full_name && <p>{errors.full_name}</p>}
         <div className="user-search-title-group" ref={refGroupPosition}>
           <input
             type="checkbox"
@@ -241,6 +270,8 @@ const BodyRightUsersSearch = () => {
             // onChange={handleInputChange}
           />
         </div>
+        {errors.position && <p>{errors.position}</p>}
+
         <div className="user-search-title-group" ref={refGroupRule}>
           <input
             type="checkbox"
@@ -265,6 +296,8 @@ const BodyRightUsersSearch = () => {
             <option value="S">Sếp</option>
           </select>
         </div>
+        {errors.role && <p>{errors.role}</p>}
+
         <div className="user-search-title-group" ref={refGroupBan}>
           <input
             type="checkbox"
@@ -286,6 +319,7 @@ const BodyRightUsersSearch = () => {
             <option value="false">Không</option>
             <option value="true">Có</option>
           </select>
+          {errors.ban && <p>{errors.ban}</p>}
         </div>
         <div className="user-search-title-group">
           <button type="submit" className="searchButton" onClick={handleSubmit}>
