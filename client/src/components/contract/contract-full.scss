@@ -1,13 +1,18 @@
+@use "../../sass/" as *;
 table,
 th,
 td {
   border: 1px solid wheat;
-  max-width: 950px;
+  // max-width: 950px;
 }
 thead {
   tr {
     &:hover {
       background-color: transparent;
+    }
+    th {
+      text-transform: capitalize;
+      white-space: nowrap;
     }
   }
 }

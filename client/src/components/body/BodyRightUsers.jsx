@@ -1,3 +1,4 @@
+import "./body-right-users.scss";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import instance from "../../services/configAxios";
 import ModalUser from "../user/ModalUser";
 import { toggleModalUser } from "../../redux/features/showModalUser";
 import formatDate from "../../helpers/formatDate";
+import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
 const BodyRightUsers = () => {
   const refUserName = useRef();
   const refFullName = useRef();
@@ -74,7 +76,7 @@ const BodyRightUsers = () => {
     dispatch(toggleModalUser(data));
   };
   return (
-    <div>
+    <div className="users">
       <h1>Users</h1>
       {/* <button onClick={getUsers}>Get users</button> */}
       <form onSubmit={handleSubmitForm}>
@@ -185,7 +187,7 @@ const BodyRightUsers = () => {
       {loading === true ? (
         <h2>.......Loading...</h2>
       ) : (
-        <div>
+        <div className="users-body">
           {data && (
             <table>
               <thead>
@@ -207,11 +209,11 @@ const BodyRightUsers = () => {
                 {data.map((item, index) => (
                   <tr key={index} onClick={() => onShowModalUser(item)}>
                     <td>{item.username}</td>
-                    <td>{item.full_name}</td>
+                    <td>{capitalizeFirstLetterOfEachWord(item.full_name)}</td>
                     <td>{item.phone_number}</td>
                     <td>{item.email}</td>
-                    <td>{item.position}</td>
-                    <td>{item.role}</td>
+                    <td>{capitalizeFirstLetterOfEachWord(item.position)}</td>
+                    <td>{capitalizeFirstLetterOfEachWord(item.role)}</td>
                     <td>{formatDate(item.createdAt)}</td>
                     <td>{formatDate(item.updatedAt)}</td>
                     <td>{`${item.ban}`}</td>

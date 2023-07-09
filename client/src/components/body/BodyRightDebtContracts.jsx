@@ -6,6 +6,7 @@ import {
   groupDebtContracts,
 } from "../../redux/features/contractsSlice";
 import { useEffect } from "react";
+import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
 const BodyRightDebtContracts = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +28,9 @@ const BodyRightDebtContracts = () => {
         <div key={data._id} className="container-debt">
           {data.list_day.length > 0 && (
             <div className="debt" key={data._id}>
-              <div className="debt-name">{data.username}</div>
+              <div className="debt-name">
+                {capitalizeFirstLetterOfEachWord(data.username)}
+              </div>
               <div className="debt-days">
                 {data.list_day.map((day) => (
                   <div className="debt-day" key={day.date_create}>
@@ -47,7 +50,9 @@ const BodyRightDebtContracts = () => {
                             {contract.number_contract}
                           </div>
                           <div className="contract-name">
-                            {contract.name_contract}
+                            {capitalizeFirstLetterOfEachWord(
+                              contract.name_contract
+                            )}
                           </div>
                         </div>
                       ))}

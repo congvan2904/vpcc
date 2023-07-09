@@ -7,6 +7,7 @@ import formatDate from "../../helpers/formatDate";
 import checkString from "../../helpers/checkString";
 import stringtoLowerCase from "../../helpers/stringtoLowerCase";
 import { validateForm } from "../../helpers/validator";
+import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
 
 const BodyRightUsersSearch = () => {
   const [name, setName] = useState("");
@@ -198,7 +199,6 @@ const BodyRightUsersSearch = () => {
     // console.log({ payload });
     const errors = validateForm(payload, payloadValidated);
     if (Object.keys(errors).length === 0) {
-      console.log("0 co loi");
       dispatch(findUser(payload));
     }
     setErrors(errors);
@@ -227,8 +227,8 @@ const BodyRightUsersSearch = () => {
             // value={inputs.name}
             // onChange={handleChange}
           />
+          {errors.username && <p>{errors.username}</p>}
         </div>
-        {errors.username && <p>{errors.username}</p>}
         <div className="user-search-title-group" ref={refGroupFullName}>
           <input
             type="checkbox"
@@ -248,8 +248,8 @@ const BodyRightUsersSearch = () => {
             // value={inputs.name}
             // onChange={handleInputChange}
           />
+          {errors.full_name && <p>{errors.full_name}</p>}
         </div>
-        {errors.full_name && <p>{errors.full_name}</p>}
         <div className="user-search-title-group" ref={refGroupPosition}>
           <input
             type="checkbox"
@@ -269,8 +269,8 @@ const BodyRightUsersSearch = () => {
             // value={inputs.name}
             // onChange={handleInputChange}
           />
+          {errors.position && <p>{errors.position}</p>}
         </div>
-        {errors.position && <p>{errors.position}</p>}
 
         <div className="user-search-title-group" ref={refGroupRule}>
           <input
@@ -289,14 +289,14 @@ const BodyRightUsersSearch = () => {
             // value={inputs.name}
             // onChange={handleInputChange}
           >
-            <option defaultValue="default">Chọn quyền</option>
+            {/* <option defaultValue="default">Chọn quyền</option> */}
             <option value="VT">Văn Thư</option>
             <option value="CCV">Công Chứng Viên</option>
             <option value="TK">Thư Ký</option>
             <option value="S">Sếp</option>
           </select>
+          {errors.role && <p>{errors.role}</p>}
         </div>
-        {errors.role && <p>{errors.role}</p>}
 
         <div className="user-search-title-group" ref={refGroupBan}>
           <input
@@ -315,7 +315,7 @@ const BodyRightUsersSearch = () => {
             // value={inputs.name}
             // onChange={handleInputChange}
           >
-            <option defaultValue="default">Chọn </option>
+            {/* <option defaultValue="default">Chọn </option> */}
             <option value="false">Không</option>
             <option value="true">Có</option>
           </select>
@@ -352,11 +352,11 @@ const BodyRightUsersSearch = () => {
                   // onClick={() => onShowModalUser(item)}
                 >
                   <td>{item.username}</td>
-                  <td>{item.full_name}</td>
+                  <td>{capitalizeFirstLetterOfEachWord(item.full_name)}</td>
                   <td>{item.phone_number}</td>
                   <td>{item.email}</td>
-                  <td>{item.position}</td>
-                  <td>{item.role}</td>
+                  <td>{capitalizeFirstLetterOfEachWord(item.position)}</td>
+                  <td>{capitalizeFirstLetterOfEachWord(item.role)}</td>
                   <td>{formatDate(item.createdAt)}</td>
                   <td>{formatDate(item.updatedAt)}</td>
                   <td>{`${item.ban}`}</td>

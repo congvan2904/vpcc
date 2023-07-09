@@ -222,7 +222,7 @@ const BodyRightNewContractToday = () => {
   // }, []);
   // console.log({ showModalContract });
   return (
-    <>
+    <div className="new-contract-today">
       <div className="manage-body-right-header">
         <form autoComplete="off">
           <div className="new-contract">
@@ -347,67 +347,64 @@ const BodyRightNewContractToday = () => {
         </form>
       </div>
       <div className="manage-body-right-body">
-        <div className="new-contract-main">
-          {data && (
-            <table>
-              <thead>
-                <tr>
-                  <th
-                    className="header-contract"
-                    onClick={() => sortKey("id_contract")}
-                  >
-                    So Cong Chung
-                  </th>
-                  <th
-                    className="header-header-secretary"
-                    // onClick={sortSecretary}
-                    onClick={() => sortKey("id_user_secretary")}
-                  >
-                    Thu ky
-                  </th>
-                  <th
-                    className="header-notary"
-                    onClick={() => sortKey("id_user_notary")}
-                  >
-                    Cong chung vien
-                  </th>
-                  <th className="header-name" onClick={() => sortKey("name")}>
-                    Hop dong
-                  </th>
-                  <th
-                    className="header-customer"
-                    onClick={() => sortKey("note")}
-                  >
-                    Khach hang
-                  </th>
-                  <th className="header-phone">Dien thoai</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <ContractFull
-                    idContract={item["_id"]}
-                    numberContract={item["id_contract"]}
-                    name={item["name"]}
-                    notary={item["id_user_notary"].username}
-                    notaryId={item["id_user_notary"]._id}
-                    secretary={item["id_user_secretary"].username}
-                    secretaryId={item["id_user_secretary"]._id}
-                    name_customer={item["note"]}
-                    phone={item["phone"]}
-                    key={item["_id"]}
-                    dateCreate={item["date_create"]}
-                  />
-                ))}
-              </tbody>
-            </table>
-          )}
+        {/* <div className="new-contract-main"> */}
+        {data && (
+          <table>
+            <thead>
+              <tr>
+                <th
+                  className="header-contract"
+                  onClick={() => sortKey("id_contract")}
+                >
+                  So CC
+                </th>
+                <th
+                  className="header-header-secretary"
+                  // onClick={sortSecretary}
+                  onClick={() => sortKey("id_user_secretary")}
+                >
+                  Thu ky
+                </th>
+                <th
+                  className="header-notary"
+                  onClick={() => sortKey("id_user_notary")}
+                >
+                  Cong CV
+                </th>
+                <th className="header-name" onClick={() => sortKey("name")}>
+                  Hop dong
+                </th>
+                <th className="header-customer" onClick={() => sortKey("note")}>
+                  Khach hang
+                </th>
+                <th className="header-phone">Dien thoai</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <ContractFull
+                  idContract={item["_id"]}
+                  numberContract={item["id_contract"]}
+                  name={item["name"]}
+                  notary={item["id_user_notary"].username}
+                  notaryId={item["id_user_notary"]._id}
+                  secretary={item["id_user_secretary"].username}
+                  secretaryId={item["id_user_secretary"]._id}
+                  name_customer={item["note"]}
+                  phone={item["phone"]}
+                  key={item["_id"]}
+                  dateCreate={item["date_create"]}
+                />
+              ))}
+            </tbody>
+          </table>
+        )}
 
-          {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
-        </div>
+        {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
+        {/* </div> */}
         {showModal && <ModalItemContract details={dataModal} />}
       </div>
-    </>
+    </div>
   );
 };
 

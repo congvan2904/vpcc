@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findContract } from "../../redux/features/contractsSlice";
 import ContractFull from "../contract/ContractFull";
 import formatDate from "../../helpers/formatDate";
+import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
 
 const BodyRightNewContractSearch = () => {
   const [showCombobox, setShowCombobox] = useState(false);
@@ -95,7 +96,7 @@ const BodyRightNewContractSearch = () => {
         <input
           type="text"
           className={showCombobox ? "hide searchTerm" : "show searchTerm"}
-          placeholder="What are you looking for?"
+          placeholder="Nhap thong tin can tim?"
           ref={refSearch}
         />
         <select
@@ -126,7 +127,7 @@ const BodyRightNewContractSearch = () => {
                 <td>So hop</td>
                 <td>So ho so</td>
                 <td>Thu ky</td>
-                <td>Cong chung vien</td>
+                <td>Cong CV</td>
                 <td>Ten Ho so</td>
                 <td>Ten khach hang</td>
                 <td>So dien thoai</td>
@@ -138,10 +139,18 @@ const BodyRightNewContractSearch = () => {
                 <tr key={index}>
                   <td>{Math.ceil(item.id_contract / 50)}</td>
                   <td>{item.id_contract}</td>
-                  <td>{item.id_user_secretary.username}</td>
-                  <td>{item.id_user_notary.username}</td>
-                  <td>{item.name}</td>
-                  <td>{item.note}</td>
+                  <td>
+                    {capitalizeFirstLetterOfEachWord(
+                      item.id_user_secretary.username
+                    )}
+                  </td>
+                  <td>
+                    {capitalizeFirstLetterOfEachWord(
+                      item.id_user_notary.username
+                    )}
+                  </td>
+                  <td>{capitalizeFirstLetterOfEachWord(item.name)}</td>
+                  <td>{capitalizeFirstLetterOfEachWord(item.note)}</td>
                   <td>{item.phone}</td>
                   <td>{formatDate(item.date_create)}</td>
                 </tr>

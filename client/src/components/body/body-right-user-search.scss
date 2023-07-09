@@ -1,4 +1,8 @@
+@use "../../sass/" as *;
 .user-search {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   &-title {
     .username,
     .fullname,
@@ -13,7 +17,46 @@
     .hide {
       display: none;
     }
+    &-group {
+      input[type="checkbox"]:not(:checked) ~ p {
+        display: none;
+      }
+      p {
+        margin-left: 5px;
+        display: inline-block;
+        color: red;
+      }
+      input[type="text"] {
+        padding: 0 5px;
+        margin-left: 5px;
+      }
+      select {
+        margin-left: 5px;
+      }
+
+      .searchButton {
+        width: 50px;
+        height: 50px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        border-radius: 30%;
+        overflow: hidden;
+        img {
+          width: 100%;
+          background-color: darkmagenta;
+          cursor: pointer;
+        }
+      }
+      &:last-child {
+        margin: 5px 5px 5px 20px;
+      }
+    }
   }
   &-body {
+    margin-bottom: 20px;
+    flex-grow: 1;
+    width: 98%;
+    overflow: auto;
   }
 }

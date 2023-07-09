@@ -37,7 +37,31 @@ input {
   border-radius: 12px;
   border: none;
 }
+table {
+  // display: block;
+  table-layout: auto;
+  min-width: 100%; // border-collapse: separate;
+  // width: 95%;
+  thead {
+    tr {
+      td {
+        padding: 0 3px;
 
+        text-transform: capitalize;
+        white-space: nowrap;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        padding: 0 3px;
+        white-space: nowrap;
+      }
+    }
+  }
+  // overflow-x: scroll;
+}
 .container {
   width: 100%;
   max-width: 1620px;

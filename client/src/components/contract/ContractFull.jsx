@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import addDotNumber from "../../helpers/addDotNumber";
 import { toggleModal } from "../../redux/features/showModalItemContract";
+import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
 const ContractFull = (props) => {
   const [idDelete, setIdDelete] = useState({});
   const refTr = useRef(null);
@@ -59,10 +60,10 @@ const ContractFull = (props) => {
         // onKeyDown={handleKeyDown}
       >
         <td>{addDotNumber(number_contract)}</td>
-        <td>{secretary}</td>
-        <td>{notary}</td>
-        <td>{nameContract}</td>
-        <td>{nameCustomer}</td>
+        <td>{capitalizeFirstLetterOfEachWord(secretary)}</td>
+        <td>{capitalizeFirstLetterOfEachWord(notary)}</td>
+        <td>{capitalizeFirstLetterOfEachWord(nameContract)}</td>
+        <td>{capitalizeFirstLetterOfEachWord(nameCustomer)}</td>
         <td>{phone}</td>
       </tr>
       {/* <div className="contract-detail">
