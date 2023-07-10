@@ -39,7 +39,7 @@ input {
 }
 table {
   // display: block;
-  table-layout: auto;
+  table-layout: fixed;
   min-width: 100%; // border-collapse: separate;
   // width: 95%;
   thead {
@@ -55,8 +55,8 @@ table {
   tbody {
     tr {
       td {
-        padding: 0 3px;
-        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
