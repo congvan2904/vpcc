@@ -159,7 +159,16 @@ const contractsSlice = createSlice({
         },
         [groupDebtContracts.fulfilled]: (state, action) => {
             state.loading = false;
-            state.groupData = action.payload;
+            // let oneDate=0;
+            const data = action.payload.map(user => {
+                let allDate = 0;
+
+                user.list_day.forEach(day => {
+                    allDate = day.count + allDate
+                })
+                return ({ ...user, allDate })
+            })
+            state.groupData = data;
         },
         [updateStatusDebtContract.fulfilled]: (state, action) => {
             state.loading = false;
@@ -174,13 +183,18 @@ const contractsSlice = createSlice({
 
             const filter = (id_contract) =>
                 state.groupData.map((ld) => {
+
                     return {
                         ...ld,
+                        allDate: (ld.list_day.some(day => day.list_contract.map(contract => contract.id_contract).includes(id_contract))) ? (ld.allDate - 1) : ld.allDate,
+
                         list_day: ld.list_day.map((e) => ({
                             ...e,
+                            count: (e.list_contract.map(contract => contract.id_contract).includes(id_contract)) ? (e.count - 1) : e.count,
                             list_contract: e.list_contract.filter(
                                 (l) => l.id_contract !== id_contract
                             ),
+
                         })),
                     };
                 });
@@ -199,6 +213,7 @@ const contractsSlice = createSlice({
                             _id: ld._id,
                             username: ld.username,
                             list_day: addListday,
+                            allDate: ld.allDate,
                         });
                     }
                 });

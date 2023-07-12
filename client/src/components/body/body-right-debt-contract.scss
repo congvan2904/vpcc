@@ -1,5 +1,7 @@
+@use "../../sass/" as *;
 .body-right-debt-contract {
-  display: grid;
+  height: 100%;
+  display: flex;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   .debt {
@@ -51,4 +53,8 @@
   .debt:empty {
     border: none;
   }
+  flex-grow: 1;
+  width: 98%;
+  overflow: auto;
+  margin-bottom: 20px;
 }
