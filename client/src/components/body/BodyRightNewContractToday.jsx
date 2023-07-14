@@ -18,6 +18,9 @@ import ContractFull from "../contract/ContractFull";
 import removeDotNumber from "../../helpers/removeDotNumber";
 import addDotNumber from "../../helpers/addDotNumber";
 import ModalItemContract from "../contract/ModalItemContract";
+import fileName from "../../helpers/fileName";
+import createCsvUrl from "../../helpers/createCsvUrl";
+import getValuesObjectByKeys from "../../helpers/getValuesObjectByKeys";
 
 const BodyRightNewContractToday = () => {
   const [idContract, setIdContract] = useState(null);
@@ -216,7 +219,42 @@ const BodyRightNewContractToday = () => {
   const { showModal, dataModal } = useSelector(
     (state) => state.showModalContractItem
   );
-
+  console.log({ data });
+  const dataValue = data.map((value) => [
+    value.id_contract,
+    value.id_user_secretary.username,
+    value.id_user_notary.username,
+    value.name,
+    value.note,
+    value.phone,
+    value.date_create,
+  ]);
+  // const addHeader = [
+  //   ["shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
+  //   ...dataValue,
+  // ];
+  // console.log({ addHeader });
+  const dataTest = [
+    ["Name", "Age", "Job"],
+    ["John", "30", "Engineer"],
+    ["Jane", "25", "Doctor"],
+    ["Mike", "35", "Designer"],
+  ];
+  const values = getValuesObjectByKeys(data, [
+    "id_contract",
+    "id_user_secretary.username",
+    "id_user_notary.username",
+    "name",
+    "note",
+    "phone",
+    "date_create",
+  ]);
+  console.log({ values });
+  const addHeader = [
+    ["shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
+    ...values,
+  ];
+  const csvUrl = createCsvUrl(addHeader);
   // useEffect(() => {
   //   refTable.current.addEventListener("keydown", handleKeyDownDelete);
   // }, []);
@@ -341,6 +379,11 @@ const BodyRightNewContractToday = () => {
               <button onClick={handleSubmitForm}>Thêm hồ sơ</button>
               <button onClick={handleDeleteContracts}>Xóa tất cả hồ sơ</button>
               <button onClick={handlegetContracts}>Test</button>
+              <button>
+                <a href={csvUrl} download={`${fileName()}.csv`}>
+                  Download CSV
+                </a>
+              </button>
             </div>
             <div className="new-contract-show"></div>
           </div>
