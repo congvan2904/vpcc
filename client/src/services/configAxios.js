@@ -13,7 +13,7 @@ const getrefreshToken = async (refToken) => {
     try {
         return await instance.post('user/refresh-token', { refreshToken: refToken })
     } catch (error) {
-        console.log(error)
+        window.location.href = '/login';
     }
 }
 instance.interceptors.request.use(async (config) => {
@@ -25,6 +25,7 @@ instance.interceptors.request.use(async (config) => {
         config.headers["Content-Type"] = "multipart/form-data";
         // return config
     }
+
     const accessToken = await instance.getLocalAccessToken()
     config.headers['authorization'] = `Bearer ${accessToken}`
 
@@ -47,8 +48,9 @@ instance.interceptors.response.use(async (response) => {
         const refreshToken1 = await instance.getLocalRefreshToken()
         // console.log(refreshToken)
         const { accessToken, refreshToken } = (await getrefreshToken(refreshToken1)).data
-        console.log('newToken.accessToken', accessToken)
+        // console.log('newToken.accessToken', accessToken)
         if (!refreshToken) {
+            window.location.href = '/login';
             throw new Error('jwt expired')
         }
 

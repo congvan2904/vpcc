@@ -1,5 +1,5 @@
 import "./body-right-new-contract-today.scss";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import formatPhoneNumber from "../../helpers/formatPhoneNumber";
 import formatContractId from "../../helpers/formatContractId";
@@ -21,6 +21,11 @@ import ModalItemContract from "../contract/ModalItemContract";
 import fileName from "../../helpers/fileName";
 import createCsvUrl from "../../helpers/createCsvUrl";
 import getValuesObjectByKeys from "../../helpers/getValuesObjectByKeys";
+import downloadCSV from "../../helpers/csvDownloader";
+import formatDate from "../../helpers/formatDate";
+import readFile from "../../helpers/readFile";
+import { toggleModalPreviewContracts } from "../../redux/features/showPreviewContracts";
+import ModalPreviewContract from "../modal/ModalPreviewContract";
 
 const BodyRightNewContractToday = () => {
   const [idContract, setIdContract] = useState(null);
@@ -30,12 +35,12 @@ const BodyRightNewContractToday = () => {
   useEffect(() => {
     async function getIdContract() {
       const result = await dispatch(getLastContract());
-      // console.log(result.payload);
+      // console.log(result);
       if (result.payload === null) {
         refId.current.value = 1;
       } else {
         setIdContract(result.payload?.id_contract + 1);
-        const valueId = +removeDotNumber(result.payload.id_contract) + 1;
+        const valueId = +removeDotNumber(result.payload?.id_contract) + 1;
         refId.current.value = addDotNumber(valueId);
         // console.log(refNotary.current.value);
       }
@@ -219,27 +224,29 @@ const BodyRightNewContractToday = () => {
   const { showModal, dataModal } = useSelector(
     (state) => state.showModalContractItem
   );
-  console.log({ data });
-  const dataValue = data.map((value) => [
-    value.id_contract,
-    value.id_user_secretary.username,
-    value.id_user_notary.username,
-    value.name,
-    value.note,
-    value.phone,
-    value.date_create,
-  ]);
+  const { show: showButtonPreviewContract, data: dataPreviewContract } =
+    useSelector((state) => state.showPrevewContracts);
+  // console.log({ data });
+  // const dataValue = data.map((value) => [
+  //   value.id_contract,
+  //   value.id_user_secretary.username,
+  //   value.id_user_notary.username,
+  //   value.name,
+  //   value.note,
+  //   value.phone,
+  //   value.date_create,
+  // ]);
   // const addHeader = [
   //   ["shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
   //   ...dataValue,
   // ];
   // console.log({ addHeader });
-  const dataTest = [
-    ["Name", "Age", "Job"],
-    ["John", "30", "Engineer"],
-    ["Jane", "25", "Doctor"],
-    ["Mike", "35", "Designer"],
-  ];
+  // const dataTest = [
+  //   ["Name", "Age", "Job"],
+  //   ["John", "30", "Engineer"],
+  //   ["Jane", "25", "Doctor"],
+  //   ["Mike", "35", "Designer"],
+  // ];
   const values = getValuesObjectByKeys(data, [
     "id_contract",
     "id_user_secretary.username",
@@ -249,12 +256,36 @@ const BodyRightNewContractToday = () => {
     "phone",
     "date_create",
   ]);
-  console.log({ values });
+  const addBoxNumber = values.map((item, i) => [
+    ++i,
+    Math.ceil(item[0] / 50),
+    item.slice(0, -1),
+    formatDate(item.slice(-1)[0]),
+  ]);
+  // console.log(addBoxNumber);
   const addHeader = [
-    ["shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
-    ...values,
+    ["STT", "SoHop", "shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
+    ...addBoxNumber,
   ];
   const csvUrl = createCsvUrl(addHeader);
+  const handleClickDownload = useCallback(() => {
+    downloadCSV(addHeader, `${fileName()}.csv`);
+  }, []);
+
+  const [file, setFile] = useState(null);
+  const [fileContents, setFileContents] = useState([]);
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
+  const handleFileRead = async (e) => {
+    e.preventDefault();
+    const contents = await readFile(file);
+    dispatch(toggleModalPreviewContracts(contents));
+    // setFileContents(contents);
+  };
   // useEffect(() => {
   //   refTable.current.addEventListener("keydown", handleKeyDownDelete);
   // }, []);
@@ -379,11 +410,16 @@ const BodyRightNewContractToday = () => {
               <button onClick={handleSubmitForm}>Thêm hồ sơ</button>
               <button onClick={handleDeleteContracts}>Xóa tất cả hồ sơ</button>
               <button onClick={handlegetContracts}>Test</button>
+              {/* <button onClick={handleClickDownload}>Download CSV</button> */}
               <button>
                 <a href={csvUrl} download={`${fileName()}.csv`}>
                   Download CSV
                 </a>
               </button>
+              <div>
+                <input type="file" onChange={handleFileChange} />
+                <button onClick={handleFileRead}>Xem thu</button>
+              </div>
             </div>
             <div className="new-contract-show"></div>
           </div>
@@ -442,10 +478,17 @@ const BodyRightNewContractToday = () => {
             </tbody>
           </table>
         )}
-
+        <div>
+          {fileContents.map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
+        </div>
         {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
         {/* </div> */}
         {showModal && <ModalItemContract details={dataModal} />}
+        {showButtonPreviewContract && (
+          <ModalPreviewContract data={dataPreviewContract} />
+        )}
       </div>
     </div>
   );

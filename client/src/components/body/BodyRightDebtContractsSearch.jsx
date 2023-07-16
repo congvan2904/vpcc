@@ -6,6 +6,9 @@ import { findContractDebt } from "../../redux/features/contractsSlice";
 import ContractFull from "../contract/ContractFull";
 import formatDate from "../../helpers/formatDate";
 import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
+import fileName from "../../helpers/fileName";
+import createCsvUrl from "../../helpers/createCsvUrl";
+import getValuesObjectByKeys from "../../helpers/getValuesObjectByKeys";
 
 const BodyRightDebtContractsSearch = () => {
   const [showCombobox, setShowCombobox] = useState(false);
@@ -117,6 +120,29 @@ const BodyRightDebtContractsSearch = () => {
       }
     }
   };
+
+  const values = getValuesObjectByKeys(findDebt, [
+    "id_contract",
+    "id_user_secretary.username",
+    "id_user_notary.username",
+    "name",
+    "note",
+    "phone",
+    "date_create",
+  ]);
+  const addBoxNumber = values.map((item, i) => [
+    ++i,
+    Math.ceil(item[0] / 50),
+    item.slice(0, -1),
+    formatDate(item.slice(-1)[0]),
+  ]);
+  // console.log(addBoxNumber);
+  const addHeader = [
+    ["STT", "SoHop", "shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
+    ...addBoxNumber,
+  ];
+  const csvUrl = createCsvUrl(addHeader);
+
   return (
     <div className="debt-contract-search">
       <div className="search-title">
@@ -217,6 +243,11 @@ const BodyRightDebtContractsSearch = () => {
         </div>
         <button type="submit" className="searchButton" onClick={handleSubmit}>
           <img src={imgSearch} alt="" />
+        </button>
+        <button>
+          <a href={csvUrl} download={`${fileName()}.csv`}>
+            Download CSV
+          </a>
         </button>
       </div>
       <div className="search-content">

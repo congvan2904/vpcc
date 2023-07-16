@@ -8,6 +8,9 @@ import checkString from "../../helpers/checkString";
 import stringtoLowerCase from "../../helpers/stringtoLowerCase";
 import { validateForm } from "../../helpers/validator";
 import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
+import fileName from "../../helpers/fileName";
+import getValuesObjectByKeys from "../../helpers/getValuesObjectByKeys";
+import createCsvUrl from "../../helpers/createCsvUrl";
 
 const BodyRightUsersSearch = () => {
   const [name, setName] = useState("");
@@ -204,7 +207,44 @@ const BodyRightUsersSearch = () => {
     setErrors(errors);
   };
   const { find: data } = useSelector((state) => state.users);
-  // console.log({ find });
+  console.log({ data });
+  const values = getValuesObjectByKeys(data, [
+    "username",
+    "full_name",
+    "phone_number",
+    "email",
+    "position",
+    "role",
+    "ban",
+    "note",
+    "createdAt",
+    "updatedAt",
+  ]);
+  const addBoxNumber = values.map((item, i) => [
+    ++i,
+    item.slice(0, -2),
+    formatDate(item.slice(-2)[0]),
+    formatDate(item.slice(-1)[0]),
+  ]);
+  // console.log(addBoxNumber);
+  const addHeader = [
+    [
+      "STT",
+      "TenDN",
+      "Ten Day du",
+      "So DT",
+      "Email",
+      "Vi tri",
+      "Quyen",
+      "Lenh Cam",
+      "Ghi chu",
+      "Ngay tao",
+      "ngay cap nhat",
+    ],
+    ...addBoxNumber,
+  ];
+  const csvUrl = createCsvUrl(addHeader);
+
   return (
     <div className="user-search">
       <div className="user-search-title">
@@ -324,6 +364,13 @@ const BodyRightUsersSearch = () => {
         <div className="user-search-title-group">
           <button type="submit" className="searchButton" onClick={handleSubmit}>
             <img src={imgSearch} alt="" />
+          </button>
+        </div>
+        <div className="user-search-title-group">
+          <button>
+            <a href={csvUrl} download={`${fileName()}.csv`}>
+              Download CSV
+            </a>
           </button>
         </div>
       </div>

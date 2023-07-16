@@ -6,6 +6,9 @@ import { findContract } from "../../redux/features/contractsSlice";
 import ContractFull from "../contract/ContractFull";
 import formatDate from "../../helpers/formatDate";
 import capitalizeFirstLetterOfEachWord from "../../helpers/capitalizeFirstLetterOfEachWord";
+import fileName from "../../helpers/fileName";
+import getValuesObjectByKeys from "../../helpers/getValuesObjectByKeys";
+import createCsvUrl from "../../helpers/createCsvUrl";
 
 const BodyRightNewContractSearch = () => {
   const [showCombobox, setShowCombobox] = useState(false);
@@ -55,6 +58,28 @@ const BodyRightNewContractSearch = () => {
       setShowCombobox(true);
     } else setShowCombobox(false);
   };
+  const values = getValuesObjectByKeys(findData, [
+    "id_contract",
+    "id_user_secretary.username",
+    "id_user_notary.username",
+    "name",
+    "note",
+    "phone",
+    "date_create",
+  ]);
+  // console.log({ values });
+  const addBoxNumber = values.map((item, i) => [
+    ++i,
+    Math.ceil(item[0] / 50),
+    item.slice(0, -1),
+    formatDate(item.slice(-1)[0]),
+  ]);
+  // console.log(addBoxNumber);
+  const addHeader = [
+    ["STT", "SoHop", "shoHs", "Tk", "CCV", "TenHD", "TenKh", "SDT", "NgayTao"],
+    ...addBoxNumber,
+  ];
+  const csvUrl = createCsvUrl(addHeader);
   return (
     <div className="new-contract-search">
       <select ref={refSelect} onChange={handleChange}>
@@ -119,6 +144,11 @@ const BodyRightNewContractSearch = () => {
           <img src={imgSearch} alt="" />
         </button>
       </div>
+      <button>
+        <a href={csvUrl} download={`${fileName()}.csv`}>
+          Download CSV
+        </a>
+      </button>
       <div className="contract-table">
         {findData && (
           <table>

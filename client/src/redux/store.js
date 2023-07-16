@@ -6,6 +6,7 @@ import usersReducer from './features/usersSlice'
 import modalItemContractReducer from './features/showModalItemContract'
 import modalUserReducer from './features/showModalUser'
 import showBottomReducer from './features/showBottom'
+import modalPreviewContractsReducer from './features/showPreviewContracts'
 
 const rootReducer = {
     auth: authReducer,
@@ -15,6 +16,7 @@ const rootReducer = {
     showModalContractItem: modalItemContractReducer,
     showModalUser: modalUserReducer,
     showBottom: showBottomReducer,
+    showPrevewContracts: modalPreviewContractsReducer,
 }
 const store = configureStore({
     reducer: rootReducer,
