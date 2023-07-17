@@ -478,11 +478,11 @@ const BodyRightNewContractToday = () => {
             </tbody>
           </table>
         )}
-        <div>
+        {/* <div>
           {fileContents.map((line, index) => (
-            <p key={index}>{line}</p>
+            <p key={index}>{line.split(",")}</p>
           ))}
-        </div>
+        </div> */}
         {number > 0 && <h2>Đã xóa {number} hợp đồng</h2>}
         {/* </div> */}
         {showModal && <ModalItemContract details={dataModal} />}
