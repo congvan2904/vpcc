@@ -1,0 +1,67 @@
+.modal-user {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+}
+.modal-user-container {
+  padding: 10px 10px 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+  border-radius: 5px;
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+}
+.modal-user-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.modal-user-container .btn-close {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.modal-manager-group {
+  display: flex;
+  gap: 5px;
+}
+.modal-manager-group label {
+  display: none;
+}
+.modal-manager-group input,
+.modal-manager-group select {
+  font-size: 18px;
+  text-align: center;
+}
+.modal-manager-group #username {
+  width: 100px;
+}
+.modal-manager-group .btn-save {
+  cursor: pointer;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  outline: none;
+  font-size: 25px;
+  border-width: 0;
+}
+.modal-manager-group img {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=modal-user.css.map */

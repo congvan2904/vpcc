@@ -6,15 +6,36 @@ const user = require('../models/user.model')
 module.exports = {
     createContracts: async (req, res, next) => {
         try {
-            for (let index = 1; index <= 6000; index++) {
+            const data = req.body
+            const contracts = [];
 
-                const newContract = new contract({ id_contract: index, status: true })
-                await newContract.save(err => console.log(`--${index}--`, err))
+            for (let item of data) {
+                const secretary = await user.findOne({ username: item.username_secretary });
+                const notary = await user.findOne({ username: item.username_notary });
+
+                if (!secretary) {
+                    throw new Error(`Secretary not found: ${item.username_secretary}`);
+                }
+                if (!notary) {
+                    throw new Error(`Notary not found: ${item.username_notary}`);
+                }
+                const payload = {
+                    id_contract: item.id_contract,
+                    id_user_secretary: secretary._id,
+                    id_user_notary: notary._id,
+                    name: item.name,
+                    note: item.name_customer,
+                    phone: item.phone,
+                    date_create: new Date(item.day_created)
+                }
+                const newContract = new contract(payload);
+
+                await newContract.save();
+                contracts.push(newContract);
             }
-            const newContract = await contract.find().sort({ 'id_contract': 1 })
-            // console.log(newContract)
+
             return res.status(200).json({
-                data: { newContract },
+                data: contracts,
                 message: 'success'
             })
         } catch (error) {

@@ -1,14 +1,34 @@
 import { useState } from "react";
 import ContractFull from "../contract/ContractFull";
 import "./modal-preview-contracts.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleModalPreviewContracts } from "../../redux/features/showPreviewContracts";
+import { createContracts } from "../../redux/features/contractsSlice";
 
 const ModalPreviewContract = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   const [inputValue, setInputValue] = useState("");
-
+  const dispatch = useDispatch();
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
+  const handleClose = () => {
+    dispatch(toggleModalPreviewContracts());
+  };
+  const handleAddContracts = () => {
+    const payload = data.slice(1).map((item) => ({
+      id_contract: item[2],
+      username_secretary: item[3],
+      username_notary: item[4],
+      name: item[5],
+      name_customer: item[6],
+      phone: item[7],
+      day_created: item[8],
+    }));
+    dispatch(createContracts(payload));
+  };
+  const { dataContracts } = useSelector((state) => state.contracts);
+  console.log({ dataContracts });
   return (
     <div className="modal-preview-contracts">
       {data && (
@@ -85,6 +105,12 @@ const ModalPreviewContract = ({ data }) => {
       {/* {data.map((line, index) => (
         <p key={index}>{line}</p>
       ))} */}
+      <button className="close" onClick={handleClose}>
+        x
+      </button>
+      <button className="add" onClick={handleAddContracts}>
+        +
+      </button>
     </div>
   );
 };

@@ -1,0 +1,72 @@
+.contract-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.contract-main-item ~ .contract-main-item {
+  margin: 4px;
+}
+.contract-main-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  background-color: #d2dad6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contract-main-item-number {
+  font-size: 35px;
+  font-weight: 600;
+  position: relative;
+}
+.contract-main-item-number ::before {
+  content: "";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: red;
+}
+.contract-main-item-name-secretary {
+  font-size: 32px;
+  font-weight: 400;
+}
+.contract-main-item:hover {
+  z-index: 100;
+  transform: scale(1.4);
+  background-color: pink;
+}
+.contract-main-item:hover-name-secretary {
+  position: absolute;
+  font-size: 35px;
+  font-weight: 400;
+}
+.contract-main-item-circle {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+}
+.contract-main-item-circle span {
+  color: transparent;
+  position: absolute;
+  left: 50%;
+  transform-origin: 0 60px;
+}
+.contract-main-item-circle:hover {
+  animation: rotateText 10s linear infinite;
+}
+.contract-main-item-circle:hover span {
+  color: red;
+}
+
+@keyframes rotateText {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}/*# sourceMappingURL=contract.css.map */

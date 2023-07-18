@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&family=Roboto:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+html {
+  font-size: 13px;
+}
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+img {
+  max-width: 100%;
+}
+
+input {
+  outline: none;
+  border-radius: 12px;
+  border: none;
+}
+
+table {
+  table-layout: fixed;
+  min-width: 100%;
+}
+table thead tr td {
+  padding: 0 3px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+table tbody tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  width: 100%;
+  max-width: 1620px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+.main {
+  margin-top: 170px;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+}
+@media only screen and (max-width: 1024px) {
+  .main {
+    margin-top: calc(70px + 20px);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .main {
+    margin-top: calc(40px + 10px);
+  }
+}
+
+.new-contract-today {
+  display: flex;
+  flex-direction: column;
+}
+.new-contract-today .manage-body-right-header {
+  border: 3px solid salmon;
+  width: auto;
+  padding: 20px;
+}
+.new-contract-today .manage-body-right-header .new-contract {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  gap: 10px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group {
+  display: flex;
+  gap: 20px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group #number_contract {
+  font-size: 18px;
+  width: 90px;
+  background: linear-gradient(135deg, orange 60%, cyan);
+  font-weight: bold;
+  text-align: center;
+}
+.new-contract-today .manage-body-right-header .new-contract-group #name_contract {
+  width: 900px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group #name_customer {
+  width: 400px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group #phone_number {
+  width: 135px;
+  text-align: center;
+}
+.new-contract-today .manage-body-right-header .new-contract-group label {
+  display: none;
+}
+.new-contract-today .manage-body-right-header .new-contract-group input {
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group select,
+.new-contract-today .manage-body-right-header .new-contract-group option {
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.new-contract-today .manage-body-right-header .new-contract-group .tooltip {
+  display: inline-block;
+}
+.new-contract-today .manage-body-right-header .new-contract-group .tooltip-text {
+  margin-left: 9px;
+  display: inline-block;
+  visibility: hidden;
+  background-color: #da2727;
+  border-radius: 4px;
+  border: 1px solid #aeaeae;
+  position: absolute;
+  z-index: 1;
+  padding: 5px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.new-contract-today .manage-body-right-header .new-contract-group .tooltip-text::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #fff700 transparent transparent;
+}
+.new-contract-today .manage-body-right-header .new-contract-group .tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+.new-contract-today .manage-body-right-header .new-contract-group button {
+  font-size: 18px;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+.new-contract-today .manage-body-right-body {
+  flex-grow: 1;
+  margin: 0 0 20px;
+  overflow: auto;
+  width: 98%;
+}
+.new-contract-today .manage-body-right-body .main-header {
+  display: flex;
+  gap: 10px;
+}/*# sourceMappingURL=body-right-new-contract-today.css.map */

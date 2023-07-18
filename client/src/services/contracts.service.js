@@ -18,9 +18,13 @@ const contractsService = {
     create_contract: async (payload) => {
         return (await api.post('contract/create-contract', payload)).data
     },
+    create_contracts: async (payload) => {
+        return (await api.post('contract/create-contracts', payload)).data
+    },
     create_contract_today: async (payload) => {
         return (await api.post('contract/create-contract-today', payload)).data
     },
+
     update_contract_today: async (payload) => {
         return (await api.patch('contract/update-contract-today', payload)).data
     },

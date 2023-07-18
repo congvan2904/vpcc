@@ -4,8 +4,8 @@ const contractController = require('../controllers/contract.controller')
 const { verifyAccessToken } = require('../helpers/jwt')
 const { authPage } = require('../helpers/permissionAuth')
 
-
-router.post('/create', contractController.createContracts)
+//create multi contract
+router.post('/create-contracts', verifyAccessToken, authPage(['VT', 'role1']), contractController.createContracts)
 
 //create one contract
 router.post('/create-contract', verifyAccessToken, authPage(['VT', 'role1']), contractController.createContract)

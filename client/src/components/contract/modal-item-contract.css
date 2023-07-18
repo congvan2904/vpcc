@@ -1,0 +1,98 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: auto;
+  background-color: purple;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-main form {
+  width: 90%;
+}
+.modal-main form h1 {
+  text-align: center;
+  font-size: 25px;
+  padding: 15px 5px;
+}
+.modal-main form .new-contract {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  gap: 10px;
+}
+.modal-main form .new-contract-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.modal-main form .new-contract-group #number_contract {
+  font-size: 18px;
+  width: 90px;
+  font-weight: bold;
+  text-align: center;
+}
+.modal-main form .new-contract-group #name_contract {
+  width: 900px;
+}
+.modal-main form .new-contract-group #name_customer {
+  width: 400px;
+}
+.modal-main form .new-contract-group #phone_number {
+  width: 135px;
+  text-align: center;
+}
+.modal-main form .new-contract-group label {
+  display: none;
+}
+.modal-main form .new-contract-group input {
+  font-size: 18px;
+  padding: 5px 10px;
+  text-align: center;
+}
+.modal-main form .new-contract-group select,
+.modal-main form .new-contract-group option {
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.modal-main form .new-contract-group .btn-save {
+  background-color: purple;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.modal-main form .new-contract-show {
+  margin-bottom: 10px;
+}
+.modal-main .btn-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}/*# sourceMappingURL=modal-item-contract.css.map */

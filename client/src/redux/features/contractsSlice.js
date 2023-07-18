@@ -27,6 +27,11 @@ export const createContract = createAsyncThunk('contract/create_contract', async
     // console.log('---createContract---=>', response.data)
     return response.data
 })
+export const createContracts = createAsyncThunk('contract/create_contracts', async (payload) => {
+    const response = await contractsService.create_contracts(payload)
+    // console.log('---createContract---=>', response.data)
+    return response.data
+})
 export const createContractToday = createAsyncThunk('contract/create_contract_today', async (payload) => {
     const response = await contractsService.create_contract_today(payload)
     // console.log('---createContract---=>', response.data)
@@ -100,7 +105,8 @@ const contractsSlice = createSlice({
         groupData: [],
         allContract: [],
         findData: [],
-        findDebt: []
+        findDebt: [],
+        dataContracts: [],
     },
     reducers: {
         sort_secretary: (state) => {
@@ -283,6 +289,9 @@ const contractsSlice = createSlice({
             })
             // state.data = [...getData, action.payload];
             // console.log('redux', state.data)
+        },
+        [createContracts.fulfilled]: (state, action) => {
+            state.dataContracts = action.payload;
         },
         [deleteContracts.fulfilled]: (state, action) => {
             state.loading = false;

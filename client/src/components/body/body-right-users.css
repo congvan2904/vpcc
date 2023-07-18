@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&family=Roboto:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+html {
+  font-size: 13px;
+}
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+img {
+  max-width: 100%;
+}
+
+input {
+  outline: none;
+  border-radius: 12px;
+  border: none;
+}
+
+table {
+  table-layout: fixed;
+  min-width: 100%;
+}
+table thead tr td {
+  padding: 0 3px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+table tbody tr td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  width: 100%;
+  max-width: 1620px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+.main {
+  margin-top: 170px;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+}
+@media only screen and (max-width: 1024px) {
+  .main {
+    margin-top: calc(70px + 20px);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .main {
+    margin-top: calc(40px + 10px);
+  }
+}
+
+.users {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.users-body {
+  margin: 10px 0 20px;
+  flex-grow: 1;
+  width: 98%;
+  overflow: auto;
+}/*# sourceMappingURL=body-right-users.css.map */

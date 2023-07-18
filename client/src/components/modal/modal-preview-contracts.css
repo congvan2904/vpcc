@@ -1,0 +1,10 @@
+.modal-preview-contracts {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: goldenrod;
+}
+.modal-preview-contracts input {
+  width: calc(1ch * var(--number-of-chars) + 2ch);
+}/*# sourceMappingURL=modal-preview-contracts.css.map */

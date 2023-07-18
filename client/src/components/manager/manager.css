@@ -1,0 +1,10 @@
+.manager-bottom {
+  position: absolute;
+  bottom: -3px;
+  left: 100%;
+  margin-left: 13px;
+  background-color: #ddb5b5;
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+}/*# sourceMappingURL=manager.css.map */
