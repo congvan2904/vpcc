@@ -35,10 +35,26 @@ module.exports = {
                     const newContract = new contract(payload);
 
                     await newContract.save();
-                    contracts.push(newContract);
+                    const start = new Date()
+                    start.setHours(0, 0, 0, 0)
+                    const end = new Date()
+                    end.setHours(23, 59, 59, 999)
+                    const populateNewContract = newContract.find({
+                        date_create: {
+                            $gte: start,
+                            $lte: end
+                        }
+                    }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+                    contracts.push(populateNewContract);
                 }
             }
-            // console.log('contracts', contracts)
+            console.log('contracts', contracts)
+            // const dataFillter = await contract.find({
+            //     date_create: {
+            //         $gte: start,
+            //         $lte: end
+            //     }
+            // }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
             return res.status(200).json({
                 data: contracts,
                 message: 'success'
