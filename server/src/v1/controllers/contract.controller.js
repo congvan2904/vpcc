@@ -5,42 +5,47 @@ const user = require('../models/user.model')
 
 module.exports = {
     createContracts: async (req, res, next) => {
-        // try {
-        const data = req.body
-        const contracts = [];
+        try {
+            const data = req.body
+            const contracts = [];
+            // console.log('data', data)
+            for (let item of data) {
+                // console.log('usernames', item.username_secretary)
+                const existingContract = await contract.findOne({ id_contract: +item.id_contract });
+                // console.log('existingContract', existingContract)
+                if (!existingContract) {
+                    const secretary = await user.findOne({ username: item.username_secretary });
+                    const notary = await user.findOne({ username: item.username_notary });
 
-        for (let item of data) {
-            const secretary = await user.findOne({ username: item.username_secretary });
-            const notary = await user.findOne({ username: item.username_notary });
+                    if (!secretary) {
+                        throw new Error(`Secretary not found: ${item.username_secretary}`);
+                    }
+                    if (!notary) {
+                        throw new Error(`Notary not found: ${item.username_notary}`);
+                    }
+                    const payload = {
+                        id_contract: +item.id_contract,
+                        id_user_secretary: secretary._id,
+                        id_user_notary: notary._id,
+                        name: item.name,
+                        note: item.name_customer,
+                        phone: item.phone,
+                        date_create: new Date(item.day_created)
+                    }
+                    const newContract = new contract(payload);
 
-            if (!secretary) {
-                throw new Error(`Secretary not found: ${item.username_secretary}`);
+                    await newContract.save();
+                    contracts.push(newContract);
+                }
             }
-            if (!notary) {
-                throw new Error(`Notary not found: ${item.username_notary}`);
-            }
-            const payload = {
-                id_contract: item.id_contract,
-                id_user_secretary: secretary._id,
-                id_user_notary: notary._id,
-                name: item.name,
-                note: item.name_customer,
-                phone: item.phone,
-                date_create: new Date(item.day_created)
-            }
-            const newContract = new contract(payload);
-
-            await newContract.save();
-            contracts.push(newContract);
+            // console.log('contracts', contracts)
+            return res.status(200).json({
+                data: contracts,
+                message: 'success'
+            })
+        } catch (error) {
+            next(error)
         }
-        console.log('contracts', contracts)
-        return res.status(200).json({
-            data: contracts,
-            message: 'success'
-        })
-        // } catch (error) {
-        //     next(error)
-        // }
     },
     createContract: async (req, res, next) => {
         try {

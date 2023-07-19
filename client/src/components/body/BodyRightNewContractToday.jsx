@@ -418,7 +418,7 @@ const BodyRightNewContractToday = () => {
               </button>
               <div>
                 <input type="file" onChange={handleFileChange} />
-                <button onClick={handleFileRead}>Xem thu</button>
+                <button onClick={handleFileRead}>Xem truoc</button>
               </div>
             </div>
             <div className="new-contract-show"></div>

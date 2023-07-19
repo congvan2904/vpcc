@@ -16,7 +16,8 @@ const ModalPreviewContract = ({ data }) => {
     dispatch(toggleModalPreviewContracts());
   };
   const handleAddContracts = () => {
-    const payload = data.slice(1).map((item) => ({
+    const removeHeaderData = data.slice(1, -1);
+    const payload = removeHeaderData.map((item) => ({
       id_contract: item[2],
       username_secretary: item[3],
       username_notary: item[4],
@@ -25,7 +26,7 @@ const ModalPreviewContract = ({ data }) => {
       phone: item[7],
       day_created: item[8],
     }));
-    dispatch(createContracts(payload));
+    removeHeaderData.length > 0 && dispatch(createContracts(payload));
   };
   const { dataContracts } = useSelector((state) => state.contracts);
   console.log({ dataContracts });
