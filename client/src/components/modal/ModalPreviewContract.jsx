@@ -3,7 +3,10 @@ import ContractFull from "../contract/ContractFull";
 import "./modal-preview-contracts.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModalPreviewContracts } from "../../redux/features/showPreviewContracts";
-import { createContracts } from "../../redux/features/contractsSlice";
+import {
+  createContracts,
+  getLastContract,
+} from "../../redux/features/contractsSlice";
 
 const ModalPreviewContract = ({ data }) => {
   // console.log(data);
@@ -14,6 +17,7 @@ const ModalPreviewContract = ({ data }) => {
   };
   const handleClose = () => {
     dispatch(toggleModalPreviewContracts());
+    dispatch(getLastContract());
   };
   const handleAddContracts = () => {
     const removeHeaderData = data.slice(1, -1);
@@ -26,10 +30,15 @@ const ModalPreviewContract = ({ data }) => {
       phone: item[7],
       day_created: item[8],
     }));
-    removeHeaderData.length > 0 && dispatch(createContracts(payload));
+    if (removeHeaderData.length > 0) {
+      dispatch(createContracts(payload));
+      // dispatch(getLastContract());
+    }
   };
-  const { dataContracts } = useSelector((state) => state.contracts);
-  console.log({ dataContracts });
+  // const { dataContracts, data: dataAddContracts } = useSelector(
+  //   (state) => state.contracts
+  // );
+  // console.log({ dataAddContracts });
   return (
     <div className="modal-preview-contracts">
       {data && (

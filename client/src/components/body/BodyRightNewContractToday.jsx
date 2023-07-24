@@ -31,22 +31,22 @@ const BodyRightNewContractToday = () => {
   const [idContract, setIdContract] = useState(null);
   const dispatch = useDispatch();
   const refId = useRef(null);
+  const { lastContract } = useSelector((state) => state.contracts);
 
   useEffect(() => {
     async function getIdContract() {
-      const result = await dispatch(getLastContract());
-      // console.log(result);
-      if (result.payload === null) {
+      console.log({ lastContract });
+      if (lastContract === "") {
         refId.current.value = 1;
       } else {
-        setIdContract(result.payload?.id_contract + 1);
-        const valueId = +removeDotNumber(result.payload?.id_contract) + 1;
+        // setIdContract(lastContract + 1);
+        const valueId = +removeDotNumber(lastContract) + 1;
         refId.current.value = addDotNumber(valueId);
         // console.log(refNotary.current.value);
       }
     }
     getIdContract();
-  }, []);
+  }, [lastContract]);
   const [dataContract, setDataContract] = useState([]);
   const { data, number } = useSelector((state) => state.contracts);
   const refDate = useRef(null);
@@ -55,7 +55,7 @@ const BodyRightNewContractToday = () => {
   const refNameContract = useRef(null);
   const refNotary = useRef(null);
   const refSecretary = useRef(null);
-  // console.log({ lastContract });
+  console.log({ data });
   const { data: dataUsers, loading } = useSelector((state) => state.users);
   const getCurrentDateInput = () => {
     const dateObj = new Date();

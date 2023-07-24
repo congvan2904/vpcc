@@ -12,6 +12,7 @@ import {
   contracts as contractsR,
   getAllContract,
   getContractsToday,
+  getLastContract,
   groupDebtContracts,
 } from "../../redux/features/contractsSlice";
 import { users as usersT } from "../../redux/features/usersSlice";
@@ -23,6 +24,8 @@ const BodyRight = () => {
       // dispatch(contractsR());
       dispatch(usersT());
       dispatch(getContractsToday());
+      dispatch(getLastContract());
+
       dispatch(getAllContract({ page: 1, page_size: 50 }));
     }
     fetchData();

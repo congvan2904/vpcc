@@ -101,7 +101,7 @@ const contractsSlice = createSlice({
         loading: false,
         data: [],
         number: 0,
-        lastContract: {},
+        lastContract: '',
         groupData: [],
         allContract: [],
         findData: [],
@@ -291,7 +291,8 @@ const contractsSlice = createSlice({
             // console.log('redux', state.data)
         },
         [createContracts.fulfilled]: (state, action) => {
-            state.dataContracts = action.payload;
+            // state.dataContracts = action.payload;
+            state.data = [...state.data, ...action.payload]
         },
         [deleteContracts.fulfilled]: (state, action) => {
             state.loading = false;
@@ -332,7 +333,7 @@ const contractsSlice = createSlice({
         },
         [getLastContract.fulfilled]: (state, action) => {
             state.loading = false;
-            state.lastContract = { ...action.payload };
+            state.lastContract = action.payload?.id_contract;
         },
         [findContract.fulfilled]: (state, action) => {
             state.loading = false;

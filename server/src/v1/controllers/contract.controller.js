@@ -5,63 +5,62 @@ const user = require('../models/user.model')
 
 module.exports = {
     createContracts: async (req, res, next) => {
-        try {
-            const data = req.body
-            const contracts = [];
-            // console.log('data', data)
-            for (let item of data) {
-                // console.log('usernames', item.username_secretary)
-                const existingContract = await contract.findOne({ id_contract: +item.id_contract });
-                // console.log('existingContract', existingContract)
-                if (!existingContract) {
-                    const secretary = await user.findOne({ username: item.username_secretary });
-                    const notary = await user.findOne({ username: item.username_notary });
+        // try {
+        const data = req.body
+        const contracts = [];
+        // console.log('data', data)
+        for (let item of data) {
+            // console.log('usernames', item.username_secretary)
+            const existingContract = await contract.findOne({ id_contract: +item.id_contract });
+            // console.log('existingContract', existingContract)
+            if (!existingContract) {
+                const secretary = await user.findOne({ username: item.username_secretary });
+                const notary = await user.findOne({ username: item.username_notary });
 
-                    if (!secretary) {
-                        throw new Error(`Secretary not found: ${item.username_secretary}`);
-                    }
-                    if (!notary) {
-                        throw new Error(`Notary not found: ${item.username_notary}`);
-                    }
-                    const payload = {
-                        id_contract: +item.id_contract,
-                        id_user_secretary: secretary._id,
-                        id_user_notary: notary._id,
-                        name: item.name,
-                        note: item.name_customer,
-                        phone: item.phone,
-                        date_create: new Date(item.day_created)
-                    }
-                    const newContract = new contract(payload);
+                if (!secretary) {
+                    throw new Error(`Secretary not found: ${item.username_secretary}`);
+                }
+                if (!notary) {
+                    throw new Error(`Notary not found: ${item.username_notary}`);
+                }
+                const payload = {
+                    id_contract: +item.id_contract,
+                    id_user_secretary: secretary._id,
+                    id_user_notary: notary._id,
+                    name: item.name,
+                    note: item.name_customer,
+                    phone: item.phone,
+                    date_create: new Date(item.day_created)
+                }
+                const newContract = new contract(payload);
 
-                    await newContract.save();
-                    const start = new Date()
-                    start.setHours(0, 0, 0, 0)
-                    const end = new Date()
-                    end.setHours(23, 59, 59, 999)
-                    const populateNewContract = newContract.find({
-                        date_create: {
-                            $gte: start,
-                            $lte: end
-                        }
-                    }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
-                    contracts.push(populateNewContract);
+                await newContract.save();
+                const start = new Date()
+                start.setHours(0, 0, 0, 0)
+                const end = new Date()
+                end.setHours(23, 59, 59, 999)
+                // await newContract.populate('id_user_secretary id_user_notary', 'username').execPopulate();
+                const populatedContract = await contract.findById(newContract._id).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username']) //.populate('id_user_secretary id_user_notary', 'username');
+
+                if (populatedContract.date_create >= start && populatedContract.date_create <= end) {
+                    contracts.push(populatedContract);
                 }
             }
-            console.log('contracts', contracts)
-            // const dataFillter = await contract.find({
-            //     date_create: {
-            //         $gte: start,
-            //         $lte: end
-            //     }
-            // }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
-            return res.status(200).json({
-                data: contracts,
-                message: 'success'
-            })
-        } catch (error) {
-            next(error)
         }
+        // console.log('contracts', contracts)
+        // const dataFillter = await contract.find({
+        //     date_create: {
+        //         $gte: start,
+        //         $lte: end
+        //     }
+        // }).populate('id_user_secretary', ['username']).populate('id_user_notary', ['username'])
+        return res.status(200).json({
+            data: contracts,
+            message: 'success'
+        })
+        // } catch (error) {
+        //     next(error)
+        // }
     },
     createContract: async (req, res, next) => {
         try {
@@ -740,7 +739,15 @@ module.exports = {
     getLastContract: async (req, res, next) => {
 
         try {
-            const dataFillter = await contract.findOne({}, {}, { sort: { 'createdAt': -1 } })
+            const currentYear = new Date().getFullYear();
+            const startOfCurrentYear = new Date(currentYear, 0, 1);
+            const endOfCurrentYear = new Date(currentYear, 11, 31);
+            const dataFillter = await contract.findOne({
+                date_create: {
+                    $gte: startOfCurrentYear,
+                    $lte: endOfCurrentYear
+                }
+            }, {}, { sort: { 'id_contract': -1 } })
             // console.log({ dataFillter })
             return res.status(200).json({
                 data: dataFillter,
