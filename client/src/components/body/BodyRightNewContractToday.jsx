@@ -276,7 +276,8 @@ const BodyRightNewContractToday = () => {
   const [fileContents, setFileContents] = useState([]);
 
   const handleFileChange = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    e.stopPropagation();
     setFile(e.target.files[0]);
   };
 
@@ -417,7 +418,12 @@ const BodyRightNewContractToday = () => {
                 </a>
               </button>
               <div>
-                <input type="file" onChange={handleFileChange} />
+                <span id="upload_file">Chon file can upload</span>
+                <input
+                  id="upload_file"
+                  type="file"
+                  onChange={handleFileChange}
+                />
                 <button onClick={handleFileRead}>Xem truoc</button>
               </div>
             </div>

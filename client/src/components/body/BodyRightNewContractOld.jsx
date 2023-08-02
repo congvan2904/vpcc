@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getAllContract } from "../../redux/features/contractsSlice";
 import formatDate from "../../helpers/formatDate";
 import "./body-right-new-contract-old.scss";
@@ -32,13 +32,34 @@ const BodyRightNewContractOld = () => {
     }
   };
 
+  // useEffect(() => {
+  //   window.addEventListener("scroll", onScroll);
+  //   return () => window.removeEventListener("scroll", onScroll);
+  // }, [page]);
+
+  const divRef = useRef(null);
+
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      const div = divRef.current;
+      if (div.scrollHeight - div.scrollTop === div.clientHeight) {
+        setPage(page + 1);
+        // console.log("2222", page);
+
+        fetchData({ page });
+      }
+    };
+
+    const div = divRef.current;
+    div.addEventListener("scroll", handleScroll);
+
+    return () => {
+      div.removeEventListener("scroll", handleScroll);
+    };
   }, [page]);
   return (
     <div className="new-contract-old">
-      <div className="new-contract-old-body">
+      <div className="new-contract-old-body" ref={divRef}>
         <table>
           <thead>
             <tr>
