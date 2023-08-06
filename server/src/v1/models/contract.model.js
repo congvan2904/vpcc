@@ -30,7 +30,6 @@ const contractSchema = new Schema({
     },
     date_finish: {
         type: Date,
-        default: Date.now
     },
     note: {
         type: String

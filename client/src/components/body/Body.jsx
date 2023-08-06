@@ -4,6 +4,7 @@ import imgContracts from "../../assets/manage/contracts.svg";
 import imgUser from "../../assets/manage/user.svg";
 import imgAccount from "../../assets/manage/account.svg";
 import imgManage from "../../assets/manage/setting.svg";
+import imgBorrowing from "../../assets/manage/borrowing.svg";
 
 import imgToday from "../../assets/manage/today.png";
 import imgTomorrow from "../../assets/manage/tomorrow.png";
@@ -11,6 +12,10 @@ import imgSearchContract from "../../assets/manage/searchcontract.png";
 
 import imgDebtContract from "../../assets/manage/debt-contract.png";
 import imgSearchDebtContract from "../../assets/manage/search-debt-contract.png";
+
+import imgBorrowingAdd from "../../assets/manage/borrowing_add.svg";
+import imgBorrowingList from "../../assets/manage/borrowing_lish.svg";
+import imgBorrowingSearch from "../../assets/manage/borrowing_search.svg";
 
 import imgListUser from "../../assets/manage/list-user.png";
 import imgSearchUser from "../../assets/manage/search-user.png";
@@ -60,6 +65,27 @@ export const IconsTop = [
         display: "Tìm kiếm hợp đồng nợ",
         icon: imgSearchDebtContract,
         path: "/debt-contracts-search",
+      },
+    ],
+  },
+  {
+    display: "Mượn hồ sơ",
+    icon: imgBorrowing,
+    extend: [
+      {
+        display: "Them",
+        icon: imgBorrowingAdd,
+        path: "/borrowing-add",
+      },
+      {
+        display: "Danh sach ",
+        icon: imgBorrowingList,
+        path: "/borrowing-list",
+      },
+      {
+        display: "Tìm kiếm",
+        icon: imgBorrowingSearch,
+        path: "/borrowing-search",
       },
     ],
   },

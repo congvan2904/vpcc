@@ -16,6 +16,9 @@ import {
   groupDebtContracts,
 } from "../../redux/features/contractsSlice";
 import { users as usersT } from "../../redux/features/usersSlice";
+import AddBorrowing from "./borrowing/AddBorrowing";
+import ListBorrowing from "./borrowing/ListBorrowing";
+import SearchBorrowing from "./borrowing/SearchBorrowing";
 const BodyRight = () => {
   const select = useSelector((state) => state.showRightBar.select);
   const dispatch = useDispatch();
@@ -50,6 +53,18 @@ const BodyRight = () => {
     {
       choose: "/debt-contracts-search",
       show: <BodyRightDebtContractsSearch />,
+    },
+    {
+      choose: "/borrowing-add",
+      show: <AddBorrowing />,
+    },
+    {
+      choose: "/borrowing-list",
+      show: <ListBorrowing />,
+    },
+    {
+      choose: "/borrowing-search",
+      show: <SearchBorrowing />,
     },
     {
       choose: "/users",
